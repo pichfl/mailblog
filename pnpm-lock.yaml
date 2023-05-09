@@ -1,0 +1,364 @@
+lockfileVersion: '6.0'
+
+dependencies:
+  encoding-japanese:
+    specifier: ^2.0.0
+    version: 2.0.0
+  iconv-lite:
+    specifier: ^0.6.3
+    version: 0.6.3
+  legacy-encoding:
+    specifier: ^3.0.0
+    version: 3.0.0
+  libmime:
+    specifier: ^5.2.1
+    version: 5.2.1
+  mailparser:
+    specifier: ^3.6.4
+    version: 3.6.4
+  mailsplit:
+    specifier: ^5.4.0
+    version: 5.4.0
+  mkdirp:
+    specifier: ^3.0.1
+    version: 3.0.1
+  nanoid:
+    specifier: ^4.0.2
+    version: 4.0.2
+  turndown:
+    specifier: ^7.1.2
+    version: 7.1.2
+  turndown-plugin-gfm:
+    specifier: ^1.0.2
+    version: 1.0.2
+
+packages:
+
+  /@selderee/plugin-htmlparser2@0.10.0:
+    resolution: {integrity: sha512-gW69MEamZ4wk1OsOq1nG1jcyhXIQcnrsX5JwixVw/9xaiav8TCyjESAruu1Rz9yyInhgBXxkNwMeygKnN2uxNA==}
+    dependencies:
+      domhandler: 5.0.3
+      selderee: 0.10.0
+    dev: false
+
+  /deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
+  /dom-serializer@2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.5.0
+    dev: false
+
+  /domelementtype@2.3.0:
+    resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+    dev: false
+
+  /domhandler@5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
+    engines: {node: '>= 4'}
+    dependencies:
+      domelementtype: 2.3.0
+    dev: false
+
+  /domino@2.1.6:
+    resolution: {integrity: sha512-3VdM/SXBZX2omc9JF9nOPCtDaYQ67BGp5CoLpIQlO2KCAPETs8TcDHacF26jXadGbvUteZzRTeos2fhID5+ucQ==}
+    dev: false
+
+  /domutils@3.1.0:
+    resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+    dev: false
+
+  /encoding-japanese@2.0.0:
+    resolution: {integrity: sha512-++P0RhebUC8MJAwJOsT93dT+5oc5oPImp1HubZpAuCZ5kTLnhuuBhKHj2jJeO/Gj93idPBWmIuQ9QWMe5rX3pQ==}
+    engines: {node: '>=8.10.0'}
+    dev: false
+
+  /entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
+    dev: false
+
+  /he@1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
+    dev: false
+
+  /html-to-text@9.0.4:
+    resolution: {integrity: sha512-ckrQ5N2yZS7qSgKxUbqrBZ02NxD5cSy7KuYjCNIf+HWbdzY3fbjYjQsoRIl6TiaZ4+XWOi0ggFP8/pmgCK/o+A==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@selderee/plugin-htmlparser2': 0.10.0
+      deepmerge: 4.3.1
+      dom-serializer: 2.0.0
+      htmlparser2: 8.0.2
+      selderee: 0.10.0
+    dev: false
+
+  /htmlparser2@8.0.2:
+    resolution: {integrity: sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==}
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      entities: 4.5.0
+    dev: false
+
+  /iconv-lite@0.4.24:
+    resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
+    dev: false
+
+  /iconv-lite@0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
+    dev: false
+
+  /iso-8859-15@0.1.2:
+    resolution: {integrity: sha512-yVBeEJCnjNplRZS7zMEClE2THk57zvocFQ+DsxyutCXijFYigDUGr1psSo69rU83Qq5CwBcO6dqOM8enCbSKkg==}
+    dev: false
+
+  /iso-8859-2@0.1.2:
+    resolution: {integrity: sha512-tVp9GhPRMBdPHVwWzPl5heWk8EY0ChVUu7Wdkdw+EuQhGh1Q6FWZ1bGsYyQSO1ZOasWvdQVdcM5k31KJnt9kBQ==}
+    dev: false
+
+  /iso-8859-3@0.1.2:
+    resolution: {integrity: sha512-vmfNH3hktlbAvDZth2HPWYnK4R5U5/6YYnM5qlnkN7CLNZVqimOWJhGJLCG+pEgtIk9upzE9QeKGwoIohXL9Aw==}
+    dev: false
+
+  /iso-8859-4@0.1.2:
+    resolution: {integrity: sha512-5zsCLvemq1vrRkDKk6SK0PJiTG517RueqdHB4nxH/tTijtOeZxkUyotDtveADZXYUM+pZSnRR3A0s7LgI2uYYQ==}
+    dev: false
+
+  /iso-8859-5@0.1.2:
+    resolution: {integrity: sha512-Fd3oGABHxcInAPJhf2lBGJftXMTGPLYbr5jY8ql2HLPV+nrNLcizYUbw02dn7rE02KDe5+EfyykJw6Zpv/3ebQ==}
+    dev: false
+
+  /iso-8859-6@0.1.2:
+    resolution: {integrity: sha512-eIGTMyBLlSsDLsig0RccPlyyn2ofwlUcMzgFIcIvElIRLl2srCWLKqXwb77lrdXRO8zB5uu4e59vOhyDJ2y29w==}
+    dev: false
+
+  /iso-8859-7@0.1.2:
+    resolution: {integrity: sha512-hiqEj9lFhlRwdWNXHjCkbMFvOEmX+BvitOyiSPPvlTlMQ5yaKOefnj/nAYqQyUlLfUizZPOW0ag7ynJGRr7toQ==}
+    dev: false
+
+  /iso-8859-8-i@0.1.2:
+    resolution: {integrity: sha512-Wo1dlXoQtu9pk9KGomdT+RteUlcar0OTmEKYKFChZVVXA7ouXtQplhDkIOmmOs2eOHbpJu962+HqlcKG0WKTmA==}
+    dev: false
+
+  /iso-8859-8@0.1.2:
+    resolution: {integrity: sha512-ssefagpYTjZKcWJwC0lNiosKfCacB3ZWv0ani7rVMnjB/nFghk8eXvBhKO0RdY4/dfuaIZOXzswKCepe+Z7oAA==}
+    dev: false
+
+  /jconv@0.1.5:
+    resolution: {integrity: sha512-aH8BnQa8SakaT2Wq+tfbu1cRBE6aMwnDqb2AP/jegh69Lg1WIBVRmwPdb4YErYyPHP7iQhuZ5rnPWBX8DcnRSg==}
+    engines: {node: '>=0.8.0'}
+    dev: false
+
+  /koi8-r@0.1.2:
+    resolution: {integrity: sha512-6/PxYCL4ot7cgDbgXQGKFpKYqLPzm8TvZV2kVtHwdY4AWdiiLwnwpTu56ZRZ7t/PTHw/VlNxJVp+awsgcGMsIw==}
+    dev: false
+
+  /leac@0.6.0:
+    resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
+    dev: false
+
+  /legacy-encoding@3.0.0:
+    resolution: {integrity: sha512-qUVsu/aaZl+RIAUVeazsFljyD/3XD7oOq/l1XPcZ5xpp++MnxR7W2oaXrH+jwnAXqCEpsI9ovXXqwmrGDMO2gQ==}
+    dependencies:
+      iconv-lite: 0.4.24
+      iso-8859-15: 0.1.2
+      iso-8859-2: 0.1.2
+      iso-8859-3: 0.1.2
+      iso-8859-4: 0.1.2
+      iso-8859-5: 0.1.2
+      iso-8859-6: 0.1.2
+      iso-8859-7: 0.1.2
+      iso-8859-8: 0.1.2
+      iso-8859-8-i: 0.1.2
+      jconv: 0.1.5
+      koi8-r: 0.1.2
+      macintosh: 0.1.2
+      windows-1250: 0.1.2
+      windows-1251: 0.1.2
+      windows-1252: 0.1.2
+      windows-1253: 0.1.2
+      windows-1254: 0.1.2
+      windows-1255: 0.1.2
+      windows-1256: 0.1.2
+      windows-1257: 0.1.2
+      windows-1258: 0.1.2
+      windows-874: 0.1.2
+      x-mac-cyrillic: 0.1.2
+    dev: false
+
+  /libbase64@1.2.1:
+    resolution: {integrity: sha512-l+nePcPbIG1fNlqMzrh68MLkX/gTxk/+vdvAb388Ssi7UuUN31MI44w4Yf33mM3Cm4xDfw48mdf3rkdHszLNew==}
+    dev: false
+
+  /libmime@5.2.0:
+    resolution: {integrity: sha512-X2U5Wx0YmK0rXFbk67ASMeqYIkZ6E5vY7pNWRKtnNzqjvdYYG8xtPDpCnuUEnPU9vlgNev+JoSrcaKSUaNvfsw==}
+    dependencies:
+      encoding-japanese: 2.0.0
+      iconv-lite: 0.6.3
+      libbase64: 1.2.1
+      libqp: 2.0.1
+    dev: false
+
+  /libmime@5.2.1:
+    resolution: {integrity: sha512-A0z9O4+5q+ZTj7QwNe/Juy1KARNb4WaviO4mYeFC4b8dBT2EEqK2pkM+GC8MVnkOjqhl5nYQxRgnPYRRTNmuSQ==}
+    dependencies:
+      encoding-japanese: 2.0.0
+      iconv-lite: 0.6.3
+      libbase64: 1.2.1
+      libqp: 2.0.1
+    dev: false
+
+  /libqp@2.0.1:
+    resolution: {integrity: sha512-Ka0eC5LkF3IPNQHJmYBWljJsw0UvM6j+QdKRbWyCdTmYwvIDE6a7bCm0UkTAL/K+3KXK5qXT/ClcInU01OpdLg==}
+    dev: false
+
+  /linkify-it@4.0.1:
+    resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
+    dependencies:
+      uc.micro: 1.0.6
+    dev: false
+
+  /macintosh@0.1.2:
+    resolution: {integrity: sha512-sMrD4F3qNiMGkYWI3jg8kscXM93K1SWIMilYBtX28cevbahFdLUpIOsu0mAG8st72EQitWbjTCdOnHYM+AV21A==}
+    dev: false
+
+  /mailparser@3.6.4:
+    resolution: {integrity: sha512-4bDgbLdlcBKX8jtVskfn/G93nZo3lf7pyuLbAQ031SHQLihEqxtRwHrb9SXMTqiTkEGlOdpDrZE5uH18O+2A+A==}
+    dependencies:
+      encoding-japanese: 2.0.0
+      he: 1.2.0
+      html-to-text: 9.0.4
+      iconv-lite: 0.6.3
+      libmime: 5.2.1
+      linkify-it: 4.0.1
+      mailsplit: 5.4.0
+      nodemailer: 6.9.1
+      tlds: 1.236.0
+    dev: false
+
+  /mailsplit@5.4.0:
+    resolution: {integrity: sha512-wnYxX5D5qymGIPYLwnp6h8n1+6P6vz/MJn5AzGjZ8pwICWssL+CCQjWBIToOVHASmATot4ktvlLo6CyLfOXWYA==}
+    dependencies:
+      libbase64: 1.2.1
+      libmime: 5.2.0
+      libqp: 2.0.1
+    dev: false
+
+  /mkdirp@3.0.1:
+    resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dev: false
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
+
+  /nodemailer@6.9.1:
+    resolution: {integrity: sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
+  /parseley@0.11.0:
+    resolution: {integrity: sha512-VfcwXlBWgTF+unPcr7yu3HSSA6QUdDaDnrHcytVfj5Z8azAyKBDrYnSIfeSxlrEayndNcLmrXzg+Vxbo6DWRXQ==}
+    dependencies:
+      leac: 0.6.0
+      peberminta: 0.8.0
+    dev: false
+
+  /peberminta@0.8.0:
+    resolution: {integrity: sha512-YYEs+eauIjDH5nUEGi18EohWE0nV2QbGTqmxQcqgZ/0g+laPCQmuIqq7EBLVi9uim9zMgfJv0QBZEnQ3uHw/Tw==}
+    dev: false
+
+  /safer-buffer@2.1.2:
+    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+    dev: false
+
+  /selderee@0.10.0:
+    resolution: {integrity: sha512-DEL/RW/f4qLw/NrVg97xKaEBC8IpzIG2fvxnzCp3Z4yk4jQ3MXom+Imav9wApjxX2dfS3eW7x0DXafJr85i39A==}
+    dependencies:
+      parseley: 0.11.0
+    dev: false
+
+  /tlds@1.236.0:
+    resolution: {integrity: sha512-oP2PZ3KeGlgpHgsEfrtva3/K9kzsJUNliQSbCfrJ7JMCWFoCdtG+9YMq/g2AnADQ1v5tVlbtvKJZ4KLpy/P6MA==}
+    hasBin: true
+    dev: false
+
+  /turndown-plugin-gfm@1.0.2:
+    resolution: {integrity: sha512-vwz9tfvF7XN/jE0dGoBei3FXWuvll78ohzCZQuOb+ZjWrs3a0XhQVomJEb2Qh4VHTPNRO4GPZh0V7VRbiWwkRg==}
+    dev: false
+
+  /turndown@7.1.2:
+    resolution: {integrity: sha512-ntI9R7fcUKjqBP6QU8rBK2Ehyt8LAzt3UBT9JR9tgo6GtuKvyUzpayWmeMKJw1DPdXzktvtIT8m2mVXz+bL/Qg==}
+    dependencies:
+      domino: 2.1.6
+    dev: false
+
+  /uc.micro@1.0.6:
+    resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
+    dev: false
+
+  /windows-1250@0.1.2:
+    resolution: {integrity: sha512-6Jl0GTM0jTNrX2zIMvHtXm8XN8Ga9x1iDsEWGmPMT2qQlBJmzLlYCmg2oDTsW41BkzTSwQNvSSzmtKJrNBreaQ==}
+    dev: false
+
+  /windows-1251@0.1.2:
+    resolution: {integrity: sha512-vRE97IjXMzcWZVaX60vRDAKY9RNipoWAY6ZO+cJYSrPcE3Ek1PUe3QeK3nOzkcrvP3Q9L0LplJieZbUtGin7FQ==}
+    dev: false
+
+  /windows-1252@0.1.2:
+    resolution: {integrity: sha512-7NVdtSZYjOZBzYj3n1fO3gKCjwcMQcY3P4DaidThJWLqUCu8pjghkKxETvW7xj2nqnESPBAJpjdTUVPHiR275w==}
+    dev: false
+
+  /windows-1253@0.1.2:
+    resolution: {integrity: sha512-UjfUOBnCUUJTOGABbTvjHQjXH0WrsYO58d0WMHq8CS8dgIZyx7JzVf868il0JeYddIsbfE2Xie+pRWbx2iPCTw==}
+    dev: false
+
+  /windows-1254@0.1.2:
+    resolution: {integrity: sha512-sEMfsrJ8b9vuJT2iVkELYEaBjljM1J2nTbFqQueHQuiZBQeqVx1J7fcoFHWxFbfud4I7zt4JzflBQE06WOEKDg==}
+    dev: false
+
+  /windows-1255@0.1.2:
+    resolution: {integrity: sha512-kiLa+s+ar63L+L34kIwIaCia+Blp+p31hehCoV2LqV5GjsyPq6SxdlQRIvLlflYMrQKi7F5El5d56DmfIsqT4g==}
+    dev: false
+
+  /windows-1256@0.1.2:
+    resolution: {integrity: sha512-Sct1HJygOcar0+OujM3nootlbIsajAEP/H1V3mDvatI3ISpY0+ixZAKWtso4cDxlMT9YPvz7j1SlebG+fNi+/g==}
+    dev: false
+
+  /windows-1257@0.1.2:
+    resolution: {integrity: sha512-tMhiawyN0PIqOqOvLEZl2u9CFIx0YmR92Af+RSdchIxZAn6isdTUvEQ1PGFwMqX9+SV2KDi1pfJvF7N0r1aQLA==}
+    dev: false
+
+  /windows-1258@0.1.2:
+    resolution: {integrity: sha512-1kwBYJdRL+Yww/ezzIxhOuE6XN/eIR4hizYh3qhKiJUnH9GU8Pd2aOPsUD8JDXhD/gppe66dsNGzZJT3Fs9nFA==}
+    dev: false
+
+  /windows-874@0.1.2:
+    resolution: {integrity: sha512-cHU69qxjTRKui/bm2j1OyUA3uSDISLhfvNAkIbpiKVMwwlt3b7vQFljBRoLTjxXX0XqDocbLfLMbey8OVVBeAA==}
+    dev: false
+
+  /x-mac-cyrillic@0.1.2:
+    resolution: {integrity: sha512-w9iiCq1RmIVGadAlCCsnjsM7etmvRonTuHqW0n7Kx+i5gY+UnI8/pbhM0iulluHR6ktiMub8L1509/cJuuogNg==}
+    dev: false
