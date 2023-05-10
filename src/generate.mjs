@@ -7,7 +7,7 @@ import { glob } from 'glob';
 // Read `./in` directory and transform all mails
 
 export default async function (inDir, outDir) {
-  const files = await readdir('./in');
+  const files = await readdir(inDir);
 
   await Promise.all(
     files.map(async (file) => {
