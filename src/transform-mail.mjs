@@ -6,7 +6,7 @@ import { writeFile, access } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
-import { basename, join } from 'node:path';
+import { basename, join, parse } from 'node:path';
 import { mkdirp } from 'mkdirp';
 import { moveFile } from 'move-file';
 
@@ -66,11 +66,21 @@ export default async function transformMail(filePath, outDir) {
             .trim()
             .replace(/^<|>$/g, '')
             .trim();
+
+          let name = headers['content-type'].name;
+          if (name) {
+            name = parse(headers['content-type'].name);
+          } else {
+            name = nanoid();
+          }
+          const type = headers['content-type'].value;
+          const ext = libmime.detectExtension(headers['content-type'].value);
+
           chunks.push({
             headers,
             charset: headers['content-type'].charset,
-            type: headers['content-type'].value,
-            name: headers['content-type'].name ?? nanoid(),
+            type,
+            name: `${name}${ext ? `.${ext}` : ''}`,
             contentId,
           });
           break;
@@ -183,8 +193,6 @@ export default async function transformMail(filePath, outDir) {
         }
 
         if (chunk.type.startsWith('image')) {
-          console.log('image', chunk.name, chunk.type);
-
           writeFile(
             join(outDir, targetFolder, `${chunk.name}`),
             chunk.body.toString('base64'),
