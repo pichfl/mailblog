@@ -14,9 +14,10 @@ export default async function (inDir, outDir) {
     files.map(async (file) => {
       const result = await transformMail(join(inDir, file), outDir);
 
-      if (config.removeFiles) {
-        await deleteAsync(join(inDir, file));
-      }
+      await deleteAsync(join(inDir, file), {
+        force: true,
+        dryRun: !config.removeFiles,
+      });
 
       return result;
     })
