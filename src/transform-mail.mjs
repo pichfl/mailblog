@@ -2,12 +2,13 @@ import { Splitter, Headers } from 'mailsplit';
 import Libmime from 'libmime';
 import { nanoid } from 'nanoid';
 import iconv from 'iconv-lite';
-import { writeFile } from 'node:fs/promises';
+import { writeFile, access } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
 import { basename, join } from 'node:path';
 import { mkdirp } from 'mkdirp';
+import { moveFile } from 'move-file';
 
 const libmime = new Libmime.Libmime({ iconv });
 const turndown = new TurndownService({
@@ -25,7 +26,7 @@ const turndown = new TurndownService({
 turndown.use(gfm);
 turndown.keep(['del', 'ins']);
 
-export default async function transformMail(filePath, outDir = './out') {
+export default async function transformMail(filePath, outDir) {
   const source = createReadStream(filePath);
   const splitter = new Splitter();
   const filename = basename(filePath);
@@ -41,8 +42,6 @@ export default async function transformMail(filePath, outDir = './out') {
     `${date.getDate()}`,
     entry
   );
-
-  await mkdirp(join(outDir, targetFolder));
 
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -85,7 +84,7 @@ export default async function transformMail(filePath, outDir = './out') {
       }
     });
 
-    splitter.on('end', () => {
+    splitter.on('end', async () => {
       const results = [];
       const contentIds = [];
       const chunksByContentId = {};
@@ -99,10 +98,31 @@ export default async function transformMail(filePath, outDir = './out') {
       }
 
       for (const chunk of chunks) {
-        if (chunk.headers?.['subject']) {
+        const subject = chunk.headers?.['subject']?.value;
+
+        if (subject) {
+          if (subject.startsWith('DELETE:')) {
+            const deleteTarget = subject.replace(/^DELETE:\s*/g, '').trim();
+            const folderToDelete = join(...deleteTarget.split('/'));
+
+            try {
+              if (await access(join(outDir, folderToDelete))) {
+                await moveFile(
+                  join(outDir, folderToDelete),
+                  join(outDir, 'trash', folderToDelete)
+                );
+              }
+            } catch {
+              // Ignore
+            }
+
+            resolve(null);
+            return;
+          }
+
           results.push({
             type: 'meta',
-            title: chunk.headers['subject'].value,
+            title: subject,
             id: chunk.headers['message-id'].value
               .trim()
               .replace(/^<|>$/g, '')
@@ -116,6 +136,8 @@ export default async function transformMail(filePath, outDir = './out') {
         if (!chunk.body || chunk.body.length === 0) {
           continue;
         }
+
+        await mkdirp(join(outDir, targetFolder));
 
         if (
           hasHTML &&
@@ -182,15 +204,15 @@ export default async function transformMail(filePath, outDir = './out') {
         }
       }
 
-      writeFile(
+      await writeFile(
         join(outDir, targetFolder, `content.json`),
-        JSON.stringify(results, null, 2),
+        JSON.stringify(results),
         {
           encoding: 'utf-8',
         }
       );
 
-      resolve();
+      resolve(targetFolder);
     });
 
     source.pipe(splitter);

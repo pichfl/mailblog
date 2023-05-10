@@ -1,23 +1,20 @@
-import transformMail from './src/transform-mail.mjs';
+import { watch } from 'node:fs/promises';
+import generate from './src/generate.mjs';
+import { config } from './src/config.mjs';
 
-const result_text = await transformMail(
-  './1683636457.21809.kojima.uberspace.de'
-);
+const ac = new AbortController();
+const { signal } = ac;
 
-// const result_html = await transformMail(
-//   './1683636180.19098.kojima.uberspace.de'
-// );
+generate(config.inDirectory, config.outDirectory);
 
-// const results = result_text
-//   .map((chunk) => {
-//     if (chunk.type.startsWith('image')) {
-//       writeFile(`./out/${chunk.name}`, chunk.body, { encoding: 'base64' });
-
-//       return Buffer.from(`![${chunk.name}](${chunk.name})`, 'utf-8');
-//     }
-
-//     return chunk.body;
-//   })
-//   .filter(Boolean);
-
-// writeFile('./out/result.md', Buffer.concat(results), { encoding: 'utf-8' });
+(async () => {
+  try {
+    const watcher = watch(config.inDirectory, { signal });
+    for await (const _ of watcher) {
+      generate(config.inDirectory, config.outDirectory);
+    }
+  } catch (err) {
+    if (err.name === 'AbortError') return;
+    throw err;
+  }
+})();
