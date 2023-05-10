@@ -68,13 +68,16 @@ export default async function transformMail(filePath, outDir) {
             .trim();
 
           let name = headers['content-type'].name;
+          let ext = libmime.detectExtension(headers['content-type'].value);
           if (name) {
-            name = parse(headers['content-type'].name);
+            name = parse(headers['content-type'].name).name;
           } else {
             name = nanoid();
+            ext = ext === 'bin' ? '' : ext;
           }
           const type = headers['content-type'].value;
-          const ext = libmime.detectExtension(headers['content-type'].value);
+
+          console.log(name, ext);
 
           chunks.push({
             headers,
