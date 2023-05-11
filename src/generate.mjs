@@ -13,14 +13,18 @@ export default async function (inDir, outDir) {
 
   await Promise.all(
     files.map(async (file) => {
-      const result = await transformMail(join(inDir, file), outDir);
+      try {
+        const result = await transformMail(join(inDir, file), outDir);
 
-      await deleteAsync(join(inDir, file), {
-        force: true,
-        dryRun: !config.removeFiles,
-      });
+        await deleteAsync(join(inDir, file), {
+          force: true,
+          dryRun: !config.removeFiles,
+        });
 
-      return result;
+        return result;
+      } catch (error) {
+        console.error(error);
+      }
     })
   );
 

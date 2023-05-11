@@ -4,27 +4,14 @@ import { nanoid } from 'nanoid';
 import iconv from 'iconv-lite';
 import { writeFile, access } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
-import TurndownService from 'turndown';
-import { gfm } from 'turndown-plugin-gfm';
 import { basename, join, parse } from 'node:path';
 import { mkdirp } from 'mkdirp';
 import { moveFile } from 'move-file';
 
-const libmime = new Libmime.Libmime({ iconv });
-const turndown = new TurndownService({
-  bulletListMarker: '-',
-  codeBlockStyle: 'fenced',
-  emDelimiter: '_',
-  fence: '```',
-  headingStyle: 'atx',
-  hr: '---',
-  linkReferenceStyle: 'full',
-  linkStyle: 'inlined',
-  strongDelimiter: '**',
-});
+import { parseImage } from './parsers/image.mjs';
+import { parseText } from './parsers/text.mjs';
 
-turndown.use(gfm);
-turndown.keep(['del', 'ins']);
+const libmime = new Libmime.Libmime({ iconv });
 
 export default async function transformMail(filePath, outDir) {
   const source = createReadStream(filePath);
@@ -69,20 +56,18 @@ export default async function transformMail(filePath, outDir) {
 
           let name = headers['content-type'].name;
           let ext = libmime.detectExtension(headers['content-type'].value);
+
           if (name) {
             name = parse(headers['content-type'].name).name;
           } else {
             name = nanoid();
             ext = ext === 'bin' ? '' : ext;
           }
-          const type = headers['content-type'].value;
-
-          console.log(name, ext);
 
           chunks.push({
             headers,
             charset: headers['content-type'].charset,
-            type,
+            type: headers['content-type'].value,
             name: `${name}${ext ? `.${ext}` : ''}`,
             contentId,
           });
@@ -143,7 +128,9 @@ export default async function transformMail(filePath, outDir) {
             date,
           });
 
-          continue;
+          if (!chunk.body) {
+            continue;
+          }
         }
 
         if (!chunk.body || chunk.body.length === 0) {
@@ -151,6 +138,10 @@ export default async function transformMail(filePath, outDir) {
         }
 
         await mkdirp(join(outDir, targetFolder));
+
+        if (chunk.type.startsWith('image')) {
+          results.push(...(await parseImage(chunk, outDir, targetFolder)));
+        }
 
         if (
           hasHTML &&
@@ -160,61 +151,14 @@ export default async function transformMail(filePath, outDir) {
           continue;
         }
 
-        const body = Buffer.concat(chunk.body);
-
         if (chunk.type.startsWith('text')) {
-          const buffer = Buffer.from(
-            iconv.decode(body, chunk.charset).replace(/=\w{2}/g, (match) => {
-              return String.fromCharCode(parseInt(match.substring(1), 16));
-            }),
-            'binary'
+          results.push(
+            ...(await parseText(chunk, contentIds, chunksByContentId))
           );
-          let text = buffer.toString('utf-8').trim();
-
-          if (text.length === 0) {
-            continue;
-          }
-
-          for (const contentId of contentIds) {
-            const chunkByContentId = chunksByContentId[contentId];
-            if (chunkByContentId) {
-              text = text.replaceAll(
-                new RegExp(`cid:${contentId}`, 'g'),
-                chunkByContentId.name
-              );
-
-              chunkByContentId.inline = true;
-            }
-          }
-
-          results.push({
-            type: 'text',
-            value: turndown.turndown(text),
-          });
-
-          continue;
-        }
-
-        if (chunk.type.startsWith('image')) {
-          writeFile(
-            join(outDir, targetFolder, `${chunk.name}`),
-            chunk.body.toString('base64'),
-            'base64'
-          );
-
-          if (chunk.inline) {
-            continue;
-          }
-
-          results.push({
-            src: `${targetFolder}/${chunk.name}`,
-            type: chunk.type,
-          });
-
-          continue;
         }
       }
 
+      await mkdirp(join(outDir, targetFolder));
       await writeFile(
         join(outDir, targetFolder, `content.json`),
         JSON.stringify(results),
