@@ -18,7 +18,7 @@ export default async function (inDir, outDir) {
 
         await deleteAsync(join(inDir, file), {
           force: true,
-          dryRun: config.removeFiles !== 'true',
+          dryRun: !config.removeFiles,
         });
 
         return result;

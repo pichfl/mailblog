@@ -26,8 +26,6 @@ export async function parseText(chunk, contentIds, chunksByContentId) {
   const buffer = Buffer.from(decodedString, 'binary');
   const text = iconv.decode(buffer, 'utf-8');
 
-  console.log('text:\n', text);
-
   if (text.length === 0) {
     return results;
   }
@@ -44,9 +42,13 @@ export async function parseText(chunk, contentIds, chunksByContentId) {
     }
   }
 
+  const value = (
+    chunk.type === 'text/plain' ? text : turndown.turndown(text)
+  ).trim();
+
   results.push({
     type: 'text',
-    value: turndown.turndown(text),
+    value,
   });
 
   return results;
