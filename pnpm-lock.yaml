@@ -46,6 +46,9 @@ dependencies:
   nanoid:
     specifier: ^4.0.2
     version: 4.0.2
+  quoted-printable:
+    specifier: ^1.0.1
+    version: 1.0.1
   sharp:
     specifier: ^0.32.1
     version: 0.32.1
@@ -1000,6 +1003,13 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /quoted-printable@1.0.1:
+    resolution: {integrity: sha512-cihC68OcGiQOjGiXuo5Jk6XHANTHl1K4JLk/xlEJRTIXfy19Sg6XzB95XonYgr+1rB88bCpr7WZE7D7AlZow4g==}
+    hasBin: true
+    dependencies:
+      utf8: 2.1.2
+    dev: false
+
   /rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
@@ -1218,6 +1228,10 @@ packages:
 
   /uc.micro@1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
+    dev: false
+
+  /utf8@2.1.2:
+    resolution: {integrity: sha512-QXo+O/QkLP/x1nyi54uQiG0XrODxdysuQvE5dtVqv7F5K2Qb6FsN+qbr6KhF5wQ20tfcV3VQp0/2x1e1MRSPWg==}
     dev: false
 
   /util-deprecate@1.0.2:

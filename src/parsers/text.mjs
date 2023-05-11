@@ -1,6 +1,7 @@
 import iconv from 'iconv-lite';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
+import quotedPrintable from 'quoted-printable';
 
 const turndown = new TurndownService({
   bulletListMarker: '-',
@@ -20,13 +21,12 @@ turndown.keep(['del', 'ins']);
 export async function parseText(chunk, contentIds, chunksByContentId) {
   const results = [];
   const body = Buffer.concat(chunk.body);
-  const buffer = Buffer.from(
-    iconv.decode(body, chunk.charset).replace(/=\w{2}/g, (match) => {
-      return String.fromCharCode(parseInt(match.substring(1), 16));
-    }),
-    'binary'
-  );
-  let text = buffer.toString('utf-8').trim();
+  const mimeString = body.toString();
+  const decodedString = quotedPrintable.decode(mimeString);
+  const buffer = Buffer.from(decodedString, 'binary');
+  const text = iconv.decode(buffer, 'utf-8');
+
+  console.log('text:\n', text);
 
   if (text.length === 0) {
     return results;
