@@ -7,6 +7,8 @@ export async function parseImage(chunk, outDir, targetFolder) {
   const results = [];
 
   const size = await new Promise(async (resolve) => {
+    const fileName = chunk.name.replace('jpeg', 'jpg');
+
     if (
       chunk.type === 'image/jpeg' ||
       chunk.type === 'image/jpg' ||
@@ -18,15 +20,13 @@ export async function parseImage(chunk, outDir, targetFolder) {
           fit: 'inside',
           withoutEnlargement: true,
         })
-        .toFile(
-          join(outDir, targetFolder, `${chunk.name.replace('jpeg', 'jpg')}`)
-        )
+        .toFile(join(outDir, targetFolder, `${fileName}`))
         .then((info) => {
           resolve(info);
         });
     } else {
       await writeFile(
-        join(outDir, targetFolder, `${chunk.name}`),
+        join(outDir, targetFolder, `${fileName}`),
         chunk.body.toString('base64'),
         'base64'
       );
@@ -40,7 +40,7 @@ export async function parseImage(chunk, outDir, targetFolder) {
   }
 
   results.push({
-    src: `${targetFolder}/${chunk.name}`,
+    src: `${targetFolder}/${fileName}`,
     type: chunk.type,
     width: size.width,
     height: size.height,
