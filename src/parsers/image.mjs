@@ -5,10 +5,9 @@ import sizeOf from 'image-size';
 
 export async function parseImage(chunk, outDir, targetFolder) {
   const results = [];
+  const fileName = chunk.name.replace('jpeg', 'jpg');
 
   const size = await new Promise(async (resolve) => {
-    const fileName = chunk.name.replace('jpeg', 'jpg');
-
     if (
       chunk.type === 'image/jpeg' ||
       chunk.type === 'image/jpg' ||
