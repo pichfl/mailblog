@@ -4,9 +4,7 @@ import sharp from 'sharp';
 import sizeOf from 'image-size';
 
 export async function parseImage(chunk, outDir, targetFolder) {
-  const results = [];
-  const fileName = chunk.name.replace('jpeg', 'jpg');
-
+  const fileName = chunk.name;
   const size = await new Promise(async (resolve) => {
     if (
       chunk.type === 'image/jpeg' ||
@@ -34,17 +32,13 @@ export async function parseImage(chunk, outDir, targetFolder) {
     }
   });
 
-  if (chunk.inline) {
-    return results;
-  }
-
-  results.push({
+  return {
     src: `${targetFolder}/${fileName}`,
     type: chunk.type,
     width: size.width,
     height: size.height,
     orientation: size.orientation ?? 0,
-  });
-
-  return results;
+    inline: Boolean(chunk.contentId),
+    contentId: chunk.contentId,
+  };
 }

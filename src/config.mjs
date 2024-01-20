@@ -7,4 +7,5 @@ export const config = {
   outDirectory: process.env.OUT_DIRECTORY ?? './out',
   removeFiles: process.env.REMOVE_FILES === 'true' ?? false,
   deployHook: process.env.DEPLOY_HOOK ?? '',
+  hostname: process.env.HOSTNAME ?? '/',
 };

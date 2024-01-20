@@ -2,20 +2,26 @@
   "name": "mailblog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.mjs",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "mailblog": "./bin/mailblog"
+  },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "blurhash": "^2.0.5",
+    "dayjs": "^1.11.10",
     "del": "^7.0.0",
     "dotenv": "^16.0.3",
     "encoding-japanese": "^2.0.0",
     "glob": "^10.2.2",
     "got": "^12.6.0",
+    "gray-matter": "^4.0.3",
     "iconv-lite": "^0.6.3",
     "image-size": "^1.0.2",
     "legacy-encoding": "^3.0.0",
@@ -25,9 +31,12 @@
     "mkdirp": "^3.0.1",
     "move-file": "^3.1.0",
     "nanoid": "^4.0.2",
+    "plaiceholder": "^3.0.0",
     "quoted-printable": "^1.0.1",
     "sharp": "^0.32.1",
     "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2"
+    "turndown-plugin-gfm": "^1.0.2",
+    "yaml": "^2.3.4",
+    "yargs": "^17.7.2"
   }
 }

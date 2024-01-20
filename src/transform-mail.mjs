@@ -1,34 +1,40 @@
-import { Splitter, Headers } from 'mailsplit';
-import Libmime from 'libmime';
-import { nanoid } from 'nanoid';
-import iconv from 'iconv-lite';
-import { writeFile, access } from 'node:fs/promises';
-import { createReadStream } from 'node:fs';
-import { basename, join, parse } from 'node:path';
+import { join, parse } from 'node:path';
 import { mkdirp } from 'mkdirp';
 import { moveFile } from 'move-file';
+import { nanoid } from 'nanoid';
+import { Splitter, Headers } from 'mailsplit';
+import { stringify as yaml } from 'yaml';
+import { writeFile, access } from 'node:fs/promises';
+import dayjs from 'dayjs';
+import iconv from 'iconv-lite';
+import Libmime from 'libmime';
 
+import { config } from './config.mjs';
 import { parseImage } from './parsers/image.mjs';
 import { parseText } from './parsers/text.mjs';
 
 const libmime = new Libmime.Libmime({ iconv });
 
-export default async function transformMail(filePath, outDir) {
-  const source = createReadStream(filePath);
-  const splitter = new Splitter();
-  const filename = basename(filePath);
-  const date = new Date(filename.split('.')[0] * 1000);
-  const entry = [
-    `${date.getUTCHours()}`.padStart(2, '0'),
-    `${date.getUTCMinutes()}`.padStart(2, '0'),
-    `${date.getUTCSeconds()}`.padStart(2, '0'),
-  ].join('');
-  const targetFolder = join(
-    `${date.getFullYear()}`,
-    `${date.getMonth() + 1}`,
-    `${date.getDate()}`,
-    entry
+function renderImage(img) {
+  const { width, height } = img;
+  const orientation =
+    width === height ? 'square' : width > height ? 'landscape' : 'portrait';
+
+  return `<img src="${config.hostname}${img.src}" width="${width}" height="${height}" data-orientation="${orientation}" alt="" />`;
+}
+
+const getTargetFolder = (date) =>
+  join(
+    date.format('YYYY'),
+    date.format('MM'),
+    date.format('DD'),
+    date.format('HHmmss')
   );
+
+export default async function transformMail(outDir, readableStream) {
+  const splitter = new Splitter();
+  let messageDate = dayjs('2024-01-14T18:24:00');
+  let targetFolder = getTargetFolder(messageDate);
 
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -83,10 +89,11 @@ export default async function transformMail(filePath, outDir) {
     });
 
     splitter.on('end', async () => {
-      const results = [];
+      let frontmatter = {};
+      let results = '';
       const contentIds = [];
       const chunksByContentId = {};
-      const hasHTML = chunks.some((chunk) => chunk.type === 'text/html');
+      const imagesByContentId = {};
 
       for (const chunk of chunks) {
         if (chunk.contentId) {
@@ -97,6 +104,18 @@ export default async function transformMail(filePath, outDir) {
 
       for (const chunk of chunks) {
         const subject = chunk.headers?.['subject']?.value;
+        const messageId = chunk.headers['message-id']?.value;
+
+        if (messageId) {
+          frontmatter.id = messageId.trim().replace(/^<|>$/g, '').trim();
+        }
+
+        if (chunk.headers.date?.value) {
+          messageDate = dayjs(chunk.headers.date.value);
+          targetFolder = getTargetFolder(messageDate);
+
+          frontmatter.date = messageDate.toISOString();
+        }
 
         if (subject) {
           if (subject.startsWith('DELETE:')) {
@@ -118,15 +137,7 @@ export default async function transformMail(filePath, outDir) {
             return;
           }
 
-          results.push({
-            type: 'meta',
-            title: subject,
-            id: chunk.headers['message-id'].value
-              .trim()
-              .replace(/^<|>$/g, '')
-              .trim(),
-            date,
-          });
+          frontmatter.title = subject;
 
           if (!chunk.body) {
             continue;
@@ -140,11 +151,26 @@ export default async function transformMail(filePath, outDir) {
         await mkdirp(join(outDir, targetFolder));
 
         if (chunk.type.startsWith('image')) {
-          results.push(...(await parseImage(chunk, outDir, targetFolder)));
+          chunk.name = chunk.name.replace('jpeg', 'jpg');
+
+          const img = await parseImage(chunk, outDir, targetFolder);
+
+          if (!img) {
+            continue;
+          }
+
+          imagesByContentId[chunk.contentId] = img;
+
+          if (img.inline) {
+            continue;
+          }
+
+          results += renderImage(img);
         }
 
         if (
-          hasHTML &&
+          chunks.some((chunk) => chunk.type === 'text/html') &&
+          chunk.type !== 'text/html' &&
           chunk.headers['content-transfer-encoding']?.value ===
             'quoted-printable'
         ) {
@@ -152,24 +178,33 @@ export default async function transformMail(filePath, outDir) {
         }
 
         if (chunk.type.startsWith('text')) {
-          results.push(
-            ...(await parseText(chunk, contentIds, chunksByContentId))
+          results += await parseText(chunk, frontmatter);
+        }
+      }
+
+      // Patch image tags
+      for (const contentId of contentIds) {
+        const chunkByContentId = chunksByContentId[contentId];
+
+        if (chunkByContentId) {
+          const img = imagesByContentId[contentId];
+          results = results.replaceAll(
+            new RegExp(`IMG:cid:${contentId}`, 'g'),
+            renderImage(img)
           );
         }
       }
 
+      results = `---\n${yaml(frontmatter)}---\n\n${results}`;
+
       await mkdirp(join(outDir, targetFolder));
-      await writeFile(
-        join(outDir, targetFolder, `content.json`),
-        JSON.stringify(results),
-        {
-          encoding: 'utf-8',
-        }
-      );
+      await writeFile(join(outDir, targetFolder, 'post.md'), results, {
+        encoding: 'utf-8',
+      });
 
       resolve(targetFolder);
     });
 
-    source.pipe(splitter);
+    readableStream.pipe(splitter);
   });
 }
