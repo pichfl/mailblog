@@ -15,8 +15,8 @@ export default async function writeContent(outDir) {
       const { content, data } = matter(file);
 
       return {
+        ...data,
         filename: match,
-        data,
         content,
       };
     })
