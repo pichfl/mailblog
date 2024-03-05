@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava",
     "lint": "biome check **/*.{js,mjs,json}",
     "lint:fix": "biome check --apply **/*.{js,mjs,json}"
   },
@@ -43,5 +43,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
+    "ava": "^6.1.2"
   }
 }
