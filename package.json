@@ -7,6 +7,7 @@
     "test": "ava",
     "lint": "biome check **/*.{js,mjs,json}",
     "lint:fix": "biome check --apply **/*.{js,mjs,json}"
+    "test:watch": "ava --watch",
   },
   "bin": {
     "mailblog": "./bin/mailblog"
