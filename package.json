@@ -5,9 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "ava",
-    "lint": "biome check **/*.{js,mjs,json}",
-    "lint:fix": "biome check --apply **/*.{js,mjs,json}"
     "test:watch": "ava --watch",
+    "lint": "biome check **/*.js",
+    "lint:fix": "biome check --apply **/*.js",
+    "mailblog": "./bin/mailblog"
   },
   "bin": {
     "mailblog": "./bin/mailblog"
@@ -18,29 +19,29 @@
   "license": "ISC",
   "dependencies": {
     "blurhash": "^2.0.5",
+    "cheerio": "1.0.0-rc.12",
+    "chmodr": "^1.2.0",
     "commander": "^12.0.0",
     "dayjs": "^1.11.10",
-    "del": "^7.0.0",
-    "dotenv": "^16.0.3",
-    "encoding-japanese": "^2.0.0",
-    "glob": "^10.2.2",
+    "del": "^7.1.0",
+    "dotenv": "^16.4.5",
+    "glob": "^10.3.10",
     "got": "^12.6.0",
     "gray-matter": "^4.0.3",
     "iconv-lite": "^0.6.3",
     "image-size": "^1.0.2",
     "legacy-encoding": "^3.0.0",
     "libmime": "^5.2.1",
-    "mailparser": "^3.6.4",
+    "lodash-es": "^4.17.21",
     "mailsplit": "^5.4.0",
     "mkdirp": "^3.0.1",
-    "move-file": "^3.1.0",
     "nanoid": "^4.0.2",
     "plaiceholder": "^3.0.0",
     "quoted-printable": "^1.0.1",
+    "rimraf": "^5.0.5",
     "sharp": "^0.32.1",
-    "turndown": "^7.1.2",
-    "turndown-plugin-gfm": "^1.0.2",
-    "yaml": "^2.3.4",
+    "undent": "^0.1.0",
+    "yaml": "^2.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",

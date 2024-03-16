@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import parseMail from '../src/parse-mail.js';
+import parseMail from '../src/parse/mail.js';
 import { readMail } from './utils.js';
 
 test('Parses Lotus Temple E-Mail into chunks', async (t) => {

@@ -3,8 +3,8 @@ import { join } from 'node:path';
 import test from 'ava';
 import { rimraf } from 'rimraf';
 
-import parseMail from '../src/parse-mail.js';
-import writeAttachments from '../src/write-attachements.js';
+import parseMail from '../src/parse/mail.js';
+import writeAttachments from '../src/write/attachements.js';
 import { readMail } from './utils.js';
 
 test('Writes attachements of "Lotus Temple.eml"', async (t) => {

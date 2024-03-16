@@ -2,8 +2,8 @@ import got from 'got';
 import { Command } from 'commander';
 
 import convertMail from './src/convert-mail.js';
-import writeContent from './src/write-content.js';
-import writeIndex from './src/write-index.js';
+import writeContent from './src/write/content.js';
+import writeIndex from './src/write/index.js';
 
 const program = new Command();
 
