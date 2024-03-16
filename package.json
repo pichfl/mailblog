@@ -28,6 +28,7 @@
     "glob": "^10.3.10",
     "got": "^12.6.0",
     "gray-matter": "^4.0.3",
+    "he": "^1.2.0",
     "iconv-lite": "^0.6.3",
     "image-size": "^1.0.2",
     "legacy-encoding": "^3.0.0",

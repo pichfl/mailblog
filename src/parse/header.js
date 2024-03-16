@@ -23,19 +23,17 @@ const allowList = new Set([
 export function parseHeaders(data) {
 	try {
 		const headers = new Headers(data.getHeaders())
-			.getList()
-			.reduce((acc, { key, line }) => {
-				const { value, params } = libmime.parseHeaderValue(
-					libmime.decodeHeader(line).value
-				);
 
-				if (allowList.has(key)) {
-					acc[camelCase(key)] = { value, ...params };
-				}
-				return acc;
-			}, new Object(null));
+		return headers.getList().reduce((acc, { key, line }) => {
+			const { value, params } = libmime.parseHeaderValue(
+				libmime.decodeHeader(line).value
+			);
 
-		return headers;
+			if (allowList.has(key)) {
+				acc[camelCase(key)] = { value: libmime.decodeWords(value), ...params };
+			}
+			return acc;
+		}, new Object(null));
 	} catch (error) {
 		console.error('Error parsing headers', error);
 	}

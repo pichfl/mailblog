@@ -6,7 +6,7 @@ import { rimraf } from 'rimraf';
 import convertMail from '../src/convert-mail.js';
 import { readMail } from './utils.js';
 
-test('Converts Lotus Temple E-Mail into chunks', async (t) => {
+test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 	await convertMail(
 		await readMail('./messages/LotusTemple.eml'),
 		join('out', 'test', 'convert-mail')
@@ -49,6 +49,41 @@ The concrete roof arches feel almost weightless and let light filter in through 
 	t.true(true);
 });
 
+test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
+	await convertMail(
+		await readMail('./messages/Jaipur-Delhi.eml'),
+		join('out', 'test', 'convert-mail')
+	);
+
+	const outPath = join(
+		'out',
+		'test',
+		'convert-mail',
+		'2024',
+		'02',
+		'23',
+		'145159'
+	);
+
+	t.like(await stat(join(outPath, 'post.md')), { size: 470 });
+	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 1759719 });
+	t.is(
+		await readFile(join(outPath, 'post.md'), 'utf8'),
+		`---
+id: 5203A9F6-8CA1-46A4-90A8-4E7092F39C7D@ylk.gd
+date: Fri, 23 Feb 2024 19:21:59 +0530
+title: Jaipur &ndash; Delhi
+---
+
+<img src="https://cdn.ylk.gd//2024/02/23/145159/IMG_1537.jpg" alt="" width="857" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFxQWXttdraiqADqwJv4yq3/8NcASx0ARxwAKgAAAPPk6uPW3ZR/gIceE70oKAA9AAAAAElFTkSuQmCC)">
+
+By train
+`
+	);
+
+	t.true(true);
+});
+
 test.after('cleanup', async () => {
-	// await rimraf(join('out', 'test', 'convert-mail'));
+	await rimraf(join('out', 'test', 'convert-mail'));
 });

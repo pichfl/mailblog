@@ -1,6 +1,7 @@
-import { Headers, Splitter } from 'mailsplit';
+import { Splitter } from 'mailsplit';
 import { parseHeaders } from './header.js';
 import { parseText } from './text.js';
+import he from 'he';
 
 export default async function parseMail(readableStream) {
 	return new Promise((resolve, reject) => {
@@ -22,7 +23,9 @@ export default async function parseMail(readableStream) {
 							.replace(/^<|>$/g, '')
 							.trim();
 						meta.date = headers['date']?.value;
-						meta.title = headers['subject']?.value;
+						meta.title = he.encode(headers['subject']?.value ?? '', {
+							useNamedReferences: true,
+						});
 						// frontmatter.headers = headers;
 
 						return;
