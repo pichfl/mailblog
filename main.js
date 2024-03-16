@@ -1,67 +1,42 @@
 import got from 'got';
+import { Command } from 'commander';
 
-import transformMail from './src/transform-mail.mjs';
+import convertMail from './src/convert-mail.js';
 import writeContent from './src/write-content.js';
 import writeIndex from './src/write-index.js';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
 
-const argv = yargs(hideBin(process.argv))
-  .usage('Usage: $0 -o [output directory]')
-  .option('out', {
-    alias: 'o',
-    type: 'string',
-    description: 'Output directory',
-    default: './out',
-  })
-  .option('index', {
-    alias: 'i',
-    type: 'boolean',
-    description: 'Write index.json',
-    default: true,
-  })
-  .option('content', {
-    alias: 'c',
-    type: 'boolean',
-    description: 'Write content.json',
-    default: true,
-  })
-  .option('read', {
-    alias: 'r',
-    type: 'boolean',
-    description: 'Write post.md',
-    default: true,
-  })
-  .option('ping', {
-    alias: 'p',
-    type: 'string',
-    description: 'Ping endpoint',
-    default: '',
-  })
-  .alias('h', 'help')
-  .alias('v', 'version')
-  .demandOption(['out'])
-  .parse();
+const program = new Command();
 
-if (argv.help) {
-  yargs.showHelp();
-  process.exit(0);
+program
+	.name('mailblog')
+	.description('Transform piped .eml files into markdown and images')
+	.version(process.env.npm_package_version);
+
+program
+	.option('-o, --out <outDir>', 'Output directory')
+	.option('-i, --index', 'Write index.json', false)
+	.option('-c, --content', 'Write content.json', false)
+	.option('-r, --read', 'Read Email and write post.md', false)
+	.option('-p, --ping <ping>', 'Ping HTTP trigger', '');
+
+program.parse(process.argv);
+
+const options = program.opts();
+
+if (options.read) {
+	await convertMail(process.stdin, options.out);
 }
 
-if (argv.read) {
-  await transformMail(argv.out, process.stdin);
+if (options.content) {
+	await writeContent(options.out);
 }
 
-if (argv.content) {
-  await writeContent(argv.out);
+if (options.index) {
+	await writeIndex(options.out);
 }
 
-if (argv.index) {
-  await writeIndex(argv.out);
-}
-
-if (argv.ping) {
-  await got(argv.ping, {
-    method: 'POST',
-  });
+if (options.ping) {
+	await got(options.ping, {
+		method: 'POST',
+	});
 }
