@@ -35,7 +35,11 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 			}
 
 			const { width, height, orientation, placeholder } = files[id];
-			const src = [config.hostname, ...outPath.split(sep), filename].join('/');
+			const src = [
+				config.hostname.replace(/\/+$/, ''),
+				...outPath.split(sep),
+				filename,
+			].join('/');
 
 			if (chunk.caption) {
 				post += '<figure>';
