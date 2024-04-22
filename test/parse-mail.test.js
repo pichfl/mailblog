@@ -158,7 +158,7 @@ Mit **Extra** Text und _Umbruch_.
 
 Mit Emoji 😍 Und Bild!
 
-![IMG_0010.jpeg](cid:204AA714-2C40-4EC8-86CF-28DCC26CB36B)
+[[204AA714-2C40-4EC8-86CF-28DCC26CB36B]]
 
 ^ Mit Bildunterschrift
 
@@ -190,7 +190,7 @@ test('Parses (No Subject).eml', async (t) => {
 	t.deepEqual(result.meta, {
 		date: 'Wed, 14 Feb 2024 23:11:28 +0530',
 		id: '2594B9DE-F662-4CEC-8527-1057B63EC318@ylk.gd',
-		title: undefined,
+		title: '',
 	});
 
 	t.deepEqual(Object.keys(result.attachments), []);

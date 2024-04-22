@@ -20,6 +20,11 @@ export default function toMarkdown(html) {
 		const cel = c(el);
 		const src = cel.attr('src');
 		const alt = cel.attr('alt');
+
+		if (src.startsWith('cid:')) {
+			return `[[${src.slice(4)}]]`;
+		}
+
 		return `![${alt}](${src})`;
 	});
 

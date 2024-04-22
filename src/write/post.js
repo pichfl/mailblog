@@ -24,6 +24,8 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 
 		// Handle images followed by a potential caption
 		if (type.startsWith('image')) {
+			let img = '';
+
 			if (
 				nextChunk?.type.startsWith('text') &&
 				nextChunk?.text.match(/^\^\s.*/)
@@ -42,20 +44,26 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 			].join('/');
 
 			if (chunk.caption) {
-				post += '<figure>';
+				img += '<figure>';
 			}
 
-			post += `<img src="${src}" alt="" width="${width}" height="${height}" data-orientation="${orientation}" style="--ph:url(${placeholder})">`;
+			img += `<img src="${src}" alt="" width="${width}" height="${height}" data-orientation="${orientation}" style="--ph:url(${placeholder})">`;
 
 			if (chunk.caption) {
-				post += `<figcaption>${chunk.caption}</figcaption>`;
-				post += '</figure>';
+				img += `<figcaption>${chunk.caption}</figcaption>`;
+				img += '</figure>';
 			}
 
-			post += '\n\n';
+			if (chunk.contentId) {
+				post = post.replace(`[[${chunk.contentId}]]`, img);
+			} else {
+				post += img;
+				post += '\n\n';
+			}
 		}
 	}
 
+	post = post.trim();
 	post += '\n';
 
 	await writeFile(filepath, post, { encoding: 'utf8' });
