@@ -1,7 +1,7 @@
 import test from 'ava';
 
 import { readFile, stat } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { rimraf } from 'rimraf';
 import convertMail from '../src/convert-mail.js';
 import { readMail } from './utils.js';
@@ -22,9 +22,18 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		'191156'
 	);
 
-	t.like(await stat(join(outPath, 'image0.jpeg')), { size: 2517274 });
-	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 1477718 });
-	t.like(await stat(join(outPath, 'image2.jpeg')), { size: 1862166 });
+	t.like(await stat(join(outPath, 'image0.jpeg')), {
+		size: 2517274,
+		mode: 33188,
+	});
+	t.like(await stat(join(outPath, 'image1.jpeg')), {
+		size: 1477718,
+		mode: 33188,
+	});
+	t.like(await stat(join(outPath, 'image2.jpeg')), {
+		size: 1862166,
+		mode: 33188,
+	});
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -45,7 +54,53 @@ The concrete roof arches feel almost weightless and let light filter in through 
 `
 	);
 
-	t.true(true);
+	// Validate CHMOD
+
+	t.is(
+		(
+			await stat(
+				join(
+					'out',
+					'test',
+					'convert-mail',
+					'2024',
+					'02',
+					'14',
+					'191156',
+					'post.md'
+				)
+			)
+		).mode.toString(8),
+		'100644'
+	);
+
+	t.is(
+		(
+			await stat(
+				join('out', 'test', 'convert-mail', '2024', '02', '14', '191156')
+			)
+		).mode.toString(8),
+		'40755'
+	);
+
+	t.is(
+		(
+			await stat(join('out', 'test', 'convert-mail', '2024', '02', '14'))
+		).mode.toString(8),
+		'40755'
+	);
+
+	t.is(
+		(
+			await stat(join('out', 'test', 'convert-mail', '2024', '02'))
+		).mode.toString(8),
+		'40755'
+	);
+
+	t.is(
+		(await stat(join('out', 'test', 'convert-mail', '2024'))).mode.toString(8),
+		'40755'
+	);
 });
 
 test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
@@ -122,5 +177,5 @@ Well worth the time.
 });
 
 test.after('cleanup', async () => {
-	// await rimraf(join('out', 'test', 'convert-mail'));
+	await rimraf(join('out', 'test', 'convert-mail'));
 });
