@@ -1,5 +1,5 @@
 import he from 'he';
-import { Splitter } from 'mailsplit';
+import { Splitter } from '@zone-eu/mailsplit';
 
 import { parseHeaders } from './header.js';
 import { parseText } from './text.js';

@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
 import Libmime from 'libmime';
 import { camelCase } from 'lodash-es';
-import { Headers } from 'mailsplit';
+import { Headers } from '@zone-eu/mailsplit';
 
 const libmime = new Libmime.Libmime({ iconv });
 

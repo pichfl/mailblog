@@ -1,6 +1,5 @@
 import { mkdirp as mkdirp_ } from 'mkdirp';
-
-import chmodr from './chmodr.js';
+import { chmodr } from 'chmodr';
 
 export default async function mkdirp(outPath, permissions) {
 	try {

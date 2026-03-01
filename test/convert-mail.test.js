@@ -16,15 +16,15 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '14', '191156');
 
 	t.like(await stat(join(outPath, 'image0.jpeg')), {
-		size: 2517274,
+		size: 1307452,
 		mode: 33188,
 	});
 	t.like(await stat(join(outPath, 'image1.jpeg')), {
-		size: 1477718,
+		size: 698926,
 		mode: 33188,
 	});
 	t.like(await stat(join(outPath, 'image2.jpeg')), {
-		size: 1862166,
+		size: 273194,
 		mode: 33188,
 	});
 	t.is(
@@ -35,11 +35,11 @@ date: Wed, 14 Feb 2024 23:41:56 +0530
 title: Lotus Temple
 ---
 
-<figure><img src="image0.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOnh1lTbaqxkQaDupqirYWRh70VALp+Cc5dcnROAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
+<figure><img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOXl1lTbaqxgQaDupqirYWRh70VALqdCc8WT7RXAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
 
-<figure><img src="image1.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXE1gD7+//p7PmjqbkAd3RjfHxramlbABgCACMXACkiABcoFCFh8Yv5AAAAAElFTkSuQmCC)"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
+<figure><img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXD1gD7+//p7PmjqbkAd3RjfHxpamlcABgCACMXACkiABb3FB9cnMTKAAAAAElFTkSuQmCC)"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
 
-<img src="image2.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unHwsDAvrrp6OcAQisnJRQUOxsVSikfABkAAEgjG1AkFzEOAI21GRnGCzH2AAAAAElFTkSuQmCC)">
+<img src="image2.jpeg" alt="" width="1280" height="1280" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unGwr/Av7rp6OcAQisnJRQUOxsVSSkeABkAAEckG04hFzEOAI1WGRGf0K0KAAAAAElFTkSuQmCC)">
 
 No pictures from inside the Bahai temple, but it is a stunning architectural structure. 
 
@@ -81,7 +81,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '23', '145159');
 
-	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 1759719 });
+	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 317667 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -90,7 +90,7 @@ date: Fri, 23 Feb 2024 19:21:59 +0530
 title: Jaipur &ndash; Delhi
 ---
 
-<img src="IMG_1537.jpg" alt="" width="857" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFxQWXttdraiqADqwJv4yq3/8NcASx0ARxwAKgAAAPPk6uPW3ZR/gIceE70oKAA9AAAAAElFTkSuQmCC)">
+<img src="IMG_1537.jpg" alt="" width="914" height="1280" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFtQWHttdraiqADqwJv4yq3/8NcASRwARhsAKQAAAPHf6OPW3ZR/gIYmE6ztt2ejAAAAAElFTkSuQmCC)">
 
 By train
 `
@@ -105,7 +105,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 	const outPath = join('out', 'test', 'convert-mail', '2024', '04', '21', '191019');
 
 	// t.like(await stat(join(outPath, 'post.md')), { size: 853 });
-	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 3431692 });
+	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 716334 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -118,7 +118,7 @@ Our IKEA Ingatorp table top hasn’t aged well in ten years, so it was time for 
 
 Ash from a local forestry. Cut, planed, glued, sanded, routed, and finished at [Das Habitat Augsburg](https://das-habitat.de). Slightly bigger dimensions than the original to make more room for boardgames. 
 
-<img src="image1.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3hwYr+9vf/y6gCRiHirm4n/+vmwr6MAj4FxnYVsxbSktKWWAHx4dyUeEA4AAG5tbebXGbmiE1KkAAAAAElFTkSuQmCC)">
+<img src="image1.jpeg" alt="" width="1512" height="1512" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3duYcC+vf/y6gCRiHiqm4n/+vmwr6MAkYVzm4Vsw6+jtKWWAHx4dyQcDw4AAG5tbeY0GbAIVVk4AAAAAElFTkSuQmCC)">
 
 Well worth the time.
 `

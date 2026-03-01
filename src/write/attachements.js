@@ -3,11 +3,8 @@ import { join } from 'node:path';
 
 import sizeOf from 'image-size';
 import { getPlaiceholder } from 'plaiceholder';
-import sharp from 'sharp';
 
 import mkdirp from '../utils/mkdirp.js';
-
-const resizable = new Set(['image/jpeg', 'image/jpg', 'image/png']);
 
 const orientation = ({ width, height }) => {
 	if (width > height) {
@@ -37,37 +34,17 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 		try {
 			const valueBuffer = Buffer.from(value.toString(), encoding);
 			const { base64: placeholder } = await getPlaiceholder(valueBuffer);
+			const { width, height } = sizeOf(valueBuffer);
 
-			if (!resizable.has(type)) {
-				await writeFile(filepath, value, encoding);
-				const size = sizeOf(valueBuffer);
-
-				results[id] = {
-					type,
-					filename,
-					placeholder,
-					orientation: orientation(size),
-					...size,
-				};
-
-				continue;
-			}
-
-			const size = await sharp(valueBuffer)
-				.rotate()
-				.resize(1200, 1200, {
-					fit: 'inside',
-					withoutEnlargement: true,
-				})
-				.toFormat('png')
-				.toFile(filepath);
+			await writeFile(filepath, valueBuffer);
 
 			results[id] = {
 				type,
 				filename,
 				placeholder,
-				orientation: orientation(size),
-				...size,
+				orientation: orientation({ width, height }),
+				width,
+				height,
 			};
 		} catch (e) {
 			console.error(`Error writing ${filename}:`, e);
