@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 
-import dayjs from './utils/dayjs.js';
 import parseMail from './parse/mail.js';
+import dayjs from './utils/dayjs.js';
 import writeAttachments from './write/attachements.js';
 import writePost from './write/post.js';
 

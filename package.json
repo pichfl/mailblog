@@ -2,7 +2,7 @@
   "name": "mailmd",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/mailmd.js",
   "scripts": {
     "test": "ava",
     "test:watch": "ava --watch",
@@ -10,10 +10,10 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
-    "mailmd": "./src/main.js"
+    "mailmd": "./src/mailmd.js"
   },
   "bin": {
-    "mailmd": "./src/main.js"
+    "mailmd": "./src/mailmd.js"
   },
   "type": "module",
   "keywords": [],

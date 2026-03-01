@@ -65,9 +65,9 @@ The concrete roof arches feel almost weightless and let light filter in through 
 	// Validate CHMOD
 
 	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156', 'message.md'))).mode.toString(
-			8
-		),
+		(
+			await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156', 'message.md'))
+		).mode.toString(8),
 		'100644'
 	);
 
