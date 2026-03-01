@@ -48,11 +48,11 @@ assets:
     orientation: square
 ---
 
-<figure><img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOXl1lTbaqxgQaDupqirYWRh70VALqdCc8WT7RXAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
+<figure><img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait"><figcaption>Aastha Kunj Park</figcaption></figure>
 
-<figure><img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXD1gD7+//p7PmjqbkAd3RjfHxpamlcABgCACMXACkiABb3FB9cnMTKAAAAAElFTkSuQmCC)"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
+<figure><img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
 
-<img src="image2.jpeg" alt="" width="1280" height="1280" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unGwr/Av7rp6OcAQisnJRQUOxsVSSkeABkAAEckG04hFzEOAI1WGRGf0K0KAAAAAElFTkSuQmCC)">
+<img src="image2.jpeg" alt="" width="1280" height="1280" data-orientation="square">
 
 No pictures from inside the Bahai temple, but it is a stunning architectural structure. 
 
@@ -97,7 +97,7 @@ assets:
     orientation: portrait
 ---
 
-<img src="IMG_1537.jpg" alt="" width="914" height="1280" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFtQWHttdraiqADqwJv4yq3/8NcASRwARhsAKQAAAPHf6OPW3ZR/gIYmE6ztt2ejAAAAAElFTkSuQmCC)">
+<img src="IMG_1537.jpg" alt="" width="914" height="1280" data-orientation="portrait">
 
 By train
 `
@@ -129,7 +129,7 @@ Our IKEA Ingatorp table top hasn’t aged well in ten years, so it was time for 
 
 Ash from a local forestry. Cut, planed, glued, sanded, routed, and finished at [Das Habitat Augsburg](https://das-habitat.de). Slightly bigger dimensions than the original to make more room for boardgames. 
 
-<img src="image1.jpeg" alt="" width="1512" height="1512" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3duYcC+vf/y6gCRiHiqm4n/+vmwr6MAkYVzm4Vsw6+jtKWWAHx4dyQcDw4AAG5tbeY0GbAIVVk4AAAAAElFTkSuQmCC)">
+<img src="image1.jpeg" alt="" width="1512" height="1512" data-orientation="square">
 
 Well worth the time.
 `
@@ -163,7 +163,7 @@ Mit **Extra** Text und _Umbruch_.
 
 Mit Emoji 😍 Und Bild!
 
-<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGP4urJciYEhw5SfoTPB4vaBuf8/XGSIs9P5/+P95tk9DAYcDFmmLKmmDABWDg/6oGtVbgAAAABJRU5ErkJggg==)">
+<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait">
 
 ^ Mit Bildunterschrift
 
@@ -206,7 +206,7 @@ assets:
 Das ist eine Testnachricht. 
 Mit Extra Text und Umbruch.
 
-Mit Emoji 😍 Und Bild!<figure><img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGP4urJciYEhw5SfoTPB4vaBuf8/XGSIs9P5/+P95tk9DAYcDFmmLKmmDABWDg/6oGtVbgAAAABJRU5ErkJggg==)"><figcaption>Mit Bildunterschrift</figcaption></figure>
+Mit Emoji 😍 Und Bild!<figure><img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait"><figcaption>Mit Bildunterschrift</figcaption></figure>
 
 > Lorem Ipsum bla blah 
 

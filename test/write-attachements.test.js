@@ -21,8 +21,6 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 			type: 'image/jpeg',
 			filename: 'image0.jpeg',
 			orientation: 'portrait',
-			placeholder:
-				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOXl1lTbaqxgQaDupqirYWRh70VALqdCc8WT7RXAAAAAElFTkSuQmCC',
 			width: 1512,
 			height: 2016,
 		},
@@ -30,8 +28,6 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 			type: 'image/jpeg',
 			filename: 'image1.jpeg',
 			orientation: 'portrait',
-			placeholder:
-				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXD1gD7+//p7PmjqbkAd3RjfHxpamlcABgCACMXACkiABb3FB9cnMTKAAAAAElFTkSuQmCC',
 			width: 1512,
 			height: 2016,
 		},
@@ -39,8 +35,6 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 			type: 'image/jpeg',
 			filename: 'image2.jpeg',
 			orientation: 'square',
-			placeholder:
-				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unGwr/Av7rp6OcAQisnJRQUOxsVSSkeABkAAEckG04hFzEOAI1WGRGf0K0KAAAAAElFTkSuQmCC',
 			width: 1280,
 			height: 1280,
 		},

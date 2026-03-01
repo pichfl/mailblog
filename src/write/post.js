@@ -50,14 +50,14 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 				nextChunk.text = trimNewlines(lines.join('\n'));
 			}
 
-			const { width, height, orientation, placeholder } = files[id];
+			const { width, height, orientation } = files[id];
 			const src = filename;
 
 			if (chunk.caption) {
 				img += '<figure>';
 			}
 
-			img += `<img src="${src}" alt="" width="${width}" height="${height}" data-orientation="${orientation}" style="--ph:url(${placeholder})">`;
+			img += `<img src="${src}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
 
 			if (chunk.caption) {
 				img += `<figcaption>${chunk.caption}</figcaption>`;

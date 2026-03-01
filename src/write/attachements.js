@@ -2,7 +2,6 @@ import { chmod, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import sizeOf from 'image-size';
-import { getPlaiceholder } from 'plaiceholder';
 
 import mkdirp from '../utils/mkdirp.js';
 
@@ -33,7 +32,6 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 
 		try {
 			const valueBuffer = Buffer.from(value.toString(), encoding);
-			const { base64: placeholder } = await getPlaiceholder(valueBuffer);
 			const { width, height } = sizeOf(valueBuffer);
 
 			await writeFile(filepath, valueBuffer);
@@ -41,7 +39,6 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 			results[id] = {
 				type,
 				filename,
-				placeholder,
 				orientation: orientation({ width, height }),
 				width,
 				height,
