@@ -111,7 +111,6 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-171019');
 
-	// t.like(await stat(join(outPath, 'post.md')), { size: 853 });
 	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 716334 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
@@ -133,6 +132,94 @@ Ash from a local forestry. Cut, planed, glued, sanded, routed, and finished at [
 <img src="image1.jpeg" alt="" width="1512" height="1512" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3duYcC+vf/y6gCRiHiqm4n/+vmwr6MAkYVzm4Vsw6+jtKWWAHx4dyQcDw4AAG5tbeY0GbAIVVk4AAAAAElFTkSuQmCC)">
 
 Well worth the time.
+`
+	);
+
+	t.true(true);
+});
+
+
+test('Converts "html.eml" into Markdown and files', async (t) => {
+	await convertMail(await readMail('./messages/html.eml'), join('out', 'test', 'convert-mail'));
+
+	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-210023');
+
+	t.like(await stat(join(outPath, 'IMG_0010.jpeg')), { size: 36745 });
+	t.is(
+		await readFile(join(outPath, 'post.md'), 'utf8'),
+		`---
+id: D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd
+date: 2024-01-14T21:00:23.000Z
+title: "HTLM #2"
+assets:
+  - filename: IMG_0010.jpeg
+    width: 240
+    height: 320
+    orientation: portrait
+---
+
+Das ist eine Testnachricht. 
+Mit **Extra** Text und _Umbruch_.
+
+Mit Emoji 😍 Und Bild!
+
+<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGP4urJciYEhw5SfoTPB4vaBuf8/XGSIs9P5/+P95tk9DAYcDFmmLKmmDABWDg/6oGtVbgAAAABJRU5ErkJggg==)">
+
+^ Mit Bildunterschrift
+
+> Lorem Ipsum bla blah 
+
+Das hier wird _italic_ und Das hier wird **fett**
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat magna sed orci malesuada varius. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi at arcu lorem. Proin eu magna et sapien hendrerit vestibulum in eu ex. Quisque in posuere nisl. 
+
+Etiam aliquet lobortis dui ut aliquam. Donec ornare, dolor sed fringilla pharetra, dui felis iaculis urna, at aliquam lacus arcu vitae mauris. Donec quis suscipit nisi. Sed tincidunt quam rhoncus pharetra rutrum. Fusce at urna bibendum, hendrerit arcu aliquam, vestibulum metus.
+
+\`\`\`js
+code
+\`\`\`
+`
+	);
+
+	t.true(true);
+});
+
+test('Converts "text.eml" into Markdown and files', async (t) => {
+	await convertMail(await readMail('./messages/text.eml'), join('out', 'test', 'convert-mail'));
+
+	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-204635');
+
+	t.like(await stat(join(outPath, 'IMG_0010.jpeg')), { size: 36745 });
+	t.is(
+		await readFile(join(outPath, 'post.md'), 'utf8'),
+		`---
+id: 62D1AEA4-FC6F-4279-9CD4-8D2CECE5A0CF@ylk.gd
+date: 2024-01-14T20:46:35.000Z
+title: Testnachricht Text
+assets:
+  - filename: IMG_0010.jpeg
+    width: 240
+    height: 320
+    orientation: portrait
+---
+
+Das ist eine Testnachricht. 
+Mit Extra Text und Umbruch.
+
+Mit Emoji 😍 Und Bild!<figure><img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGP4urJciYEhw5SfoTPB4vaBuf8/XGSIs9P5/+P95tk9DAYcDFmmLKmmDABWDg/6oGtVbgAAAABJRU5ErkJggg==)"><figcaption>Mit Bildunterschrift</figcaption></figure>
+
+> Lorem Ipsum bla blah 
+
+Das hier wird _italic_ und Das hier wird **fett**
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat magna sed orci malesuada varius. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi at arcu lorem. Proin eu magna et sapien hendrerit vestibulum in eu ex. Quisque in posuere nisl. 
+
+Etiam aliquet lobortis dui ut aliquam. Donec ornare, dolor sed fringilla pharetra, dui felis iaculis urna, at aliquam lacus arcu vitae mauris. Donec quis suscipit nisi. Sed tincidunt quam rhoncus pharetra rutrum. Fusce at urna bibendum, hendrerit arcu aliquam, vestibulum metus.
+
+\`\`\`js
+code
+\`\`\`
 `
 	);
 
