@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { Splitter } from '@zone-eu/mailsplit';
 import he from 'he';
 
@@ -19,7 +21,7 @@ export default async function parseMail(readableStream) {
 
 					if (headers.from && headers.messageId) {
 						// Metadata
-						meta.id = (headers.messageId?.value ?? nanoid()).trim().replace(/^<|>$/g, '').trim();
+						meta.id = (headers.messageId?.value ?? randomUUID()).trim().replace(/^<|>$/g, '').trim();
 						meta.date = headers['date']?.value;
 						meta.title = he.encode(headers['subject']?.value ?? '', {
 							useNamedReferences: true,

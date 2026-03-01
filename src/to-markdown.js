@@ -16,6 +16,12 @@ export default function toMarkdown(html) {
 		cel.replaceWith(`\n${inner}`);
 	});
 
+	c('p').each((_, el) => {
+		const cel = c(el);
+		const inner = cel.prop('innerHTML');
+		cel.replaceWith(`\n\n${inner}`);
+	});
+
 	c('img').replaceWith((_, el) => {
 		const cel = c(el);
 		const src = cel.attr('src');
@@ -32,9 +38,9 @@ export default function toMarkdown(html) {
 	c('strong').replaceWith(rewrap('**', '**'));
 	c('i').replaceWith(rewrap('_', '_'));
 	c('em').replaceWith(rewrap('_', '_'));
-	c('s').replaceWith(rewrap('~', '~'));
-	c('strike').replaceWith(rewrap('~', '~'));
-	c('del').replaceWith(rewrap('~', '~'));
+	c('s').replaceWith(rewrap('~~', '~~'));
+	c('strike').replaceWith(rewrap('~~', '~~'));
+	c('del').replaceWith(rewrap('~~', '~~'));
 	c('code').replaceWith(rewrap('`', '`'));
 
 	c('a').replaceWith((_, el) => {

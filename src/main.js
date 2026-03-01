@@ -2,6 +2,7 @@
 import { Command } from 'commander';
 import got from 'got';
 
+import { config } from './config.js';
 import convertMail from './convert-mail.js';
 import writeContent from './write/content.js';
 import writeIndex from './write/index.js';
@@ -23,23 +24,31 @@ program
 program.parse(process.argv);
 
 const options = program.opts();
+const outDir = options.out ?? config.outDirectory;
+const ping = options.ping || config.deployHook;
 
-if (options.read) {
-	const written = await convertMail(process.stdin, options.out);
+try {
+	if (options.read) {
+		const written = await convertMail(process.stdin, outDir);
 
-	console.log(written);
-}
+		console.log(written);
+	}
 
-if (options.content) {
-	await writeContent(options.out);
-}
+	if (options.content) {
+		await writeContent(outDir);
+	}
 
-if (options.index) {
-	await writeIndex(options.out);
-}
+	if (options.index) {
+		await writeIndex(outDir);
+	}
 
-if (options.ping) {
-	await got(options.ping, {
-		method: 'POST',
-	});
+	if (ping) {
+		await got(ping, {
+			method: 'POST',
+		});
+	}
+} catch (error) {
+	console.error(error.message);
+	if (error.cause) console.error(error.cause);
+	process.exit(1);
 }

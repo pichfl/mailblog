@@ -46,11 +46,11 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 				width,
 				height,
 			};
+
+			await chmod(filepath, 0o644);
 		} catch (e) {
 			console.error(`Error writing ${filename}:`, e);
 		}
-
-		await chmod(filepath, 0o644);
 	}
 
 	return results;

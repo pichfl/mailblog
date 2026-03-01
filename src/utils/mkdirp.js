@@ -8,6 +8,6 @@ export default async function mkdirp(outPath, permissions) {
 
 		return outPath;
 	} catch (error) {
-		throw new Error(`Error creating directory ${outPath}`, error);
+		throw new Error(`Error creating directory ${outPath}`, { cause: error });
 	}
 }
