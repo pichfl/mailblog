@@ -13,7 +13,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '14', '191156');
+	const outPath = join('out', 'test', 'convert-mail', '2024-02-14-191156');
 
 	t.like(await stat(join(outPath, 'image0.jpeg')), {
 		size: 1307452,
@@ -33,6 +33,19 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 id: DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd
 date: Wed, 14 Feb 2024 23:41:56 +0530
 title: Lotus Temple
+assets:
+  - filename: image0.jpeg
+    width: 1512
+    height: 2016
+    orientation: portrait
+  - filename: image1.jpeg
+    width: 1512
+    height: 2016
+    orientation: portrait
+  - filename: image2.jpeg
+    width: 1280
+    height: 1280
+    orientation: square
 ---
 
 <figure><img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOXl1lTbaqxgQaDupqirYWRh70VALqdCc8WT7RXAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
@@ -51,26 +64,15 @@ The concrete roof arches feel almost weightless and let light filter in through 
 
 	t.is(
 		(
-			await stat(join('out', 'test', 'convert-mail', '2024', '02', '14', '191156', 'post.md'))
+			await stat(join('out', 'test', 'convert-mail', '2024-02-14-191156', 'post.md'))
 		).mode.toString(8),
 		'100644'
 	);
 
 	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024', '02', '14', '191156'))).mode.toString(
-			8
-		),
+		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-191156'))).mode.toString(8),
 		'40755'
 	);
-
-	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024', '02', '14'))).mode.toString(8),
-		'40755'
-	);
-
-	t.is((await stat(join('out', 'test', 'convert-mail', '2024', '02'))).mode.toString(8), '40755');
-
-	t.is((await stat(join('out', 'test', 'convert-mail', '2024'))).mode.toString(8), '40755');
 });
 
 test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
@@ -79,7 +81,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '23', '145159');
+	const outPath = join('out', 'test', 'convert-mail', '2024-02-23-145159');
 
 	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 317667 });
 	t.is(
@@ -88,6 +90,11 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 id: 5203A9F6-8CA1-46A4-90A8-4E7092F39C7D@ylk.gd
 date: Fri, 23 Feb 2024 19:21:59 +0530
 title: Jaipur &ndash; Delhi
+assets:
+  - filename: IMG_1537.jpg
+    width: 914
+    height: 1280
+    orientation: portrait
 ---
 
 <img src="IMG_1537.jpg" alt="" width="914" height="1280" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFtQWHttdraiqADqwJv4yq3/8NcASRwARhsAKQAAAPHf6OPW3ZR/gIYmE6ztt2ejAAAAAElFTkSuQmCC)">
@@ -102,7 +109,7 @@ By train
 test('Converts "Table.eml" into Markdown and files', async (t) => {
 	await convertMail(await readMail('./messages/Table.eml'), join('out', 'test', 'convert-mail'));
 
-	const outPath = join('out', 'test', 'convert-mail', '2024', '04', '21', '191019');
+	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-191019');
 
 	// t.like(await stat(join(outPath, 'post.md')), { size: 853 });
 	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 716334 });
@@ -112,6 +119,11 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 id: C73DC854-EA96-4721-8881-EA4DADEF97A5@ylk.gd
 date: Sun, 21 Apr 2024 19:10:19 +0200
 title: Table
+assets:
+  - filename: image1.jpeg
+    width: 1512
+    height: 1512
+    orientation: square
 ---
 
 Our IKEA Ingatorp table top hasn’t aged well in ten years, so it was time for a replacement. 

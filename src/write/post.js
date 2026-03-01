@@ -9,8 +9,24 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 	const filepath = join(outDir, outPath, 'post.md');
 	let post = '';
 
+	const assets = Object.keys(files).map((id) => {
+		const file = files[id];
+		const chunk = chunks.find((c) => c.id === id);
+		return {
+			filename: chunk?.filename || id,
+			width: file.width,
+			height: file.height,
+			orientation: file.orientation,
+		};
+	});
+
+	const frontmatter = {
+		...meta,
+		...(assets.length > 0 ? { assets } : {}),
+	};
+
 	post += '---\n';
-	post += yaml(meta);
+	post += yaml(frontmatter);
 	post += '---\n';
 	post += '\n';
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import { Command } from 'commander';
 import { createReadStream } from 'node:fs';
+
+import { Command } from 'commander';
 
 import { config } from './config.js';
 import convertMail from './convert-mail.js';
-import writeContent from './write/content.js';
 
 const program = new Command();
 
@@ -25,8 +25,7 @@ const outDir = options.out ?? config.outDirectory;
 
 try {
 	const inputStream = args[0] ? createReadStream(args[0]) : process.stdin;
-  const written = await convertMail(inputStream, outDir);
-  await writeContent(outDir);
+	const written = await convertMail(inputStream, outDir);
 	console.log(written);
 } catch (error) {
 	console.error(error.message);
