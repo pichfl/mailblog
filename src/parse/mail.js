@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { Splitter } from '@zone-eu/mailsplit';
 import he from 'he';
 
+import dayjs from '../utils/dayjs.js';
 import { parseHeaders } from './header.js';
 import { parseText } from './text.js';
 
@@ -21,8 +22,11 @@ export default async function parseMail(readableStream) {
 
 					if (headers.from && headers.messageId) {
 						// Metadata
-						meta.id = (headers.messageId?.value ?? randomUUID()).trim().replace(/^<|>$/g, '').trim();
-						meta.date = headers['date']?.value;
+						meta.id = (headers.messageId?.value ?? randomUUID())
+							.trim()
+							.replace(/^<|>$/g, '')
+							.trim();
+						meta.date = dayjs(headers['date']?.value).utc().toISOString();
 						meta.title = he.encode(headers['subject']?.value ?? '', {
 							useNamedReferences: true,
 						});

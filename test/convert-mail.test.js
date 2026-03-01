@@ -13,7 +13,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join('out', 'test', 'convert-mail', '2024-02-14-191156');
+	const outPath = join('out', 'test', 'convert-mail', '2024-02-14-181156');
 
 	t.like(await stat(join(outPath, 'image0.jpeg')), {
 		size: 1307452,
@@ -31,7 +31,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
 id: DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd
-date: Wed, 14 Feb 2024 23:41:56 +0530
+date: 2024-02-14T18:11:56.000Z
 title: Lotus Temple
 assets:
   - filename: image0.jpeg
@@ -63,14 +63,14 @@ The concrete roof arches feel almost weightless and let light filter in through 
 	// Validate CHMOD
 
 	t.is(
-		(
-			await stat(join('out', 'test', 'convert-mail', '2024-02-14-191156', 'post.md'))
-		).mode.toString(8),
+		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156', 'post.md'))).mode.toString(
+			8
+		),
 		'100644'
 	);
 
 	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-191156'))).mode.toString(8),
+		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156'))).mode.toString(8),
 		'40755'
 	);
 });
@@ -81,14 +81,14 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join('out', 'test', 'convert-mail', '2024-02-23-145159');
+	const outPath = join('out', 'test', 'convert-mail', '2024-02-23-135159');
 
 	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 317667 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
 id: 5203A9F6-8CA1-46A4-90A8-4E7092F39C7D@ylk.gd
-date: Fri, 23 Feb 2024 19:21:59 +0530
+date: 2024-02-23T13:51:59.000Z
 title: Jaipur &ndash; Delhi
 assets:
   - filename: IMG_1537.jpg
@@ -109,7 +109,7 @@ By train
 test('Converts "Table.eml" into Markdown and files', async (t) => {
 	await convertMail(await readMail('./messages/Table.eml'), join('out', 'test', 'convert-mail'));
 
-	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-191019');
+	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-171019');
 
 	// t.like(await stat(join(outPath, 'post.md')), { size: 853 });
 	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 716334 });
@@ -117,7 +117,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
 id: C73DC854-EA96-4721-8881-EA4DADEF97A5@ylk.gd
-date: Sun, 21 Apr 2024 19:10:19 +0200
+date: 2024-04-21T17:10:19.000Z
 title: Table
 assets:
   - filename: image1.jpeg

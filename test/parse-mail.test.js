@@ -7,7 +7,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 	const result = await parseMail(await readMail('./messages/LotusTemple.eml'));
 
 	t.deepEqual(result.meta, {
-		date: 'Wed, 14 Feb 2024 23:41:56 +0530',
+		date: '2024-02-14T18:11:56.000Z',
 		id: 'DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd',
 		title: 'Lotus Temple',
 	});
@@ -114,7 +114,7 @@ test('Parses HTML E-Mail into chunks', async (t) => {
 	const result = await parseMail(await readMail('./messages/html.eml'));
 
 	t.deepEqual(result.meta, {
-		date: 'Sun, 14 Jan 2024 22:00:23 +0100',
+		date: '2024-01-14T21:00:23.000Z',
 		id: 'D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd',
 		title: 'HTLM #2',
 	});
@@ -182,7 +182,7 @@ test('Parses (No Subject).eml', async (t) => {
 	const result = await parseMail(await readMail('./messages/(No Subject).eml'));
 
 	t.deepEqual(result.meta, {
-		date: 'Wed, 14 Feb 2024 23:11:28 +0530',
+		date: '2024-02-14T17:41:28.000Z',
 		id: '2594B9DE-F662-4CEC-8527-1057B63EC318@ylk.gd',
 		title: '',
 	});
@@ -204,7 +204,7 @@ test('Parses Taj Mahal.eml', async (t) => {
 	const result = await parseMail(await readMail('./messages/Taj Mahal.eml'));
 
 	t.deepEqual(result.meta, {
-		date: 'Mon, 19 Feb 2024 14:27:06 +0530',
+		date: '2024-02-19T08:57:06.000Z',
 		id: 'AA788889-9D0E-4CEE-9202-29C7B33EF614@ylk.gd',
 		title: 'Taj Mahal',
 	});
