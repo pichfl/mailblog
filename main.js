@@ -8,7 +8,7 @@ import writeIndex from './src/write/index.js';
 const program = new Command();
 
 program
-	.name('mailblog')
+	.name('mailmd')
 	.description('Transform piped .eml files into markdown and images')
 	.version(process.env.npm_package_version);
 

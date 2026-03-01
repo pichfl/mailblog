@@ -1,6 +1,6 @@
-# Mailblog
+# mailmd
 
-TLDR; This is barely enough to get my blog running.
+Convert .eml into Markdown and assets.
 
 ## What is this?
 

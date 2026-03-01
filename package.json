@@ -1,5 +1,5 @@
 {
-  "name": "mailblog",
+  "name": "mailmd",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -10,10 +10,10 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
-    "mailblog": "./bin/mailblog"
+    "mailmd": "./bin/mailmd"
   },
   "bin": {
-    "mailblog": "./bin/mailblog"
+    "mailmd": "./bin/mailmd"
   },
   "type": "module",
   "keywords": [],
