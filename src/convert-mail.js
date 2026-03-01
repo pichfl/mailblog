@@ -12,5 +12,5 @@ export default async function convertMail(readableStream, outDir) {
 
 	await writePost(outDir, outPath, meta, chunks, files);
 
-	return join(outDir, outPath, 'post.md');
+	return join(outDir, outPath, 'message.md');
 }

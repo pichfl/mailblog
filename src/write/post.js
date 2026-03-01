@@ -40,7 +40,7 @@ function processImageWithContentId(post, chunk, img) {
 }
 
 export default async function writePost(outDir, outPath, meta, chunks, files) {
-	const filepath = join(outDir, outPath, 'post.md');
+	const filepath = join(outDir, outPath, 'message.md');
 	let post = '';
 
 	const assets = Object.keys(files).map((id) => {

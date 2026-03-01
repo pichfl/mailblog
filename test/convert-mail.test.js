@@ -28,7 +28,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		mode: 33188,
 	});
 	t.is(
-		await readFile(join(outPath, 'post.md'), 'utf8'),
+		await readFile(join(outPath, 'message.md'), 'utf8'),
 		`---
 id: DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd
 date: 2024-02-14T18:11:56.000Z
@@ -65,7 +65,7 @@ The concrete roof arches feel almost weightless and let light filter in through 
 	// Validate CHMOD
 
 	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156', 'post.md'))).mode.toString(
+		(await stat(join('out', 'test', 'convert-mail', '2024-02-14-181156', 'message.md'))).mode.toString(
 			8
 		),
 		'100644'
@@ -87,7 +87,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 317667 });
 	t.is(
-		await readFile(join(outPath, 'post.md'), 'utf8'),
+		await readFile(join(outPath, 'message.md'), 'utf8'),
 		`---
 id: 5203A9F6-8CA1-46A4-90A8-4E7092F39C7D@ylk.gd
 date: 2024-02-23T13:51:59.000Z
@@ -115,7 +115,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'image1.jpg')), { size: 716334 });
 	t.is(
-		await readFile(join(outPath, 'post.md'), 'utf8'),
+		await readFile(join(outPath, 'message.md'), 'utf8'),
 		`---
 id: C73DC854-EA96-4721-8881-EA4DADEF97A5@ylk.gd
 date: 2024-04-21T17:10:19.000Z
@@ -147,7 +147,7 @@ test('Converts "html.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 	t.is(
-		await readFile(join(outPath, 'post.md'), 'utf8'),
+		await readFile(join(outPath, 'message.md'), 'utf8'),
 		`---
 id: D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd
 date: 2024-01-14T21:00:23.000Z
@@ -191,7 +191,7 @@ test('Converts "text.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 	t.is(
-		await readFile(join(outPath, 'post.md'), 'utf8'),
+		await readFile(join(outPath, 'message.md'), 'utf8'),
 		`---
 id: 62D1AEA4-FC6F-4279-9CD4-8D2CECE5A0CF@ylk.gd
 date: 2024-01-14T20:46:35.000Z
