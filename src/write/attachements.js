@@ -28,7 +28,8 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 			node: { contentType: type, encoding, filename },
 			value,
 		} = attachment;
-		const filepath = join(out, filename);
+		const normalizedFilename = filename.replace(/\.jpeg$/i, '.jpg');
+		const filepath = join(out, normalizedFilename);
 
 		try {
 			const valueBuffer = Buffer.from(value.toString(), encoding);
@@ -38,7 +39,7 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 
 			results[id] = {
 				type,
-				filename,
+				filename: normalizedFilename,
 				orientation: orientation({ width, height }),
 				width,
 				height,
@@ -46,7 +47,7 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 
 			await chmod(filepath, 0o644);
 		} catch (e) {
-			console.error(`Error writing ${filename}:`, e);
+			console.error(`Error writing ${normalizedFilename}:`, e);
 		}
 	}
 

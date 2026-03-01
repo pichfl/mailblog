@@ -15,15 +15,15 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-02-14-181156');
 
-	t.like(await stat(join(outPath, 'image0.jpeg')), {
+	t.like(await stat(join(outPath, 'image0.jpg')), {
 		size: 1307452,
 		mode: 33188,
 	});
-	t.like(await stat(join(outPath, 'image1.jpeg')), {
+	t.like(await stat(join(outPath, 'image1.jpg')), {
 		size: 698926,
 		mode: 33188,
 	});
-	t.like(await stat(join(outPath, 'image2.jpeg')), {
+	t.like(await stat(join(outPath, 'image2.jpg')), {
 		size: 273194,
 		mode: 33188,
 	});
@@ -34,27 +34,27 @@ id: DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd
 date: 2024-02-14T18:11:56.000Z
 title: Lotus Temple
 assets:
-  - filename: image0.jpeg
+  - filename: image0.jpg
     width: 1512
     height: 2016
     orientation: portrait
-  - filename: image1.jpeg
+  - filename: image1.jpg
     width: 1512
     height: 2016
     orientation: portrait
-  - filename: image2.jpeg
+  - filename: image2.jpg
     width: 1280
     height: 1280
     orientation: square
 ---
 
-<img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait">
+<img src="image0.jpg" alt="" width="1512" height="2016" data-orientation="portrait">
 ^ Aastha Kunj Park
 
-<img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait">
+<img src="image1.jpg" alt="" width="1512" height="2016" data-orientation="portrait">
 ^ Inside the Lotus Temple Gardens
 
-<img src="image2.jpeg" alt="" width="1280" height="1280" data-orientation="square">
+<img src="image2.jpg" alt="" width="1280" height="1280" data-orientation="square">
 
 No pictures from inside the Bahai temple, but it is a stunning architectural structure. 
 
@@ -113,7 +113,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-171019');
 
-	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 716334 });
+	t.like(await stat(join(outPath, 'image1.jpg')), { size: 716334 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -121,7 +121,7 @@ id: C73DC854-EA96-4721-8881-EA4DADEF97A5@ylk.gd
 date: 2024-04-21T17:10:19.000Z
 title: Table
 assets:
-  - filename: image1.jpeg
+  - filename: image1.jpg
     width: 1512
     height: 1512
     orientation: square
@@ -131,7 +131,7 @@ Our IKEA Ingatorp table top hasn’t aged well in ten years, so it was time for 
 
 Ash from a local forestry. Cut, planed, glued, sanded, routed, and finished at [Das Habitat Augsburg](https://das-habitat.de). Slightly bigger dimensions than the original to make more room for boardgames. 
 
-<img src="image1.jpeg" alt="" width="1512" height="1512" data-orientation="square">
+<img src="image1.jpg" alt="" width="1512" height="1512" data-orientation="square">
 
 Well worth the time.
 `
@@ -145,7 +145,7 @@ test('Converts "html.eml" into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-210023');
 
-	t.like(await stat(join(outPath, 'IMG_0010.jpeg')), { size: 36745 });
+	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -153,7 +153,7 @@ id: D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd
 date: 2024-01-14T21:00:23.000Z
 title: "HTLM #2"
 assets:
-  - filename: IMG_0010.jpeg
+  - filename: IMG_0010.jpg
     width: 240
     height: 320
     orientation: portrait
@@ -164,7 +164,7 @@ Mit **Extra** Text und _Umbruch_.
 
 Mit Emoji 😍 Und Bild!
 
-<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait">
+<img src="IMG_0010.jpg" alt="" width="240" height="320" data-orientation="portrait">
 ^ Mit Bildunterschrift
 
 > Lorem Ipsum bla blah 
@@ -189,7 +189,7 @@ test('Converts "text.eml" into Markdown and files', async (t) => {
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-204635');
 
-	t.like(await stat(join(outPath, 'IMG_0010.jpeg')), { size: 36745 });
+	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 	t.is(
 		await readFile(join(outPath, 'post.md'), 'utf8'),
 		`---
@@ -197,7 +197,7 @@ id: 62D1AEA4-FC6F-4279-9CD4-8D2CECE5A0CF@ylk.gd
 date: 2024-01-14T20:46:35.000Z
 title: Testnachricht Text
 assets:
-  - filename: IMG_0010.jpeg
+  - filename: IMG_0010.jpg
     width: 240
     height: 320
     orientation: portrait
@@ -208,7 +208,7 @@ Mit Extra Text und Umbruch.
 
 Mit Emoji 😍 Und Bild!
 
-<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait">
+<img src="IMG_0010.jpg" alt="" width="240" height="320" data-orientation="portrait">
 ^ Mit Bildunterschrift
 
 > Lorem Ipsum bla blah 

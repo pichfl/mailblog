@@ -45,9 +45,8 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 
 	const assets = Object.keys(files).map((id) => {
 		const file = files[id];
-		const chunk = chunks.find((c) => c.id === id);
 		return {
-			filename: chunk?.filename || id,
+			filename: file.filename,
 			width: file.width,
 			height: file.height,
 			orientation: file.orientation,
@@ -65,7 +64,7 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 	post += '\n';
 
 	for (let i = 0; i < chunks.length; i++) {
-		const { type, id, filename, ...chunk } = chunks[i];
+		const { type, id, ...chunk } = chunks[i];
 		const nextChunk = chunks[i + 1];
 
 		if (type.startsWith('text')) {
@@ -80,8 +79,8 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 				chunk.caption = caption;
 			}
 
-			const { width, height, orientation } = files[id];
-			const img = `<img src="${filename}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
+			const { width, height, orientation, filename: normalizedFilename } = files[id];
+			const img = `<img src="${normalizedFilename}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
 
 			if (chunk.contentId) {
 				post = processImageWithContentId(post, chunk, img);

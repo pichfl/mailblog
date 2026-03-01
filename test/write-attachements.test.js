@@ -19,21 +19,21 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 	t.deepEqual(attachments, {
 		'image0.jpeg': {
 			type: 'image/jpeg',
-			filename: 'image0.jpeg',
+			filename: 'image0.jpg',
 			orientation: 'portrait',
 			width: 1512,
 			height: 2016,
 		},
 		'image1.jpeg': {
 			type: 'image/jpeg',
-			filename: 'image1.jpeg',
+			filename: 'image1.jpg',
 			orientation: 'portrait',
 			width: 1512,
 			height: 2016,
 		},
 		'image2.jpeg': {
 			type: 'image/jpeg',
-			filename: 'image2.jpeg',
+			filename: 'image2.jpg',
 			orientation: 'square',
 			width: 1280,
 			height: 1280,
@@ -42,9 +42,9 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 
 	const outPath = join('out', 'test', 'write-attachments', 'LotusTemple');
 
-	t.like(await stat(join(outPath, 'image0.jpeg')), { size: 1307452 });
-	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 698926 });
-	t.like(await stat(join(outPath, 'image2.jpeg')), { size: 273194 });
+	t.like(await stat(join(outPath, 'image0.jpg')), { size: 1307452 });
+	t.like(await stat(join(outPath, 'image1.jpg')), { size: 698926 });
+	t.like(await stat(join(outPath, 'image2.jpg')), { size: 273194 });
 });
 
 test.after('cleanup', async () => {
