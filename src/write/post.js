@@ -1,9 +1,8 @@
 import { chmod, writeFile } from 'node:fs/promises';
-import { join, sep } from 'node:path';
+import { join } from 'node:path';
 
 import { stringify as yaml } from 'yaml';
 
-import { config } from '../config.js';
 import trimNewlines from '../utils/trim-newlines.js';
 
 export default async function writePost(outDir, outPath, meta, chunks, files) {
@@ -36,7 +35,7 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 			}
 
 			const { width, height, orientation, placeholder } = files[id];
-			const src = [config.hostname.replace(/\/+$/, ''), ...outPath.split(sep), filename].join('/');
+			const src = filename;
 
 			if (chunk.caption) {
 				img += '<figure>';

@@ -1,5 +1,5 @@
 import { readFile, stat } from 'node:fs/promises';
-import { join, sep } from 'node:path';
+import { join } from 'node:path';
 
 import test from 'ava';
 import { rimraf } from 'rimraf';
@@ -35,11 +35,11 @@ date: Wed, 14 Feb 2024 23:41:56 +0530
 title: Lotus Temple
 ---
 
-<figure><img src="https://cdn.ylk.gd/2024/02/14/191156/image0.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOnh1lTbaqxkQaDupqirYWRh70VALp+Cc5dcnROAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
+<figure><img src="image0.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNgYGPgEBfXMzFh0DXS/vn7R2BIEIOnh1lTbaqxkQaDupqirYWRh70VALp+Cc5dcnROAAAAAElFTkSuQmCC)"><figcaption>Aastha Kunj Park</figcaption></figure>
 
-<figure><img src="https://cdn.ylk.gd/2024/02/14/191156/image1.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXE1gD7+//p7PmjqbkAd3RjfHxramlbABgCACMXACkiABcoFCFh8Yv5AAAAAElFTkSuQmCC)"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
+<figure><img src="image1.jpeg" alt="" width="900" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AO/v9eHm8bXE1gD7+//p7PmjqbkAd3RjfHxramlbABgCACMXACkiABcoFCFh8Yv5AAAAAElFTkSuQmCC)"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
 
-<img src="https://cdn.ylk.gd/2024/02/14/191156/image2.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unHwsDAvrrp6OcAQisnJRQUOxsVSikfABkAAEgjG1AkFzEOAI21GRnGCzH2AAAAAElFTkSuQmCC)">
+<img src="image2.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/APz9/f7+/vz9/Pz8/QDr6unHwsDAvrrp6OcAQisnJRQUOxsVSikfABkAAEgjG1AkFzEOAI21GRnGCzH2AAAAAElFTkSuQmCC)">
 
 No pictures from inside the Bahai temple, but it is a stunning architectural structure. 
 
@@ -90,7 +90,7 @@ date: Fri, 23 Feb 2024 19:21:59 +0530
 title: Jaipur &ndash; Delhi
 ---
 
-<img src="https://cdn.ylk.gd/2024/02/23/145159/IMG_1537.jpg" alt="" width="857" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFxQWXttdraiqADqwJv4yq3/8NcASx0ARxwAKgAAAPPk6uPW3ZR/gIceE70oKAA9AAAAAElFTkSuQmCC)">
+<img src="IMG_1537.jpg" alt="" width="857" height="1200" data-orientation="portrait" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AFxQWXttdraiqADqwJv4yq3/8NcASx0ARxwAKgAAAPPk6uPW3ZR/gIceE70oKAA9AAAAAElFTkSuQmCC)">
 
 By train
 `
@@ -118,7 +118,7 @@ Our IKEA Ingatorp table top hasn’t aged well in ten years, so it was time for 
 
 Ash from a local forestry. Cut, planed, glued, sanded, routed, and finished at [Das Habitat Augsburg](https://das-habitat.de). Slightly bigger dimensions than the original to make more room for boardgames. 
 
-<img src="https://cdn.ylk.gd/2024/04/21/191019/image1.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3hwYr+9vf/y6gCRiHirm4n/+vmwr6MAj4FxnYVsxbSktKWWAHx4dyUeEA4AAG5tbebXGbmiE1KkAAAAAElFTkSuQmCC)">
+<img src="image1.jpeg" alt="" width="1200" height="1200" data-orientation="square" style="--ph:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/AFJKO3hwYr+9vf/y6gCRiHirm4n/+vmwr6MAj4FxnYVsxbSktKWWAHx4dyUeEA4AAG5tbebXGbmiE1KkAAAAAElFTkSuQmCC)">
 
 Well worth the time.
 `

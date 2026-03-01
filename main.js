@@ -1,7 +1,6 @@
 import { Command } from 'commander';
 import got from 'got';
 
-import { config } from './src/config.js';
 import convertMail from './src/convert-mail.js';
 import writeContent from './src/write/content.js';
 import writeIndex from './src/write/index.js';
@@ -18,16 +17,11 @@ program
 	.option('-i, --index', 'Write index.json', false)
 	.option('-c, --content', 'Write content.json', false)
 	.option('-r, --read', 'Read Email and write post.md', false)
-	.option('-p, --ping <ping>', 'Ping HTTP trigger', '')
-	.option('-n, --hostname <host>', 'Hostname prefixed to all assets', '');
+	.option('-p, --ping <ping>', 'Ping HTTP trigger', '');
 
 program.parse(process.argv);
 
 const options = program.opts();
-
-if (options.hostname) {
-	config.hostname = options.hostname;
-}
 
 if (options.read) {
 	const written = await convertMail(process.stdin, options.out);
