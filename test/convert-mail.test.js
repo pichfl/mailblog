@@ -48,9 +48,11 @@ assets:
     orientation: square
 ---
 
-<figure><img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait"><figcaption>Aastha Kunj Park</figcaption></figure>
+<img src="image0.jpeg" alt="" width="1512" height="2016" data-orientation="portrait">
+^ Aastha Kunj Park
 
-<figure><img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait"><figcaption>Inside the Lotus Temple Gardens</figcaption></figure>
+<img src="image1.jpeg" alt="" width="1512" height="2016" data-orientation="portrait">
+^ Inside the Lotus Temple Gardens
 
 <img src="image2.jpeg" alt="" width="1280" height="1280" data-orientation="square">
 
@@ -138,7 +140,6 @@ Well worth the time.
 	t.true(true);
 });
 
-
 test('Converts "html.eml" into Markdown and files', async (t) => {
 	await convertMail(await readMail('./messages/html.eml'), join('out', 'test', 'convert-mail'));
 
@@ -164,7 +165,6 @@ Mit **Extra** Text und _Umbruch_.
 Mit Emoji 😍 Und Bild!
 
 <img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait">
-
 ^ Mit Bildunterschrift
 
 > Lorem Ipsum bla blah 
@@ -206,12 +206,14 @@ assets:
 Das ist eine Testnachricht. 
 Mit Extra Text und Umbruch.
 
-Mit Emoji 😍 Und Bild!<figure><img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait"><figcaption>Mit Bildunterschrift</figcaption></figure>
+Mit Emoji 😍 Und Bild!
+
+<img src="IMG_0010.jpeg" alt="" width="240" height="320" data-orientation="portrait">
+^ Mit Bildunterschrift
 
 > Lorem Ipsum bla blah 
 
 Das hier wird _italic_ und Das hier wird **fett**
-
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat magna sed orci malesuada varius. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi at arcu lorem. Proin eu magna et sapien hendrerit vestibulum in eu ex. Quisque in posuere nisl. 
 

@@ -5,6 +5,40 @@ import { stringify as yaml } from 'yaml';
 
 import trimNewlines from '../utils/trim-newlines.js';
 
+function detectCaption(nextChunk) {
+	if (!nextChunk?.type.startsWith('text') || !nextChunk?.text.match(/^\^\s.*/)) {
+		return null;
+	}
+
+	const lines = nextChunk.text.split('\n');
+	const caption = lines.shift().replace(/^\^\s/, '');
+	nextChunk.text = trimNewlines(lines.join('\n')).replace(/\n{3,}/g, '\n\n');
+
+	return caption;
+}
+
+function processImageWithContentId(post, chunk, img) {
+	const placeholder = `[[${chunk.contentId}]]`;
+	const placeholderRegex = new RegExp(
+		`\\[\\[${chunk.contentId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\]\\]\\n\\n\\^\\s(.+)`,
+		'g'
+	);
+	const match = post.match(placeholderRegex);
+
+	if (match) {
+		chunk.caption = match[0].replace(placeholderRegex, '$1');
+		const replacement = `${img}\n^ ${chunk.caption}`;
+		return post.replace(placeholderRegex, replacement);
+	}
+
+	if (chunk.caption) {
+		const replacement = `${img}\n^ ${chunk.caption}`;
+		return post.replace(placeholder, replacement);
+	}
+
+	return post.replace(placeholder, img);
+}
+
 export default async function writePost(outDir, outPath, meta, chunks, files) {
 	const filepath = join(outDir, outPath, 'post.md');
 	let post = '';
@@ -41,34 +75,31 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 
 		// Handle images followed by a potential caption
 		if (type.startsWith('image')) {
-			let img = '';
-
-			if (nextChunk?.type.startsWith('text') && nextChunk?.text.match(/^\^\s.*/)) {
-				const lines = nextChunk.text.split('\n');
-
-				chunk.caption = lines.shift().replace(/^\^\s/, '');
-				nextChunk.text = trimNewlines(lines.join('\n'));
+			const caption = detectCaption(nextChunk);
+			if (caption) {
+				chunk.caption = caption;
 			}
 
 			const { width, height, orientation } = files[id];
-			const src = filename;
-
-			if (chunk.caption) {
-				img += '<figure>';
-			}
-
-			img += `<img src="${src}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
-
-			if (chunk.caption) {
-				img += `<figcaption>${chunk.caption}</figcaption>`;
-				img += '</figure>';
-			}
+			const img = `<img src="${filename}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
 
 			if (chunk.contentId) {
-				post = post.replace(`[[${chunk.contentId}]]`, img);
+				post = processImageWithContentId(post, chunk, img);
 			} else {
-				post += img;
-				post += '\n\n';
+				if (chunk.caption) {
+					const result = `${img}\n^ ${chunk.caption}`;
+					if (post && !post.endsWith('\n\n')) {
+						post += '\n\n';
+					}
+					post += result;
+					post += '\n\n';
+				} else {
+					if (post && !post.endsWith('\n\n')) {
+						post += '\n\n';
+					}
+					post += img;
+					post += '\n\n';
+				}
 			}
 		}
 	}
