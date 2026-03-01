@@ -6,8 +6,10 @@
   "scripts": {
     "test": "ava",
     "test:watch": "ava --watch",
-    "lint": "biome check **/*.js",
-    "lint:fix": "biome check --apply **/*.js",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
     "mailblog": "./bin/mailblog"
   },
   "bin": {
@@ -45,7 +47,8 @@
     "yaml": "^2.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "ava": "^6.1.2"
+    "ava": "^6.1.2",
+    "oxfmt": "^0.35.0",
+    "oxlint": "^1.50.0"
   }
 }

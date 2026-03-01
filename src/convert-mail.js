@@ -1,8 +1,9 @@
+import { join } from 'node:path';
+
 import buildOutPath from './build-out-path.js';
 import parseMail from './parse/mail.js';
 import writeAttachments from './write/attachements.js';
 import writePost from './write/post.js';
-import { join } from 'node:path';
 
 export default async function convertMail(readableStream, outDir) {
 	const { meta, chunks, attachments } = await parseMail(readableStream);

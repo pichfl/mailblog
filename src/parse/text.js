@@ -1,5 +1,6 @@
 import iconv from 'iconv-lite';
 import quotedPrintable from 'quoted-printable';
+
 import toMarkdown from '../to-markdown.js';
 import trimNewlines from '../utils/trim-newlines.js';
 
@@ -19,10 +20,7 @@ export function parseText(data, headers) {
 	let type = contentType;
 
 	// Replace non-breaking spaces with regular spaces
-	text = text
-		.replaceAll('\u00a0', ' ')
-		.replaceAll('&nbsp;', ' ')
-		.replaceAll('77u/DQoNCg=', '\n');
+	text = text.replaceAll('\u00a0', ' ').replaceAll('&nbsp;', ' ').replaceAll('77u/DQoNCg=', '\n');
 	text = trimNewlines(text);
 
 	if (type === 'text/html') {

@@ -1,8 +1,9 @@
-import test from 'ava';
-
 import { readFile, stat } from 'node:fs/promises';
 import { join, sep } from 'node:path';
+
+import test from 'ava';
 import { rimraf } from 'rimraf';
+
 import convertMail from '../src/convert-mail.js';
 import { readMail } from './utils.js';
 
@@ -12,15 +13,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join(
-		'out',
-		'test',
-		'convert-mail',
-		'2024',
-		'02',
-		'14',
-		'191156'
-	);
+	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '14', '191156');
 
 	t.like(await stat(join(outPath, 'image0.jpeg')), {
 		size: 2517274,
@@ -58,49 +51,26 @@ The concrete roof arches feel almost weightless and let light filter in through 
 
 	t.is(
 		(
-			await stat(
-				join(
-					'out',
-					'test',
-					'convert-mail',
-					'2024',
-					'02',
-					'14',
-					'191156',
-					'post.md'
-				)
-			)
+			await stat(join('out', 'test', 'convert-mail', '2024', '02', '14', '191156', 'post.md'))
 		).mode.toString(8),
 		'100644'
 	);
 
 	t.is(
-		(
-			await stat(
-				join('out', 'test', 'convert-mail', '2024', '02', '14', '191156')
-			)
-		).mode.toString(8),
+		(await stat(join('out', 'test', 'convert-mail', '2024', '02', '14', '191156'))).mode.toString(
+			8
+		),
 		'40755'
 	);
 
 	t.is(
-		(
-			await stat(join('out', 'test', 'convert-mail', '2024', '02', '14'))
-		).mode.toString(8),
+		(await stat(join('out', 'test', 'convert-mail', '2024', '02', '14'))).mode.toString(8),
 		'40755'
 	);
 
-	t.is(
-		(
-			await stat(join('out', 'test', 'convert-mail', '2024', '02'))
-		).mode.toString(8),
-		'40755'
-	);
+	t.is((await stat(join('out', 'test', 'convert-mail', '2024', '02'))).mode.toString(8), '40755');
 
-	t.is(
-		(await stat(join('out', 'test', 'convert-mail', '2024'))).mode.toString(8),
-		'40755'
-	);
+	t.is((await stat(join('out', 'test', 'convert-mail', '2024'))).mode.toString(8), '40755');
 });
 
 test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
@@ -109,15 +79,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 		join('out', 'test', 'convert-mail')
 	);
 
-	const outPath = join(
-		'out',
-		'test',
-		'convert-mail',
-		'2024',
-		'02',
-		'23',
-		'145159'
-	);
+	const outPath = join('out', 'test', 'convert-mail', '2024', '02', '23', '145159');
 
 	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 1759719 });
 	t.is(
@@ -138,20 +100,9 @@ By train
 });
 
 test('Converts "Table.eml" into Markdown and files', async (t) => {
-	await convertMail(
-		await readMail('./messages/Table.eml'),
-		join('out', 'test', 'convert-mail')
-	);
+	await convertMail(await readMail('./messages/Table.eml'), join('out', 'test', 'convert-mail'));
 
-	const outPath = join(
-		'out',
-		'test',
-		'convert-mail',
-		'2024',
-		'04',
-		'21',
-		'191019'
-	);
+	const outPath = join('out', 'test', 'convert-mail', '2024', '04', '21', '191019');
 
 	// t.like(await stat(join(outPath, 'post.md')), { size: 853 });
 	t.like(await stat(join(outPath, 'image1.jpeg')), { size: 3431692 });

@@ -1,0 +1,8 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"useTabs": true,
+	"sortImports": {},
+	"ignorePatterns": ["package-lock.yaml", "package.json", "node_modules/", "out/"]
+}

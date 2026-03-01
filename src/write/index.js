@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import { glob } from 'glob';
 
 export default async function writeIndex(outDir) {

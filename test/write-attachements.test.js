@@ -1,5 +1,6 @@
 import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import test from 'ava';
 import { rimraf } from 'rimraf';
 

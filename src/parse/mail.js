@@ -1,7 +1,8 @@
+import he from 'he';
 import { Splitter } from 'mailsplit';
+
 import { parseHeaders } from './header.js';
 import { parseText } from './text.js';
-import he from 'he';
 
 export default async function parseMail(readableStream) {
 	return new Promise((resolve, reject) => {
@@ -18,10 +19,7 @@ export default async function parseMail(readableStream) {
 
 					if (headers.from && headers.messageId) {
 						// Metadata
-						meta.id = (headers.messageId?.value ?? nanoid())
-							.trim()
-							.replace(/^<|>$/g, '')
-							.trim();
+						meta.id = (headers.messageId?.value ?? nanoid()).trim().replace(/^<|>$/g, '').trim();
 						meta.date = headers['date']?.value;
 						meta.title = he.encode(headers['subject']?.value ?? '', {
 							useNamedReferences: true,
@@ -48,10 +46,7 @@ export default async function parseMail(readableStream) {
 
 					// Concatinate Attachments
 					const { node, value } = data;
-					const contentId = previousHeaders.contentId?.value?.replace(
-						/^<|>$/g,
-						''
-					);
+					const contentId = previousHeaders.contentId?.value?.replace(/^<|>$/g, '');
 
 					const id = contentId ?? data.contentLocation ?? node.filename;
 
@@ -69,10 +64,7 @@ export default async function parseMail(readableStream) {
 							value,
 						};
 					} else {
-						attachments[id].value = Buffer.concat([
-							attachments[id].value,
-							value,
-						]);
+						attachments[id].value = Buffer.concat([attachments[id].value, value]);
 					}
 
 					break;
@@ -82,12 +74,7 @@ export default async function parseMail(readableStream) {
 
 		splitter.on('end', async () => {
 			// Drop PLain Text if HTML is present
-			if (
-				chunks.find(
-					(chunk) =>
-						chunk.type === 'text/html' || chunk.type === 'text/markdown'
-				)
-			) {
+			if (chunks.find((chunk) => chunk.type === 'text/html' || chunk.type === 'text/markdown')) {
 				chunks = chunks.filter((chunk) => chunk.type !== 'text/plain');
 			}
 

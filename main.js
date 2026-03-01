@@ -1,10 +1,10 @@
-import got from 'got';
 import { Command } from 'commander';
+import got from 'got';
 
+import { config } from './src/config.js';
 import convertMail from './src/convert-mail.js';
 import writeContent from './src/write/content.js';
 import writeIndex from './src/write/index.js';
-import { config } from './src/config.js';
 
 const program = new Command();
 

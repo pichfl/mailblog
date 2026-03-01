@@ -1,6 +1,8 @@
 import { chmod, writeFile } from 'node:fs/promises';
 import { join, sep } from 'node:path';
+
 import { stringify as yaml } from 'yaml';
+
 import { config } from '../config.js';
 import trimNewlines from '../utils/trim-newlines.js';
 
@@ -26,10 +28,7 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 		if (type.startsWith('image')) {
 			let img = '';
 
-			if (
-				nextChunk?.type.startsWith('text') &&
-				nextChunk?.text.match(/^\^\s.*/)
-			) {
+			if (nextChunk?.type.startsWith('text') && nextChunk?.text.match(/^\^\s.*/)) {
 				const lines = nextChunk.text.split('\n');
 
 				chunk.caption = lines.shift().replace(/^\^\s/, '');
@@ -37,11 +36,7 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 			}
 
 			const { width, height, orientation, placeholder } = files[id];
-			const src = [
-				config.hostname.replace(/\/+$/, ''),
-				...outPath.split(sep),
-				filename,
-			].join('/');
+			const src = [config.hostname.replace(/\/+$/, ''), ...outPath.split(sep), filename].join('/');
 
 			if (chunk.caption) {
 				img += '<figure>';

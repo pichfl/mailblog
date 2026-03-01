@@ -22,12 +22,10 @@ const allowList = new Set([
 
 export function parseHeaders(data) {
 	try {
-		const headers = new Headers(data.getHeaders())
+		const headers = new Headers(data.getHeaders());
 
 		return headers.getList().reduce((acc, { key, line }) => {
-			const { value, params } = libmime.parseHeaderValue(
-				libmime.decodeHeader(line).value
-			);
+			const { value, params } = libmime.parseHeaderValue(libmime.decodeHeader(line).value);
 
 			if (allowList.has(key)) {
 				acc[camelCase(key)] = { value: libmime.decodeWords(value), ...params };

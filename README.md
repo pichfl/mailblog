@@ -1,6 +1,6 @@
 # Mailblog
 
-TLDR; This is barely enough to get my blog running. 
+TLDR; This is barely enough to get my blog running.
 
 ## What is this?
 

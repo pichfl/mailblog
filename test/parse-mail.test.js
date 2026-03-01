@@ -12,11 +12,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 		title: 'Lotus Temple',
 	});
 
-	t.deepEqual(Object.keys(result.attachments), [
-		'image0.jpeg',
-		'image1.jpeg',
-		'image2.jpeg',
-	]);
+	t.deepEqual(Object.keys(result.attachments), ['image0.jpeg', 'image1.jpeg', 'image2.jpeg']);
 
 	t.like(result.attachments, {
 		'image0.jpeg': {
@@ -123,9 +119,7 @@ test('Parses HTML E-Mail into chunks', async (t) => {
 		title: 'HTLM #2',
 	});
 
-	t.deepEqual(Object.keys(result.attachments), [
-		'204AA714-2C40-4EC8-86CF-28DCC26CB36B',
-	]);
+	t.deepEqual(Object.keys(result.attachments), ['204AA714-2C40-4EC8-86CF-28DCC26CB36B']);
 	t.like(result.attachments, {
 		'204AA714-2C40-4EC8-86CF-28DCC26CB36B': {
 			headers: {
