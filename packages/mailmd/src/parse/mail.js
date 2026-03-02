@@ -84,7 +84,16 @@ export default async function parseMail(readableStream) {
 				chunks = chunks.filter((chunk) => chunk.type !== 'text/plain');
 			}
 
-			resolve({ chunks, attachments, meta });
+			const emailFrontmatter = {};
+			for (const chunk of chunks) {
+				if (chunk.frontmatter && Object.keys(chunk.frontmatter).length > 0) {
+					Object.assign(emailFrontmatter, chunk.frontmatter);
+				}
+			}
+
+			const mergedMeta = { ...meta, ...emailFrontmatter };
+
+			resolve({ chunks, attachments, meta: mergedMeta });
 		});
 
 		splitter.on('error', (error) => reject(error));

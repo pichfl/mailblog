@@ -69,6 +69,9 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 		const nextChunk = chunks[i + 1];
 
 		if (type.startsWith('text')) {
+			if (post && !post.endsWith('\n\n') && !post.endsWith('---\n\n')) {
+				post += '\n\n';
+			}
 			post += chunk.text;
 			continue;
 		}

@@ -83,6 +83,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 		{
 			type: 'text/plain',
 			text: '^ Aastha Kunj Park',
+			frontmatter: {},
 		},
 		{
 			contentId: undefined,
@@ -93,6 +94,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 		{
 			type: 'text/plain',
 			text: '^ Inside the Lotus Temple Gardens',
+			frontmatter: {},
 		},
 		{
 			contentId: undefined,
@@ -106,6 +108,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 				'No pictures from inside the Bahai temple, but it is a stunning architectural structure. \n' +
 				'\n' +
 				'The concrete roof arches feel almost weightless and let light filter in through gaps between the petals. We were very lucky to experience moments in peace and calmness almost on our own in an otherwise busy and crowded place. ',
+			frontmatter: {},
 		},
 	]);
 });
@@ -168,6 +171,7 @@ Etiam aliquet lobortis dui ut aliquam. Donec ornare, dolor sed fringilla pharetr
 code
 \`\`\``,
 			type: 'text/markdown',
+			frontmatter: {},
 		},
 		{
 			contentId: '204AA714-2C40-4EC8-86CF-28DCC26CB36B',
@@ -196,6 +200,7 @@ test('Parses (No Subject).eml', async (t) => {
 
 Which means I'm done shopping for the wedding and we can spent a few days doing touristy things.`,
 			type: 'text/plain',
+			frontmatter: {},
 		},
 	]);
 });

@@ -1,3 +1,4 @@
+import matter from 'gray-matter';
 import iconv from 'iconv-lite';
 import quotedPrintable from 'quoted-printable';
 
@@ -28,8 +29,20 @@ export function parseText(data, _headers) {
 		type = 'text/markdown';
 	}
 
+	let frontmatter = {};
+	try {
+		const parsed = matter(text);
+		if (parsed.data && Object.keys(parsed.data).length > 0) {
+			frontmatter = parsed.data;
+			text = trimNewlines(parsed.content);
+		}
+	} catch {
+		// ignore errors
+	}
+
 	return {
 		type,
 		text,
+		frontmatter,
 	};
 }

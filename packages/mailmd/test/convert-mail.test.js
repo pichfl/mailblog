@@ -228,6 +228,21 @@ code
 	t.true(true);
 });
 
+test('Converts email with frontmatter into Markdown with merged frontmatter', async (t) => {
+	await convertMail(await readMail('./messages/Finnland.eml'), join('out', 'test', 'convert-mail'));
+
+	const outPath = join('out', 'test', 'convert-mail', '2026-03-01-080000');
+
+	// Verify images were processed
+	t.like(await stat(join(outPath, '_DSC5194.jpg')), { size: 27332 });
+	t.like(await stat(join(outPath, '_DSC5212.jpg')), { size: 22254 });
+
+	const content = await readFile(join(outPath, 'message.md'), 'utf8');
+
+	const expectedContent = await readFile(join(import.meta.dirname, 'expected-finnland.md'), 'utf8');
+	t.is(content, expectedContent);
+});
+
 test.after('cleanup', async () => {
 	await rimraf(join('out', 'test', 'convert-mail'));
 });
