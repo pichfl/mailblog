@@ -11,7 +11,7 @@ export function parseMimeString(string, charset) {
 	return iconv.decode(buffer, charset);
 }
 
-export function parseText(data, headers) {
+export function parseText(data, _headers) {
 	const {
 		node: { contentType, charset },
 		value,
