@@ -1,9 +1,11 @@
-# mailmd
+# mailblog
 
-Convert .eml into Markdown and assets.
+A collection of tools to publish blog posts from your email client.
 
-## What is this?
+## Tools
 
-It's a Node.js binary which accepts email messages via std.in and converts them to images and markdown files. It also generates a JSON based index and a combined JSON file for all posts.
+- `mailmd` & `mdmail` - convert from eml to sanitized Markdown and back
 
-This works if you have a server that allows piping incoming messages into a binary e.g. through qmail. I use [Uberspace](https://uberspace.de/en/) which provides this out of the box.
+## License 
+
+None yet subject to change.
