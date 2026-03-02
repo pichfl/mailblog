@@ -10,10 +10,12 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
-    "mailmd": "./src/mailmd.js"
+    "mailmd": "./src/mailmd.js",
+    "mdmail": "./src/mdmail.js"
   },
   "bin": {
-    "mailmd": "./src/mailmd.js"
+    "mailmd": "./src/mailmd.js",
+    "mdmail": "./src/mdmail.js"
   },
   "type": "module",
   "keywords": [],
