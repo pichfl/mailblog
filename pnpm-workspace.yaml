@@ -2,4 +2,4 @@ onlyBuiltDependencies:
   - sharp
 
 packages:
-  - "packages/**"
+  - 'packages/**'

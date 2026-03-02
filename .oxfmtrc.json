@@ -4,5 +4,11 @@
 	"trailingComma": "es5",
 	"useTabs": true,
 	"sortImports": {},
-	"ignorePatterns": ["package-lock.yaml", "package.json", "node_modules/", "out/"]
+	"ignorePatterns": [
+		"package-lock.yaml",
+		"**/package.json",
+		"**/node_modules/",
+		"**/out/",
+		"**/test/*.md"
+	]
 }

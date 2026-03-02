@@ -6,16 +6,20 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      oxfmt:
+        specifier: 0.35.0
+        version: 0.35.0
+      oxlint:
+        specifier: 1.50.0
+        version: 1.50.0
 
   packages/mailmd:
     dependencies:
       '@zone-eu/mailsplit':
         specifier: ^5.4.8
         version: 5.4.8
-      blurhash:
-        specifier: 2.0.5
-        version: 2.0.5
       cheerio:
         specifier: 1.2.0
         version: 1.2.0
@@ -84,10 +88,10 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       oxfmt:
-        specifier: 0.35.0
+        specifier: '*'
         version: 0.35.0
       oxlint:
-        specifier: 1.50.0
+        specifier: '*'
         version: 1.50.0
 
 packages:
@@ -455,9 +459,6 @@ packages:
 
   blueimp-md5@2.19.0:
     resolution: {integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w==}
-
-  blurhash@2.0.5:
-    resolution: {integrity: sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==}
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
@@ -1650,8 +1651,6 @@ snapshots:
       file-uri-to-path: 1.0.0
 
   blueimp-md5@2.19.0: {}
-
-  blurhash@2.0.5: {}
 
   boolbase@1.0.0: {}
 

@@ -6,6 +6,6 @@ A collection of tools to publish blog posts from your email client.
 
 - `mailmd` & `mdmail` - convert from eml to sanitized Markdown and back
 
-## License 
+## License
 
 None yet subject to change.
