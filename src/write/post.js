@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { stringify as yaml } from 'yaml';
 
+import { config } from '../config.js';
 import trimNewlines from '../utils/trim-newlines.js';
 
 function detectCaption(nextChunk) {
@@ -40,7 +41,7 @@ function processImageWithContentId(post, chunk, img) {
 }
 
 export default async function writePost(outDir, outPath, meta, chunks, files) {
-	const filepath = join(outDir, outPath, 'message.md');
+	const filepath = join(outDir, outPath, config.mdFilename);
 	let post = '';
 
 	const assets = Object.keys(files).map((id) => {
