@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "test": "pnpm --filter @posteingang/tests test",
+    "test:watch": "pnpm --filter @posteingang/tests test:watch",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",

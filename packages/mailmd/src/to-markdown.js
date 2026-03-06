@@ -1,4 +1,4 @@
-import * as cheerio from 'cheerio';
+import * as cheerio from 'cheerio/slim';
 
 export default function toMarkdown(html) {
 	const c = cheerio.load(html);
