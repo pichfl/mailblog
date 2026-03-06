@@ -1,11 +1,10 @@
 import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import test from 'ava';
-import { rimraf } from 'rimraf';
-
 import parseMail from '@posteingang/mailmd/src/parse/mail.js';
 import writeAttachments from '@posteingang/mailmd/src/write/attachements.js';
+import test from 'ava';
+import { rimraf } from 'rimraf';
 
 import { readMail } from '../utils.js';
 

@@ -1,4 +1,3 @@
-import { access } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { config } from './config.js';
@@ -12,13 +11,7 @@ export default async function convertMail(readableStream, outDir) {
 	const { sentAt, ...postMeta } = meta;
 	const outPath = dayjs(postMeta.date).utc().format('YYYY-MM-DD-HHmmss');
 
-	let isUpdate = false;
-	try {
-		await access(join(outDir, outPath, config.mdFilename));
-		isUpdate = true;
-	} catch {}
-
-	const finalMeta = { ...postMeta, ...(isUpdate ? { updatedAt: sentAt } : {}) };
+	const finalMeta = { ...postMeta, updatedAt: sentAt };
 
 	const files = await writeAttachments(outDir, outPath, attachments);
 	await writePost(outDir, outPath, finalMeta, chunks, files);

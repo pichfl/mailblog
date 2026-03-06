@@ -1,10 +1,9 @@
 import { readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import convertMail from '@posteingang/mailmd/src/convert-mail.js';
 import test from 'ava';
 import { rimraf } from 'rimraf';
-
-import convertMail from '@posteingang/mailmd/src/convert-mail.js';
 
 import { readMail } from '../utils.js';
 
@@ -261,6 +260,10 @@ test('Updates existing message.md when date frontmatter matches existing post', 
 
 	t.true(content.includes('updatedAt: 2024-03-10T12:00:00.000Z'));
 	t.true(content.includes('Updated content.'));
+});
+
+test.before('cleanup', async () => {
+	await rimraf(join('out', 'test', 'convert-mail'));
 });
 
 test.after('cleanup', async () => {

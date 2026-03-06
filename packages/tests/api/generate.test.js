@@ -2,10 +2,9 @@ import { readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
+import { generate as generateApi } from '@posteingang/api/src/adapters/strapi5.js';
 import test from 'ava';
 import { rimraf } from 'rimraf';
-
-import { generate as generateApi } from '@posteingang/api/src/adapters/strapi5.js';
 
 const outDir = join(tmpdir(), 'mdapi-test');
 

@@ -1,13 +1,12 @@
 import { mkdir, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import test from 'ava';
-import { rimraf } from 'rimraf';
-
 import convertMdToMail, {
 	parseMarkdownToPlainText,
 	extractAttachments,
 } from '@posteingang/mailmd/src/convert-md.js';
+import test from 'ava';
+import { rimraf } from 'rimraf';
 
 const testImageContent = 'fake-image-content';
 

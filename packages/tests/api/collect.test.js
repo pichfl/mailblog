@@ -1,8 +1,7 @@
 import { join } from 'node:path';
 
-import test from 'ava';
-
 import { collectPosts } from '@posteingang/api/src/collect.js';
+import test from 'ava';
 
 const fixtures = join(import.meta.dirname, '../fixtures/posts');
 

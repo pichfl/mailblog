@@ -1,6 +1,5 @@
-import test from 'ava';
-
 import parseMail from '@posteingang/mailmd/src/parse/mail.js';
+import test from 'ava';
 
 import { readMail } from '../utils.js';
 
