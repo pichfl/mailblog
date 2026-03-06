@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 import { program } from 'commander';
+import * as dotenv from 'dotenv';
 
 import { collectPosts } from './collect.js';
 import { generateApi } from './generate.js';
+
+dotenv.config({ quiet: true });
 
 program
 	.argument('[dir]', 'dist directory', './dist')

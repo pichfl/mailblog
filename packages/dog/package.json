@@ -1,10 +1,14 @@
 {
-  "name": "dog",
+  "name": "@posteingang/dog",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Daemon that watches an email inbox folder and runs mailmd + api generation",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "dog": "src/index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +16,13 @@
   "packageManager": "pnpm@10.22.0",
   "dependencies": {
     "@posteingang/api": "workspace:*",
-    "@posteingang/mailmd": "workspace:*"
+    "@posteingang/mailmd": "workspace:*",
+    "chokidar": "^4.0.0",
+    "commander": "14.0.3",
+    "dotenv": "17.3.1"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0"
   }
 }

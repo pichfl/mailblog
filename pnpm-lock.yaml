@@ -20,6 +20,9 @@ importers:
       commander:
         specifier: 14.0.3
         version: 14.0.3
+      dotenv:
+        specifier: 17.3.1
+        version: 17.3.1
       glob:
         specifier: 13.0.6
         version: 13.0.6
@@ -41,6 +44,9 @@ importers:
       commander:
         specifier: 14.0.3
         version: 14.0.3
+      dotenv:
+        specifier: 17.3.1
+        version: 17.3.1
     devDependencies:
       oxfmt:
         specifier: ^0.36.0

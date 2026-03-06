@@ -11,7 +11,8 @@
     "format:check": "oxfmt --check .",
     "mailmd": "./packages/mailmd/src/mailmd.js",
     "mdmail": "./packages/mailmd/src/mdmail.js",
-    "mdapi": "./packages/mdapi/src/main.js"
+    "mdapi": "./packages/mdapi/src/main.js",
+    "dog": "./packages/dog/src/index.js"
   },
   "keywords": [],
   "author": "Florian Pichler <pichfl@ylk.gd>",
