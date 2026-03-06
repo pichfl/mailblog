@@ -6,11 +6,11 @@
   "main": "src/index.js",
   "bin": {
     "dog": "src/index.js",
-    "dog-hash": "src/hash.js"
+    "hashmail": "src/hash.js"
   },
   "scripts": {
     "start": "node src/index.js",
-    "hash": "node src/hash.js"
+    "hashmail": "node src/hash.js"
   },
   "keywords": [],
   "author": "",

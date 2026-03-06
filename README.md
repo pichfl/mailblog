@@ -106,8 +106,7 @@ inbox+HASH@yourdomain.com
 `HASH` = first N hex characters of `HMAC-SHA256(salt, from@address)`. Emails that fail the check are deleted. Generate a hash with:
 
 ```sh
-node -e "const {createHmac}=require('crypto'); \
-  console.log(createHmac('sha256','YOUR_SALT').update('sender@example.com').digest('hex').slice(0,8))"
+pnpm hashmail YOUR_SALT sender@example.com
 ```
 
 ---
