@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { rebuild } from '@posteingang/dog/src/index.js';
+import { rebuild } from '@posteingang/dog/src/watcher.js';
 import test from 'ava';
 
 const FIXTURES = new URL('../fixtures/posts', import.meta.url).pathname;

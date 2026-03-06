@@ -2,7 +2,7 @@ import { copyFile, mkdir, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { createWatcher } from '@posteingang/dog/src/index.js';
+import { createWatcher } from '@posteingang/dog/src/watcher.js';
 import test from 'ava';
 
 // Use a no-image fixture for faster processing in watch tests
