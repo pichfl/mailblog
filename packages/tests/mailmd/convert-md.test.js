@@ -7,17 +7,14 @@ import { rimraf } from 'rimraf';
 import convertMdToMail, {
 	parseMarkdownToPlainText,
 	extractAttachments,
-} from '../src/convert-md.js';
+} from '@posteingang/mailmd/src/convert-md.js';
 
-// Test data
 const testImageContent = 'fake-image-content';
 
-// Create/cleanup folder for convertMdToMail tests
 const needsFolderTests = ['convertMdToMail'];
 
 test.beforeEach(async (t) => {
 	if (needsFolderTests.some((name) => t.title.includes(name))) {
-		// Create unique folder for each test - use just the test name part after the last ›
 		const testName = t.title.split(' › ').pop().replace(/\s+/g, '-');
 		t.context.testFolder = join('out', 'test', 'convert-md', testName);
 		await mkdir(t.context.testFolder, { recursive: true });
@@ -92,7 +89,6 @@ Final paragraph.`;
 	t.is(parseMarkdownToPlainText(input), expected);
 });
 
-// extractAttachments tests
 test('extractAttachments › extracts single image attachment', (t) => {
 	const content = '<img src="test.jpg" alt="" width="640" height="480">';
 	const folderPath = '/test/path';
@@ -160,7 +156,6 @@ test('extractAttachments › handles complex image attributes', (t) => {
 	]);
 });
 
-// convertMdToMail main function tests
 test('convertMdToMail › converts basic markdown with frontmatter', async (t) => {
 	const messageContent = `---
 from: sender@example.com
@@ -247,7 +242,6 @@ Test content.`;
 
 	t.is(result.subject, 'my-folder-name');
 
-	// Cleanup
 	await rm(testFolder, { recursive: true, force: true });
 });
 
@@ -292,7 +286,6 @@ Test content.`;
 });
 
 test('convertMdToMail › handles images and attachments', async (t) => {
-	// Create test image files
 	await writeFile(join(t.context.testFolder, 'test1.jpg'), testImageContent);
 	await writeFile(join(t.context.testFolder, 'test2.png'), testImageContent);
 
@@ -332,7 +325,6 @@ More text.`;
 		},
 	]);
 
-	// Check that images are replaced with CID placeholders and captions remain
 	t.false(result.text.includes('<img'));
 	t.false(result.text.includes('test1.jpg'));
 	t.false(result.text.includes('test2.png'));

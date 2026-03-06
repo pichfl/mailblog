@@ -1,5 +1,5 @@
 export default {
-	files: ['test/**/*.test.js'],
+	files: ['**/*.test.js'],
 	watchMode: {
 		ignoreChanges: ['out/**/*'],
 	},

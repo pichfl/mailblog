@@ -4,12 +4,13 @@ import { join } from 'node:path';
 import test from 'ava';
 import { rimraf } from 'rimraf';
 
-import convertMail from '../src/convert-mail.js';
-import { readMail } from './utils.js';
+import convertMail from '@posteingang/mailmd/src/convert-mail.js';
+
+import { readMail } from '../utils.js';
 
 test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 	await convertMail(
-		await readMail('./messages/LotusTemple.eml'),
+		await readMail('messages/LotusTemple.eml'),
 		join('out', 'test', 'convert-mail')
 	);
 
@@ -33,6 +34,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 id: DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd
 date: 2024-02-14T18:11:56.000Z
 title: Lotus Temple
+updatedAt: 2024-02-14T18:11:56.000Z
 assets:
   - filename: image0.jpg
     width: 1512
@@ -79,7 +81,7 @@ The concrete roof arches feel almost weightless and let light filter in through 
 
 test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 	await convertMail(
-		await readMail('./messages/Jaipur-Delhi.eml'),
+		await readMail('messages/Jaipur-Delhi.eml'),
 		join('out', 'test', 'convert-mail')
 	);
 
@@ -92,6 +94,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 id: 5203A9F6-8CA1-46A4-90A8-4E7092F39C7D@ylk.gd
 date: 2024-02-23T13:51:59.000Z
 title: Jaipur &ndash; Delhi
+updatedAt: 2024-02-23T13:51:59.000Z
 assets:
   - filename: IMG_1537.jpg
     width: 914
@@ -109,7 +112,7 @@ By train
 });
 
 test('Converts "Table.eml" into Markdown and files', async (t) => {
-	await convertMail(await readMail('./messages/Table.eml'), join('out', 'test', 'convert-mail'));
+	await convertMail(await readMail('messages/Table.eml'), join('out', 'test', 'convert-mail'));
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-04-21-171019');
 
@@ -120,6 +123,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 id: C73DC854-EA96-4721-8881-EA4DADEF97A5@ylk.gd
 date: 2024-04-21T17:10:19.000Z
 title: Table
+updatedAt: 2024-04-21T17:10:19.000Z
 assets:
   - filename: image1.jpg
     width: 1512
@@ -141,7 +145,7 @@ Well worth the time.
 });
 
 test('Converts "html.eml" into Markdown and files', async (t) => {
-	await convertMail(await readMail('./messages/html.eml'), join('out', 'test', 'convert-mail'));
+	await convertMail(await readMail('messages/html.eml'), join('out', 'test', 'convert-mail'));
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-210023');
 
@@ -152,6 +156,7 @@ test('Converts "html.eml" into Markdown and files', async (t) => {
 id: D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd
 date: 2024-01-14T21:00:23.000Z
 title: "HTLM #2"
+updatedAt: 2024-01-14T21:00:23.000Z
 assets:
   - filename: IMG_0010.jpg
     width: 240
@@ -185,7 +190,7 @@ code
 });
 
 test('Converts "text.eml" into Markdown and files', async (t) => {
-	await convertMail(await readMail('./messages/text.eml'), join('out', 'test', 'convert-mail'));
+	await convertMail(await readMail('messages/text.eml'), join('out', 'test', 'convert-mail'));
 
 	const outPath = join('out', 'test', 'convert-mail', '2024-01-14-204635');
 
@@ -196,6 +201,7 @@ test('Converts "text.eml" into Markdown and files', async (t) => {
 id: 62D1AEA4-FC6F-4279-9CD4-8D2CECE5A0CF@ylk.gd
 date: 2024-01-14T20:46:35.000Z
 title: Testnachricht Text
+updatedAt: 2024-01-14T20:46:35.000Z
 assets:
   - filename: IMG_0010.jpg
     width: 240
@@ -229,29 +235,26 @@ code
 });
 
 test('Converts email with frontmatter into Markdown with merged frontmatter', async (t) => {
-	await convertMail(await readMail('./messages/Finnland.eml'), join('out', 'test', 'convert-mail'));
+	await convertMail(await readMail('messages/Finnland.eml'), join('out', 'test', 'convert-mail'));
 
 	const outPath = join('out', 'test', 'convert-mail', '2026-03-01-080000');
 
-	// Verify images were processed
 	t.like(await stat(join(outPath, '_DSC5194.jpg')), { size: 27332 });
 	t.like(await stat(join(outPath, '_DSC5212.jpg')), { size: 22254 });
 
 	const content = await readFile(join(outPath, 'message.md'), 'utf8');
-
-	const expectedContent = await readFile(join(import.meta.dirname, 'expected-finnland.md'), 'utf8');
+	const expectedContent = await readFile(
+		join(import.meta.dirname, '../fixtures/expected-finnland.md'),
+		'utf8'
+	);
 	t.is(content, expectedContent);
 });
 
 test('Updates existing message.md when date frontmatter matches existing post', async (t) => {
 	const outDir = join('out', 'test', 'convert-mail');
 
-	// First convert creates the original post (Jaipur-Delhi, date 2024-02-23T13:51:59.000Z)
-	await convertMail(await readMail('./messages/Jaipur-Delhi.eml'), outDir);
-
-	// Second convert with update.eml — its body frontmatter has date: 2024-02-23T13:51:59.000Z
-	// and the email was sent on 2024-03-10T12:00:00.000Z
-	await convertMail(await readMail('./messages/update.eml'), outDir);
+	await convertMail(await readMail('messages/Jaipur-Delhi.eml'), outDir);
+	await convertMail(await readMail('messages/update.eml'), outDir);
 
 	const outPath = join(outDir, '2024-02-23-135159');
 	const content = await readFile(join(outPath, 'message.md'), 'utf8');

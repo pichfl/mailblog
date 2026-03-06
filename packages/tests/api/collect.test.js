@@ -2,9 +2,9 @@ import { join } from 'node:path';
 
 import test from 'ava';
 
-import { collectPosts } from '../src/collect.js';
+import { collectPosts } from '@posteingang/api/src/collect.js';
 
-const fixtures = join(import.meta.dirname, 'fixtures');
+const fixtures = join(import.meta.dirname, '../fixtures/posts');
 
 test('collects and parses published posts', async (t) => {
 	const posts = await collectPosts(fixtures);

@@ -4,8 +4,6 @@
   "description": "",
   "main": "src/mailmd.js",
   "scripts": {
-    "test": "ava",
-    "test:watch": "ava --watch",
     "mailmd": "./src/mailmd.js",
     "mdmail": "./src/mdmail.js"
   },
@@ -42,7 +40,6 @@
     "yaml": "2.8.2"
   },
   "devDependencies": {
-    "ava": "7.0.0",
     "oxfmt": "*",
     "oxlint": "*"
   }

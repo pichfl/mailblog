@@ -1,10 +1,11 @@
 import test from 'ava';
 
-import parseMail from '../src/parse/mail.js';
-import { readMail } from './utils.js';
+import parseMail from '@posteingang/mailmd/src/parse/mail.js';
+
+import { readMail } from '../utils.js';
 
 test('Parses Lotus Temple E-Mail into chunks', async (t) => {
-	const result = await parseMail(await readMail('./messages/LotusTemple.eml'));
+	const result = await parseMail(await readMail('messages/LotusTemple.eml'));
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-14T18:11:56.000Z',
@@ -115,7 +116,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 });
 
 test('Parses HTML E-Mail into chunks', async (t) => {
-	const result = await parseMail(await readMail('./messages/html.eml'));
+	const result = await parseMail(await readMail('messages/html.eml'));
 
 	t.deepEqual(result.meta, {
 		date: '2024-01-14T21:00:23.000Z',
@@ -185,7 +186,7 @@ code
 });
 
 test('Parses (No Subject).eml', async (t) => {
-	const result = await parseMail(await readMail('./messages/(No Subject).eml'));
+	const result = await parseMail(await readMail('messages/(No Subject).eml'));
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-14T17:41:28.000Z',
@@ -209,7 +210,7 @@ Which means I'm done shopping for the wedding and we can spent a few days doing 
 });
 
 test('Parses Taj Mahal.eml', async (t) => {
-	const result = await parseMail(await readMail('./messages/Taj Mahal.eml'));
+	const result = await parseMail(await readMail('messages/Taj Mahal.eml'));
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-19T08:57:06.000Z',

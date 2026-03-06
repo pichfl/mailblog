@@ -6,6 +6,7 @@ tags:
   - foo
   - bar
 published: false
+updatedAt: 2026-03-02T14:05:04.000Z
 assets:
   - filename: _DSC5194.jpg
     width: 320
