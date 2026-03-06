@@ -1,5 +1,5 @@
 {
-  "name": "@mailblog/mailmd",
+  "name": "@posteingang/mailmd",
   "version": "1.0.0",
   "description": "",
   "main": "src/mailmd.js",

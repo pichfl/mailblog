@@ -1,5 +1,5 @@
 {
-  "name": "@mailblog/mdapi",
+  "name": "@posteingang/api",
   "version": "1.0.0",
   "description": "Generate static Strapi-like API JSON from mailmd output",
   "type": "module",

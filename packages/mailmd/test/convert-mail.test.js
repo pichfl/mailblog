@@ -243,6 +243,23 @@ test('Converts email with frontmatter into Markdown with merged frontmatter', as
 	t.is(content, expectedContent);
 });
 
+test('Updates existing message.md when date frontmatter matches existing post', async (t) => {
+	const outDir = join('out', 'test', 'convert-mail');
+
+	// First convert creates the original post (Jaipur-Delhi, date 2024-02-23T13:51:59.000Z)
+	await convertMail(await readMail('./messages/Jaipur-Delhi.eml'), outDir);
+
+	// Second convert with update.eml — its body frontmatter has date: 2024-02-23T13:51:59.000Z
+	// and the email was sent on 2024-03-10T12:00:00.000Z
+	await convertMail(await readMail('./messages/update.eml'), outDir);
+
+	const outPath = join(outDir, '2024-02-23-135159');
+	const content = await readFile(join(outPath, 'message.md'), 'utf8');
+
+	t.true(content.includes('updatedAt: 2024-03-10T12:00:00.000Z'));
+	t.true(content.includes('Updated content.'));
+});
+
 test.after('cleanup', async () => {
 	await rimraf(join('out', 'test', 'convert-mail'));
 });

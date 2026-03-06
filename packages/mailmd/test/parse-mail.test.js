@@ -8,6 +8,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-14T18:11:56.000Z',
+		sentAt: '2024-02-14T18:11:56.000Z',
 		id: 'DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd',
 		title: 'Lotus Temple',
 	});
@@ -83,7 +84,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 		{
 			type: 'text/plain',
 			text: '^ Aastha Kunj Park',
-			frontmatter: {},
+			meta: {},
 		},
 		{
 			contentId: undefined,
@@ -94,7 +95,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 		{
 			type: 'text/plain',
 			text: '^ Inside the Lotus Temple Gardens',
-			frontmatter: {},
+			meta: {},
 		},
 		{
 			contentId: undefined,
@@ -108,7 +109,7 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 				'No pictures from inside the Bahai temple, but it is a stunning architectural structure. \n' +
 				'\n' +
 				'The concrete roof arches feel almost weightless and let light filter in through gaps between the petals. We were very lucky to experience moments in peace and calmness almost on our own in an otherwise busy and crowded place. ',
-			frontmatter: {},
+			meta: {},
 		},
 	]);
 });
@@ -118,6 +119,7 @@ test('Parses HTML E-Mail into chunks', async (t) => {
 
 	t.deepEqual(result.meta, {
 		date: '2024-01-14T21:00:23.000Z',
+		sentAt: '2024-01-14T21:00:23.000Z',
 		id: 'D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd',
 		title: 'HTLM #2',
 	});
@@ -171,7 +173,7 @@ Etiam aliquet lobortis dui ut aliquam. Donec ornare, dolor sed fringilla pharetr
 code
 \`\`\``,
 			type: 'text/markdown',
-			frontmatter: {},
+			meta: {},
 		},
 		{
 			contentId: '204AA714-2C40-4EC8-86CF-28DCC26CB36B',
@@ -187,6 +189,7 @@ test('Parses (No Subject).eml', async (t) => {
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-14T17:41:28.000Z',
+		sentAt: '2024-02-14T17:41:28.000Z',
 		id: '2594B9DE-F662-4CEC-8527-1057B63EC318@ylk.gd',
 		title: '',
 	});
@@ -200,7 +203,7 @@ test('Parses (No Subject).eml', async (t) => {
 
 Which means I'm done shopping for the wedding and we can spent a few days doing touristy things.`,
 			type: 'text/plain',
-			frontmatter: {},
+			meta: {},
 		},
 	]);
 });
@@ -210,6 +213,7 @@ test('Parses Taj Mahal.eml', async (t) => {
 
 	t.deepEqual(result.meta, {
 		date: '2024-02-19T08:57:06.000Z',
+		sentAt: '2024-02-19T08:57:06.000Z',
 		id: 'AA788889-9D0E-4CEE-9202-29C7B33EF614@ylk.gd',
 		title: 'Taj Mahal',
 	});

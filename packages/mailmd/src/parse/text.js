@@ -29,11 +29,11 @@ export function parseText(data, _headers) {
 		type = 'text/markdown';
 	}
 
-	let frontmatter = {};
+	let meta = {};
 	try {
 		const parsed = matter(text);
 		if (parsed.data && Object.keys(parsed.data).length > 0) {
-			frontmatter = parsed.data;
+			meta = parsed.data;
 			text = trimNewlines(parsed.content);
 		}
 	} catch {
@@ -43,6 +43,6 @@ export function parseText(data, _headers) {
 	return {
 		type,
 		text,
-		frontmatter,
+		meta,
 	};
 }

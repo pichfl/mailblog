@@ -10,9 +10,9 @@ export async function collectPosts(inputDir) {
 
 	for (const file of files) {
 		const raw = await readFile(file, 'utf8');
-		const { data, content } = matter(raw);
-		if (data.published === false) continue;
-		posts.push({ ...data, slug: basename(dirname(file)), content: content.trim() });
+		const { data: frontmatter, content } = matter(raw);
+		if (frontmatter.published === false) continue;
+		posts.push({ ...frontmatter, slug: basename(dirname(file)), content: content.trim() });
 	}
 
 	return posts.sort((a, b) => new Date(b.date) - new Date(a.date));

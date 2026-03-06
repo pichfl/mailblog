@@ -27,10 +27,11 @@ export default async function parseMail(readableStream) {
 							.replace(/^<|>$/g, '')
 							.trim();
 						meta.date = dayjs(headers['date']?.value).utc().toISOString();
+						meta.sentAt = meta.date;
 						meta.title = he.encode(headers['subject']?.value ?? '', {
 							useNamedReferences: true,
 						});
-						// frontmatter.headers = headers;
+						// meta.headers = headers;
 
 						return;
 					}
@@ -84,14 +85,14 @@ export default async function parseMail(readableStream) {
 				chunks = chunks.filter((chunk) => chunk.type !== 'text/plain');
 			}
 
-			const emailFrontmatter = {};
+			const emailMeta = {};
 			for (const chunk of chunks) {
-				if (chunk.frontmatter && Object.keys(chunk.frontmatter).length > 0) {
-					Object.assign(emailFrontmatter, chunk.frontmatter);
+				if (chunk.meta && Object.keys(chunk.meta).length > 0) {
+					Object.assign(emailMeta, chunk.meta);
 				}
 			}
 
-			const mergedMeta = { ...meta, ...emailFrontmatter };
+			const mergedMeta = { ...meta, ...emailMeta };
 
 			resolve({ chunks, attachments, meta: mergedMeta });
 		});
