@@ -10,7 +10,7 @@ import { program } from 'commander';
 import * as dotenv from 'dotenv';
 
 export async function rebuild(distDir, deployHook) {
-  const posts = await collectPosts(distDir);
+	const posts = await collectPosts(distDir);
 
 	await generateApi(posts, distDir);
 
@@ -24,7 +24,7 @@ export async function rebuild(distDir, deployHook) {
 }
 
 export function createWatcher(inDir, distDir, options = {}) {
-  let rebuildTimer;
+	let rebuildTimer;
 
 	const watcher = watch(inDir, {
 		ignoreInitial: false,
@@ -37,9 +37,9 @@ export function createWatcher(inDir, distDir, options = {}) {
 		}
 
 		convertMail(createReadStream(path), distDir)
-      .then(() => {
-        clearTimeout(rebuildTimer);
-        rebuildTimer = setTimeout(() => rebuild(distDir, options.deployHook), 1000);
+			.then(() => {
+				clearTimeout(rebuildTimer);
+				rebuildTimer = setTimeout(() => rebuild(distDir, options.deployHook), 1000);
 			})
 			.catch((err) => console.error(`error processing ${path}: ${err.message}`));
 	});
@@ -50,7 +50,7 @@ export function createWatcher(inDir, distDir, options = {}) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  dotenv.config({ quiet: true });
+	dotenv.config({ quiet: true });
 
 	program
 		.argument('[in]', 'inbox directory to watch', './in')
