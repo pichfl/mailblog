@@ -5,10 +5,12 @@
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "dog": "src/index.js"
+    "dog": "src/index.js",
+    "dog-hash": "src/hash.js"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "hash": "node src/hash.js"
   },
   "keywords": [],
   "author": "",
