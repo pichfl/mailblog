@@ -11,7 +11,7 @@
     "format:check": "oxfmt --check .",
     "mailmd": "./packages/mailmd/src/mailmd.js",
     "mdmail": "./packages/mailmd/src/mdmail.js",
-    "mdapi": "./packages/mdapi/src/main.js",
+    "mdapi": "./packages/api/src/index.js",
     "dog": "./packages/dog/src/index.js"
   },
   "keywords": [],

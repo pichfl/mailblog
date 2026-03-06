@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Generate static Strapi-like API JSON from mailmd output",
   "type": "module",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "bin": {
-    "mdapi": "./src/main.js"
+    "mdapi": "./src/index.js"
   },
   "scripts": {},
   "keywords": [],
