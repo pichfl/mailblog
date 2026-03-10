@@ -40,23 +40,28 @@ function processImageWithContentId(post, chunk, img) {
 	return post.replace(placeholder, img);
 }
 
-export default async function writePost(outDir, outPath, meta, chunks, files) {
+export default async function writePost(outDir, outPath, meta, chunks, { images, attachments }) {
 	const filepath = join(outDir, outPath, config.mdFilename);
 	let post = '';
 
-	const assets = Object.keys(files).map((id) => {
-		const file = files[id];
-		return {
-			filename: file.filename,
-			width: file.width,
-			height: file.height,
-			orientation: file.orientation,
-		};
-	});
+	const files = { ...images, ...attachments };
+
+	const imageList = Object.values(images).map(({ filename, width, height, orientation }) => ({
+		filename: `./${filename}`,
+		width,
+		height,
+		orientation,
+	}));
+
+	const attachmentList = Object.values(attachments).map(({ filename, type }) => ({
+		filename: `./${filename}`,
+		type,
+	}));
 
 	const frontmatter = {
 		...meta,
-		...(assets.length > 0 ? { assets } : {}),
+		...(imageList.length > 0 ? { images: imageList } : {}),
+		...(attachmentList.length > 0 ? { attachments: attachmentList } : {}),
 	};
 
 	post += '---\n';
@@ -83,8 +88,8 @@ export default async function writePost(outDir, outPath, meta, chunks, files) {
 				chunk.caption = caption;
 			}
 
-			const { width, height, orientation, filename: normalizedFilename } = files[id];
-			const img = `<img src="${normalizedFilename}" alt="" width="${width}" height="${height}" data-orientation="${orientation}">`;
+			const { filename } = files[id];
+			const img = `![${filename}](./${filename})`;
 
 			if (chunk.contentId) {
 				post = processImageWithContentId(post, chunk, img);

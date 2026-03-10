@@ -5,8 +5,8 @@ title: Post with Tags and Assets
 tags:
   - travel
   - photos
-assets:
-  - filename: photo.jpg
+images:
+  - filename: ./photo.jpg
     width: 1280
     height: 960
     orientation: landscape
@@ -14,4 +14,4 @@ assets:
 
 Post with tags and an image.
 
-<img src="photo.jpg" alt="" width="1280" height="960" data-orientation="landscape">
+<img src="./photo.jpg" alt="" width="1280" height="960" data-orientation="landscape">

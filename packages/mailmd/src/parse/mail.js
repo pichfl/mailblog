@@ -1,8 +1,9 @@
-import { randomUUID } from 'node:crypto';
+import { createHmac } from 'node:crypto';
 
 import { Splitter } from '@zone-eu/mailsplit';
 import he from 'he';
 
+import { config } from '../config.js';
 import dayjs from '../utils/dayjs.js';
 import { parseHeaders } from './header.js';
 import { parseText } from './text.js';
@@ -22,10 +23,8 @@ export default async function parseMail(readableStream) {
 
 					if (headers.from && headers.messageId) {
 						// Metadata
-						meta.id = (headers.messageId?.value ?? randomUUID())
-							.trim()
-							.replace(/^<|>$/g, '')
-							.trim();
+						const messageId = headers['messageId']?.value?.replace(/^<|>$/g, '') ?? '';
+						meta.id = createHmac('sha256', config.hashSalt).update(messageId).digest('hex').slice(0, 16);
 						meta.date = dayjs(headers['date']?.value).utc().toISOString();
 						meta.sentAt = meta.date;
 						meta.title = he.encode(headers['subject']?.value ?? '', {

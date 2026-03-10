@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 function toEntry(post, index) {
-	const { id: documentId, date, updatedAt, slug, title, tags, assets, content } = post;
+	const { id: documentId, date, updatedAt, slug, title, tags, images, attachments, content } = post;
 	return {
 		id: index + 1,
 		documentId,
@@ -12,7 +12,8 @@ function toEntry(post, index) {
 		createdAt: date,
 		updatedAt: updatedAt ?? date,
 		...(tags ? { tags } : {}),
-		...(assets ? { assets } : {}),
+		...(images ? { images } : {}),
+		...(attachments ? { attachments } : {}),
 		content,
 	};
 }

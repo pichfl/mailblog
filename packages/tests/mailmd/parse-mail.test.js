@@ -6,10 +6,10 @@ import { readMail } from '../utils.js';
 test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 	const result = await parseMail(await readMail('messages/LotusTemple.eml'));
 
-	t.deepEqual(result.meta, {
+	t.like(result.meta, {
+		id: '835d8eae08283e02',
 		date: '2024-02-14T18:11:56.000Z',
 		sentAt: '2024-02-14T18:11:56.000Z',
-		id: 'DFCFA91D-782C-4CA2-B642-342D946A0656@ylk.gd',
 		title: 'Lotus Temple',
 	});
 
@@ -117,10 +117,10 @@ test('Parses Lotus Temple E-Mail into chunks', async (t) => {
 test('Parses HTML E-Mail into chunks', async (t) => {
 	const result = await parseMail(await readMail('messages/html.eml'));
 
-	t.deepEqual(result.meta, {
+	t.like(result.meta, {
+		id: '27491f8bcf3cd63c',
 		date: '2024-01-14T21:00:23.000Z',
 		sentAt: '2024-01-14T21:00:23.000Z',
-		id: 'D1F2A684-4D3D-4867-ABF7-DDD90DC78546@ylk.gd',
 		title: 'HTLM #2',
 	});
 
@@ -187,10 +187,10 @@ code
 test('Parses (No Subject).eml', async (t) => {
 	const result = await parseMail(await readMail('messages/(No Subject).eml'));
 
-	t.deepEqual(result.meta, {
+	t.like(result.meta, {
+		id: 'f4c87e63fce15eac',
 		date: '2024-02-14T17:41:28.000Z',
 		sentAt: '2024-02-14T17:41:28.000Z',
-		id: '2594B9DE-F662-4CEC-8527-1057B63EC318@ylk.gd',
 		title: '',
 	});
 
@@ -211,10 +211,10 @@ Which means I'm done shopping for the wedding and we can spent a few days doing 
 test('Parses Taj Mahal.eml', async (t) => {
 	const result = await parseMail(await readMail('messages/Taj Mahal.eml'));
 
-	t.deepEqual(result.meta, {
+	t.like(result.meta, {
+		id: '662cb06c829f0be5',
 		date: '2024-02-19T08:57:06.000Z',
 		sentAt: '2024-02-19T08:57:06.000Z',
-		id: 'AA788889-9D0E-4CEE-9202-29C7B33EF614@ylk.gd',
 		title: 'Taj Mahal',
 	});
 

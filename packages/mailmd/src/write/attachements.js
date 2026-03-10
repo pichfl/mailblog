@@ -5,6 +5,20 @@ import sizeOf from 'image-size';
 
 import mkdirp from '../utils/mkdirp.js';
 
+export const IMAGE_CONTENT_TYPES = new Set([
+	'image/jpeg',
+	'image/jpg',
+	'image/png',
+	'image/gif',
+	'image/webp',
+	'image/avif',
+	'image/svg+xml',
+	'image/tiff',
+	'image/bmp',
+	'image/heic',
+	'image/heif',
+]);
+
 const orientation = ({ width, height }) => {
 	if (width > height) {
 		return 'landscape';
@@ -17,13 +31,14 @@ const orientation = ({ width, height }) => {
 	return 'square';
 };
 
-export default async function writeAttachments(outDir, outPath, attachments) {
+export default async function writeAttachments(outDir, outPath, raw) {
 	const out = join(outDir, outPath);
-	const results = {};
+	const images = {};
+	const attachments = {};
 
 	await mkdirp(out, 0o755);
 
-	for (const [id, attachment] of Object.entries(attachments)) {
+	for (const [id, attachment] of Object.entries(raw)) {
 		const {
 			node: { contentType: type, encoding, filename },
 			value,
@@ -33,23 +48,30 @@ export default async function writeAttachments(outDir, outPath, attachments) {
 
 		try {
 			const valueBuffer = Buffer.from(value.toString(), encoding);
-			const { width, height } = sizeOf(valueBuffer);
 
 			await writeFile(filepath, valueBuffer);
-
-			results[id] = {
-				type,
-				filename: normalizedFilename,
-				orientation: orientation({ width, height }),
-				width,
-				height,
-			};
-
 			await chmod(filepath, 0o644);
+
+			if (IMAGE_CONTENT_TYPES.has(type)) {
+				const { width, height } = sizeOf(valueBuffer);
+
+				images[id] = {
+					type,
+					filename: normalizedFilename,
+					orientation: orientation({ width, height }),
+					width,
+					height,
+				};
+			} else {
+				attachments[id] = {
+					type,
+					filename: normalizedFilename,
+				};
+			}
 		} catch (e) {
 			console.error(`Error writing ${normalizedFilename}:`, e);
 		}
 	}
 
-	return results;
+	return { images, attachments };
 }

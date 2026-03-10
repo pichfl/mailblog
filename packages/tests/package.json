@@ -9,7 +9,8 @@
   "dependencies": {
     "@posteingang/api": "workspace:*",
     "@posteingang/dog": "workspace:*",
-    "@posteingang/mailmd": "workspace:*"
+    "@posteingang/mailmd": "workspace:*",
+    "undent": "1.0.0"
   },
   "devDependencies": {
     "ava": "7.0.0",

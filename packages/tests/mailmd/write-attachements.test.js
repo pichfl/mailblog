@@ -17,27 +17,30 @@ test('Writes attachements of "Lotus Temple.eml"', async (t) => {
 	);
 
 	t.deepEqual(attachments, {
-		'image0.jpeg': {
-			type: 'image/jpeg',
-			filename: 'image0.jpg',
-			orientation: 'portrait',
-			width: 1512,
-			height: 2016,
+		images: {
+			'image0.jpeg': {
+				type: 'image/jpeg',
+				filename: 'image0.jpg',
+				orientation: 'portrait',
+				width: 1512,
+				height: 2016,
+			},
+			'image1.jpeg': {
+				type: 'image/jpeg',
+				filename: 'image1.jpg',
+				orientation: 'portrait',
+				width: 1512,
+				height: 2016,
+			},
+			'image2.jpeg': {
+				type: 'image/jpeg',
+				filename: 'image2.jpg',
+				orientation: 'square',
+				width: 1280,
+				height: 1280,
+			},
 		},
-		'image1.jpeg': {
-			type: 'image/jpeg',
-			filename: 'image1.jpg',
-			orientation: 'portrait',
-			width: 1512,
-			height: 2016,
-		},
-		'image2.jpeg': {
-			type: 'image/jpeg',
-			filename: 'image2.jpg',
-			orientation: 'square',
-			width: 1280,
-			height: 1280,
-		},
+		attachments: {},
 	});
 
 	const outPath = join('out', 'test', 'write-attachments', 'LotusTemple');

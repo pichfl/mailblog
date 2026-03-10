@@ -8,7 +8,7 @@ const fixtures = join(import.meta.dirname, '../fixtures/posts');
 test('collects and parses published posts', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts.length, 2);
+	t.is(posts.length, 10);
 });
 
 test('excludes published: false posts', async (t) => {
@@ -23,24 +23,24 @@ test('excludes published: false posts', async (t) => {
 test('sorts posts by date descending', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts[0].title, 'Post with Tags and Assets');
-	t.is(posts[1].title, 'Simple Post');
+	t.is(posts[0].title, 'Table');
+	t.is(posts[1].title, 'Jaipur &ndash; Delhi');
 });
 
 test('includes slug derived from folder name', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts[0].slug, '2024-02-01-090000');
-	t.is(posts[1].slug, '2024-01-01-120000');
+	t.is(posts[0].slug, '2814609dfbfed3bc');
+	t.is(posts[1].slug, '91d56f7766c203eb');
 });
 
 test('parses frontmatter fields', async (t) => {
 	const posts = await collectPosts(fixtures);
-	const withAssets = posts[0];
+  const withAssets = posts.find(({ id }) => id === 'BBBB-0002@example.com');
 
 	t.deepEqual(withAssets.tags, ['travel', 'photos']);
-	t.deepEqual(withAssets.assets, [
-		{ filename: 'photo.jpg', width: 1280, height: 960, orientation: 'landscape' },
+	t.deepEqual(withAssets.images, [
+		{ filename: './photo.jpg', width: 1280, height: 960, orientation: 'landscape' },
 	]);
 	t.is(typeof withAssets.content, 'string');
 	t.true(withAssets.content.length > 0);

@@ -10,7 +10,7 @@ function parseMarkdownToPlainText(content) {
 		content
 			// Replace image tags with content ID placeholders for embedding
 			.replace(/<img[^>]+src="([^"]+)"[^>]*>/g, (match, src) => {
-				const cid = src.replace(/\.[^.]+$/, '');
+				const cid = src.replace(/^\.\//, '').replace(/\.[^.]+$/, '');
 				return `[cid:${cid}]`;
 			})
 			// Clean up extra whitespace
@@ -25,7 +25,7 @@ function extractAttachments(content, folderPath) {
 	let match;
 
 	while ((match = imgRegex.exec(content)) !== null) {
-		const filename = match[1];
+		const filename = match[1].replace(/^\.\//, '');
 		const filepath = join(folderPath, filename);
 
 		attachments.push({

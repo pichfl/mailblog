@@ -142,6 +142,9 @@ importers:
       '@posteingang/mailmd':
         specifier: workspace:*
         version: link:../mailmd
+      undent:
+        specifier: 1.0.0
+        version: 1.0.0
     devDependencies:
       ava:
         specifier: 7.0.0

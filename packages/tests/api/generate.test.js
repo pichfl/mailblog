@@ -15,7 +15,7 @@ const posts = [
 		slug: '2024-02-01-090000',
 		title: 'Post with Tags and Assets',
 		tags: ['travel', 'photos'],
-		assets: [{ filename: 'photo.jpg', width: 1280, height: 960, orientation: 'landscape' }],
+		images: [{ filename: './photo.jpg', width: 1280, height: 960, orientation: 'landscape' }],
 		content: 'Post with tags and an image.',
 	},
 	{
@@ -61,13 +61,14 @@ test('maps fields to Strapi v5 flat shape', async (t) => {
 	t.is(entry.content, 'Post with tags and an image.');
 });
 
-test('omits tags/assets when absent', async (t) => {
+test('omits tags/images/attachments when absent', async (t) => {
 	const raw = await readFile(join(outDir, 'posts.json'), 'utf8');
 	const { data } = JSON.parse(raw);
 	const simple = data[1];
 
 	t.false('tags' in simple);
-	t.false('assets' in simple);
+	t.false('images' in simple);
+	t.false('attachments' in simple);
 });
 
 test('writes individual post files', async (t) => {
