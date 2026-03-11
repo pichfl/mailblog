@@ -21,7 +21,7 @@ export function parseText(data, _headers) {
 	let type = contentType;
 
 	// Replace non-breaking spaces with regular spaces
-	text = text.replaceAll('\u00a0', ' ').replaceAll('&nbsp;', ' ').replaceAll('77u/DQoNCg=', '\n');
+	text = text.replaceAll('\u00a0', ' ').replaceAll('&nbsp;', ' ').replaceAll('77u/DQoNCg=', '\n').replaceAll('77u/', '');
 	text = trimNewlines(text);
 
 	if (type === 'text/html') {

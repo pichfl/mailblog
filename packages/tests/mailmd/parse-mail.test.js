@@ -208,6 +208,50 @@ Which means I'm done shopping for the wedding and we can spent a few days doing 
 	]);
 });
 
+test('Parses Qutab Minar.eml', async (t) => {
+	const result = await parseMail(await readMail('messages/Qutab Minar.eml'));
+
+	t.like(result.meta, {
+		id: '04a21880ec162fca',
+		date: '2024-02-12T16:06:44.000Z',
+		sentAt: '2024-02-12T16:06:44.000Z',
+		title: 'Qutab Minar',
+	});
+
+	t.deepEqual(Object.keys(result.attachments), ['IMG_0515.jpg']);
+
+	t.like(result.attachments, {
+		'IMG_0515.jpg': {
+			headers: {
+				contentDisposition: {
+					filename: 'IMG_0515.jpg',
+					value: 'inline',
+				},
+				contentTransferEncoding: {
+					value: 'base64',
+				},
+				contentType: {
+					name: 'IMG_0515.jpg',
+					value: 'image/jpeg',
+					'x-apple-part-url': 'FA9CD8CC-AF92-4BEC-9232-05E517339854',
+				},
+			},
+		},
+	});
+
+	t.truthy(result.attachments['IMG_0515.jpg'].node);
+	t.truthy(result.attachments['IMG_0515.jpg'].value);
+
+	t.deepEqual(result.chunks, [
+		{
+			contentId: undefined,
+			type: 'image/jpeg',
+			id: 'IMG_0515.jpg',
+			filename: 'IMG_0515.jpg',
+		},
+	]);
+});
+
 test('Parses Taj Mahal.eml', async (t) => {
 	const result = await parseMail(await readMail('messages/Taj Mahal.eml'));
 
