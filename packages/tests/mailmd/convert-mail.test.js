@@ -1,4 +1,4 @@
-import { readFile, stat } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 
 import convertMail from '@posteingang/mailmd/src/convert-mail.js';
@@ -133,6 +133,24 @@ test('Returns delete action without writing files', async (t) => {
 	);
 
 	t.deepEqual(result, { type: 'delete', targetId: 'f4c87e63fce15eac' });
+});
+
+test('Skips post already in .Trash', async (t) => {
+	const outDir = join('out', 'test', 'convert-mail-trashed');
+	const postId = 'f4c87e63fce15eac';
+
+	await mkdir(join(outDir, '.Trash', postId), { recursive: true });
+	await writeFile(join(outDir, '.Trash', postId, 'message.md'), '---\ntitle: test\n---\n');
+
+	try {
+		const result = await convertMail(await readMail('messages/(No Subject).eml'), outDir);
+		t.deepEqual(result, { type: 'trashed', targetId: postId });
+
+		const postDirExists = await stat(join(outDir, postId)).then(() => true, () => false);
+		t.false(postDirExists, 'post directory was not re-created');
+	} finally {
+		await rimraf(outDir);
+	}
 });
 
 test.before('cleanup', async () => {

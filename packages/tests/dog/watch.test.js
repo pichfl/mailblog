@@ -76,6 +76,39 @@ test.serial('picks up .eml files already present when watcher starts', async (t)
 	}
 });
 
+test.serial('does not regenerate a post that is already in .Trash', async (t) => {
+	t.timeout(12000);
+
+	const inDir = join(tmpdir(), `dog-watch-trashed-in-${Date.now()}`);
+	const distDir = join(tmpdir(), `dog-watch-trashed-dist-${Date.now()}`);
+	const targetId = 'f4c87e63fce15eac';
+
+	await mkdir(inDir, { recursive: true });
+	await mkdir(join(distDir, '.Trash', targetId), { recursive: true });
+	await writeFile(join(distDir, '.Trash', targetId, 'message.md'), '---\ntitle: trashed\n---\n');
+	await copyFile(FIXTURE, join(inDir, 'existing.eml'));
+
+	const watcher = createWatcher(inDir, distDir);
+	try {
+		// Wait for rebuild to complete (posts.json is written last)
+		await waitUntil(async () => {
+			try {
+				await stat(join(distDir, 'posts.json'));
+				return true;
+			} catch {
+				return false;
+			}
+		});
+
+		const postDirExists = await stat(join(distDir, targetId)).then(() => true, () => false);
+		t.false(postDirExists, 'trashed post was not regenerated');
+	} finally {
+		await watcher.close();
+		await rm(inDir, { recursive: true, force: true });
+		await rm(distDir, { recursive: true, force: true });
+	}
+});
+
 test.serial('DELETE email moves target folder to .Trash', async (t) => {
 	t.timeout(12000);
 
