@@ -36,7 +36,12 @@ export default async function parseMail(readableStream) {
 							title,
 							tags,
 							date: subjectDate,
+							action,
 						} = parseSubject(headers['subject']?.value ?? '');
+
+						if (action) {
+							meta.action = action;
+						}
 
 						meta.title = he.encode(title, { useNamedReferences: true });
 

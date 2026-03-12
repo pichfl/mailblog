@@ -48,7 +48,7 @@ test('resolvePartialDate: non-date string - null', (t) => {
 });
 
 test('parseSubject: plain title', (t) => {
-	t.deepEqual(parseSubject('Hello World', NOW), { title: 'Hello World', tags: [], date: null });
+	t.deepEqual(parseSubject('Hello World', NOW), { title: 'Hello World', tags: [], date: null, action: null });
 });
 
 test('parseSubject: single tag', (t) => {
@@ -127,5 +127,22 @@ test('parseSubject: date and tag without spacing', (t) => {
 });
 
 test('parseSubject: empty subject', (t) => {
-	t.deepEqual(parseSubject('', NOW), { title: '', tags: [], date: null });
+	t.deepEqual(parseSubject('', NOW), { title: '', tags: [], date: null, action: null });
+});
+
+test('parseSubject: DELETE action', (t) => {
+	const result = parseSubject('DELETE 2024-02-14-1911', NOW);
+	t.deepEqual(result.action, { type: 'delete', targetId: '2024-02-14-1911' });
+	t.is(result.title, '');
+	t.deepEqual(result.tags, []);
+	t.is(result.date, null);
+});
+
+test('parseSubject: DELETE is case-insensitive', (t) => {
+	const result = parseSubject('delete abc123def', NOW);
+	t.deepEqual(result.action, { type: 'delete', targetId: 'abc123def' });
+});
+
+test('parseSubject: regular subject has null action', (t) => {
+	t.is(parseSubject('Hello World', NOW).action, null);
 });

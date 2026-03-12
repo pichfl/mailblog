@@ -8,7 +8,7 @@ import { rimraf } from 'rimraf';
 import { readMail } from '../utils.js';
 
 test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/LotusTemple.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -38,7 +38,7 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 });
 
 test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/Jaipur-Delhi.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -53,7 +53,7 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 });
 
 test('Converts "Table.eml" into Markdown and files', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/Table.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -68,7 +68,7 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 });
 
 test('Converts "html.eml" into Markdown and files', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/html.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -83,7 +83,7 @@ test('Converts "html.eml" into Markdown and files', async (t) => {
 });
 
 test('Converts "text.eml" into Markdown and files', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/text.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -98,7 +98,7 @@ test('Converts "text.eml" into Markdown and files', async (t) => {
 });
 
 test('Converts email with tags into Markdown with merged frontmatter', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/Finnland.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -114,7 +114,7 @@ test('Converts email with tags into Markdown with merged frontmatter', async (t)
 });
 
 test('Merges body frontmatter date into post with email date as updatedAt', async (t) => {
-	const mdPath = await convertMail(
+	const { path: mdPath } = await convertMail(
 		await readMail('messages/update.eml'),
 		join('out', 'test', 'convert-mail')
 	);
@@ -124,6 +124,15 @@ test('Merges body frontmatter date into post with email date as updatedAt', asyn
 	t.true(content.includes('date: 2024-02-23T13:51:59.000Z'));
 	t.true(content.includes('updatedAt: 2024-03-10T12:00:00.000Z'));
 	t.true(content.includes('Updated content.'));
+});
+
+test('Returns delete action without writing files', async (t) => {
+	const result = await convertMail(
+		await readMail('messages/delete.eml'),
+		join('out', 'test', 'convert-mail')
+	);
+
+	t.deepEqual(result, { type: 'delete', targetId: 'f4c87e63fce15eac' });
 });
 
 test.before('cleanup', async () => {

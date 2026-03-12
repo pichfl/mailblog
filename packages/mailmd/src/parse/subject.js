@@ -31,7 +31,15 @@ export function resolvePartialDate(str, now) {
 	return base.isAfter(now) ? now : base;
 }
 
+const DELETE_RE = /^DELETE\s+(\S+)/i;
+
 export function parseSubject(subject, now = dayjs.utc()) {
+	const deleteMatch = subject.match(DELETE_RE);
+
+	if (deleteMatch) {
+		return { title: '', tags: [], date: null, action: { type: 'delete', targetId: deleteMatch[1] } };
+	}
+
 	const tags = [];
 	let date = null;
 
@@ -49,5 +57,5 @@ export function parseSubject(subject, now = dayjs.utc()) {
 		})
 		.trim();
 
-	return { title, tags: [...new Set(tags)].sort(), date };
+	return { title, tags: [...new Set(tags)].sort(), date, action: null };
 }

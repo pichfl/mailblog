@@ -7,6 +7,11 @@ import writePost from './write/post.js';
 
 export default async function convertMail(readableStream, outDir) {
 	const { meta, chunks, attachments } = await parseMail(readableStream);
+
+	if (meta.action) {
+		return meta.action;
+	}
+
 	const { sentAt, ...postMeta } = meta;
 	const outPath = postMeta.id;
 
@@ -15,5 +20,5 @@ export default async function convertMail(readableStream, outDir) {
 	const files = await writeAttachments(outDir, outPath, attachments);
 	await writePost(outDir, outPath, finalMeta, chunks, files);
 
-	return join(outDir, outPath, config.mdFilename);
+	return { type: 'post', path: join(outDir, outPath, config.mdFilename) };
 }

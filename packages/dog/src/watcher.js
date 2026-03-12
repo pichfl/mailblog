@@ -1,5 +1,6 @@
 import { createReadStream } from 'node:fs';
-import { unlink } from 'node:fs/promises';
+import { mkdir, rename, unlink } from 'node:fs/promises';
+import { join } from 'node:path';
 
 import { collectPosts } from '@posteingang/api/src/collect.js';
 import { generateApi } from '@posteingang/api/src/generate.js';
@@ -20,6 +21,14 @@ export async function rebuild(distDir, deployHook) {
 	}
 
 	return posts;
+}
+
+async function trashPost(distDir, targetId) {
+	const source = join(distDir, targetId);
+	const trashDir = join(distDir, '.Trash');
+
+	await mkdir(trashDir, { recursive: true });
+	await rename(source, join(trashDir, targetId));
 }
 
 export function createWatcher(inDir, distDir, options = {}) {
@@ -43,7 +52,12 @@ export function createWatcher(inDir, distDir, options = {}) {
 				return;
 			}
 
-			await convertMail(createReadStream(path), distDir);
+			const result = await convertMail(createReadStream(path), distDir);
+
+			if (result.type === 'delete') {
+				await trashPost(distDir, result.targetId);
+			}
+
 			clearTimeout(rebuildTimer);
 			rebuildTimer = setTimeout(() => rebuild(distDir, options.deployHook), 1000);
 		})().catch((err) => console.error(`error processing ${path}: ${err.message}`));

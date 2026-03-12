@@ -25,8 +25,8 @@ const outDir = options.out ?? config.outDirectory;
 
 try {
 	const inputStream = args[0] ? createReadStream(args[0]) : process.stdin;
-	const written = await convertMail(inputStream, outDir);
-	console.log(written);
+	const result = await convertMail(inputStream, outDir);
+	console.log(JSON.stringify(result));
 } catch (error) {
 	console.error(error.message);
 	if (error.cause) console.error(error.cause);
