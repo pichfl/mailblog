@@ -28,10 +28,10 @@ test('Converts Lotus Temple E-Mail into Markdown and files', async (t) => {
 		mode: 33188,
 	});
 
-  const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/835d8eae08283e02/message.md', 'utf-8');
-  t.is(content, expected);
-  
+	const content = await readFile(mdPath, 'utf8');
+	const expected = await readFile('./fixtures/posts/835d8eae08283e02/message.md', 'utf-8');
+	t.is(content, expected);
+
 	// Validate CHMOD
 	t.is((await stat(mdPath)).mode.toString(8), '100644');
 	t.is((await stat(outPath)).mode.toString(8), '40755');
@@ -48,8 +48,8 @@ test('Converts "Jaipur-Delhi.eml" into Markdown and files', async (t) => {
 	t.like(await stat(join(outPath, 'IMG_1537.jpg')), { size: 317667 });
 
 	const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/91d56f7766c203eb/message.md', 'utf-8');
-  t.is(content, expected);
+	const expected = await readFile('./fixtures/posts/91d56f7766c203eb/message.md', 'utf-8');
+	t.is(content, expected);
 });
 
 test('Converts "Table.eml" into Markdown and files', async (t) => {
@@ -63,8 +63,8 @@ test('Converts "Table.eml" into Markdown and files', async (t) => {
 	t.like(await stat(join(outPath, 'image1.jpg')), { size: 716334 });
 
 	const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/2814609dfbfed3bc/message.md', 'utf-8');
-  t.is(content, expected);
+	const expected = await readFile('./fixtures/posts/2814609dfbfed3bc/message.md', 'utf-8');
+	t.is(content, expected);
 });
 
 test('Converts "html.eml" into Markdown and files', async (t) => {
@@ -77,9 +77,9 @@ test('Converts "html.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 
-  const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/27491f8bcf3cd63c/message.md', 'utf-8');
-  t.is(content, expected);
+	const content = await readFile(mdPath, 'utf8');
+	const expected = await readFile('./fixtures/posts/27491f8bcf3cd63c/message.md', 'utf-8');
+	t.is(content, expected);
 });
 
 test('Converts "text.eml" into Markdown and files', async (t) => {
@@ -92,12 +92,12 @@ test('Converts "text.eml" into Markdown and files', async (t) => {
 
 	t.like(await stat(join(outPath, 'IMG_0010.jpg')), { size: 36745 });
 
-  const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/5c8855100472d5cb/message.md', 'utf-8');
-  t.is(content, expected);
+	const content = await readFile(mdPath, 'utf8');
+	const expected = await readFile('./fixtures/posts/5c8855100472d5cb/message.md', 'utf-8');
+	t.is(content, expected);
 });
 
-test('Converts email with frontmatter into Markdown with merged frontmatter', async (t) => {
+test('Converts email with tags into Markdown with merged frontmatter', async (t) => {
 	const mdPath = await convertMail(
 		await readMail('messages/Finnland.eml'),
 		join('out', 'test', 'convert-mail')
@@ -108,9 +108,9 @@ test('Converts email with frontmatter into Markdown with merged frontmatter', as
 	t.like(await stat(join(outPath, '_DSC5194.jpg')), { size: 27332 });
 	t.like(await stat(join(outPath, '_DSC5212.jpg')), { size: 22254 });
 
-  const content = await readFile(mdPath, 'utf8');
-  const expected = await readFile('./fixtures/posts/614dcf742bdfacf3/message.md', 'utf-8');
-  t.is(content, expected);
+	const content = await readFile(mdPath, 'utf8');
+	const expected = await readFile('./fixtures/posts/614dcf742bdfacf3/message.md', 'utf-8');
+	t.is(content, expected);
 });
 
 test('Merges body frontmatter date into post with email date as updatedAt', async (t) => {

@@ -11,7 +11,6 @@ export async function collectPosts(inputDir) {
 	for (const file of files) {
 		const raw = await readFile(file, 'utf8');
 		const { data: frontmatter, content } = matter(raw);
-		if (frontmatter.published === false) continue;
 		posts.push({ ...frontmatter, slug: basename(dirname(file)), content: content.trim() });
 	}
 

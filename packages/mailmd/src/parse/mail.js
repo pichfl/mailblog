@@ -6,6 +6,7 @@ import he from 'he';
 import { config } from '../config.js';
 import dayjs from '../utils/dayjs.js';
 import { parseHeaders } from './header.js';
+import { parseSubject } from './subject.js';
 import { parseText } from './text.js';
 
 export default async function parseMail(readableStream) {
@@ -24,12 +25,28 @@ export default async function parseMail(readableStream) {
 					if (headers.from && headers.messageId) {
 						// Metadata
 						const messageId = headers['messageId']?.value?.replace(/^<|>$/g, '') ?? '';
-						meta.id = createHmac('sha256', config.hashSalt).update(messageId).digest('hex').slice(0, 16);
+						meta.id = createHmac('sha256', config.hashSalt)
+							.update(messageId)
+							.digest('hex')
+							.slice(0, 16);
 						meta.date = dayjs(headers['date']?.value).utc().toISOString();
 						meta.sentAt = meta.date;
-						meta.title = he.encode(headers['subject']?.value ?? '', {
-							useNamedReferences: true,
-						});
+
+						const {
+							title,
+							tags,
+							date: subjectDate,
+						} = parseSubject(headers['subject']?.value ?? '');
+
+						meta.title = he.encode(title, { useNamedReferences: true });
+
+						if (tags.length > 0) {
+							meta.tags = tags;
+						}
+
+						if (subjectDate) {
+							meta.date = subjectDate.toISOString();
+						}
 						// meta.headers = headers;
 
 						return;

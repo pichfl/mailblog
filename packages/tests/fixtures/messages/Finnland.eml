@@ -1,9 +1,9 @@
 Return-path: <fp@ylk.gd>
 Original-recipient: rfc822;hello@florianpichler.de
 Received: from p00-icloudmta-smtpin-us-central-1n-100-percent-7 by p103-mailgateway-smtp-5768688687-hbcwt (mailgateway 2606B152)
-	with SMTP id 4bbaac38-5f20-402f-b0bf-af0c163011c7 
+	with SMTP id 4bbaac38-5f20-402f-b0bf-af0c163011c7
 	for <hello@florianpichler.de>; Mon, 2 Mar 2026 14:05:24 GMT
-X-Apple-MoveToFolder: INBOX 
+X-Apple-MoveToFolder: INBOX
 X-Apple-Action: MOVE_TO_FOLDER/INBOX
 X-Apple-UUID: 4bbaac38-5f20-402f-b0bf-af0c163011c7
 Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
@@ -66,7 +66,7 @@ From: Florian Pichler <fp@ylk.gd>
 Content-Type: multipart/mixed;
 	boundary="Apple-Mail=_D5E993AD-2390-4E01-A291-64E672815663"
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.400.21\))
-Subject: Finnland
+Subject: [2026-03-01T08:00:00][foo, bar]Finnland
 Message-Id: <A5EC1243-A0C3-4DC4-962D-0095826B8018@ylk.gd>
 Date: Mon, 2 Mar 2026 15:05:04 +0100
 To: hello@florianpichler.de
@@ -96,12 +96,6 @@ X-JNJ: AAAAAAABpyxrb1zdEvbRvt01fwB8G5hYoR/1Lm8XOdSw8jPRcoprHKgf8MZ1arbMojrUHf5j1
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
 	charset=utf-8
-
----
-date: 2026-03-01T08:00:00
-tags: [foo, bar]
-published: false
----
 
 Hello **World**
 

@@ -5,38 +5,29 @@ import test from 'ava';
 
 const fixtures = join(import.meta.dirname, '../fixtures/posts');
 
-test('collects and parses published posts', async (t) => {
+test('collects and parses all posts', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts.length, 10);
-});
-
-test('excludes published: false posts', async (t) => {
-	const posts = await collectPosts(fixtures);
-
-	t.is(
-		posts.find((p) => p.title === 'Draft Post'),
-		undefined
-	);
+	t.is(posts.length, 12);
 });
 
 test('sorts posts by date descending', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts[0].title, 'Table');
-	t.is(posts[1].title, 'Jaipur &ndash; Delhi');
+	t.is(posts[0].title, 'Finnland');
+	t.is(posts[1].title, 'Table');
 });
 
 test('includes slug derived from folder name', async (t) => {
 	const posts = await collectPosts(fixtures);
 
-	t.is(posts[0].slug, '2814609dfbfed3bc');
-	t.is(posts[1].slug, '91d56f7766c203eb');
+	t.is(posts[0].slug, '614dcf742bdfacf3');
+	t.is(posts[1].slug, '2814609dfbfed3bc');
 });
 
 test('parses frontmatter fields', async (t) => {
 	const posts = await collectPosts(fixtures);
-  const withAssets = posts.find(({ id }) => id === 'BBBB-0002@example.com');
+	const withAssets = posts.find(({ id }) => id === 'BBBB-0002@example.com');
 
 	t.deepEqual(withAssets.tags, ['travel', 'photos']);
 	t.deepEqual(withAssets.images, [

@@ -1,11 +1,10 @@
 ---
 id: 614dcf742bdfacf3
-date: 2026-03-01T08:00:00.000Z
+date: 2026-03-01T08:00:00.999Z
 title: Finnland
 tags:
-  - foo
   - bar
-published: false
+  - foo
 updatedAt: 2026-03-02T14:05:04.000Z
 images:
   - filename: ./_DSC5194.jpg
