@@ -7,12 +7,12 @@ import { createWatcher } from './watcher.js';
 dotenv.config({ quiet: true });
 
 program
-	.argument('[in]', 'inbox directory to watch', './in')
-	.argument('[dist]', 'dist directory for output', './dist')
+	.argument('[in]', 'inbox directory to watch', process.env.POSTEINGANG_IN ?? './in')
+	.argument('[dist]', 'dist directory for output', process.env.POSTEINGANG_OUT ?? './dist')
 	.option('-d, --deploy-hook <url>', 'webhook URL to POST to after rebuild')
-	.option('-s, --salt <value>', 'HMAC-SHA256 salt to verify sender hash in recipient address')
+	.option('-s, --salt <value>', 'HMAC-SHA256 salt to verify sender hash in recipient address', process.env.POSTEINGANG_SALT)
 	.action((inDir, distDir, { deployHook, salt }) => {
-		createWatcher(inDir, distDir, { deployHook, salt });
+		createWatcher(inDir, distDir, { deployHook, salt  });
 		console.log(`@posteingang/dog watching ${inDir}`);
 	});
 
