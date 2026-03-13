@@ -146,7 +146,10 @@ test('Skips post already in .Trash', async (t) => {
 		const result = await convertMail(await readMail('messages/(No Subject).eml'), outDir);
 		t.deepEqual(result, { type: 'trashed', targetId: postId });
 
-		const postDirExists = await stat(join(outDir, postId)).then(() => true, () => false);
+		const postDirExists = await stat(join(outDir, postId)).then(
+			() => true,
+			() => false
+		);
 		t.false(postDirExists, 'post directory was not re-created');
 	} finally {
 		await rimraf(outDir);

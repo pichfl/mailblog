@@ -37,7 +37,12 @@ export function parseSubject(subject, now = dayjs.utc()) {
 	const deleteMatch = subject.match(DELETE_RE);
 
 	if (deleteMatch) {
-		return { title: '', tags: [], date: null, action: { type: 'delete', targetId: deleteMatch[1] } };
+		return {
+			title: '',
+			tags: [],
+			date: null,
+			action: { type: 'delete', targetId: deleteMatch[1] },
+		};
 	}
 
 	const tags = [];
@@ -47,12 +52,17 @@ export function parseSubject(subject, now = dayjs.utc()) {
 		.replace(BRACKET_RE, (_, content) => {
 			const trimmed = content.trim();
 
-      if (/^\d{3,}/.test(trimmed)) {
+			if (/^\d{3,}/.test(trimmed)) {
 				date = resolvePartialDate(trimmed, now);
 				return '';
 			}
 
-			tags.push(...trimmed.split(',').map((t) => t.trim()).filter(Boolean));
+			tags.push(
+				...trimmed
+					.split(',')
+					.map((t) => t.trim())
+					.filter(Boolean)
+			);
 			return '';
 		})
 		.trim();

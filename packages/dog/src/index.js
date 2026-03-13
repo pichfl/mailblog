@@ -12,7 +12,7 @@ program
 	.option('-d, --deploy-hook <url>', 'webhook URL to POST to after rebuild')
 	.option('-s, --salt <value>', 'HMAC-SHA256 salt to verify sender hash in recipient address')
 	.action((inDir, distDir, { deployHook, salt }) => {
-		createWatcher(inDir, distDir, { deployHook, salt: salt || process.env.POSTEINGANG_SALT  });
+		createWatcher(inDir, distDir, { deployHook, salt: salt || process.env.POSTEINGANG_SALT });
 		console.log(`@posteingang/dog watching ${inDir}`);
 	});
 

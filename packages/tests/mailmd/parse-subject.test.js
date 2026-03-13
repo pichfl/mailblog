@@ -1,6 +1,6 @@
 import { resolvePartialDate, parseSubject } from '@posteingang/mailmd/src/parse/subject.js';
-import test from 'ava';
 import dayjs from '@posteingang/mailmd/src/utils/dayjs.js';
+import test from 'ava';
 
 const NOW = dayjs.utc('2026-03-12T10:30:00.000Z');
 
@@ -37,10 +37,7 @@ test('resolvePartialDate: current minute - now', (t) => {
 });
 
 test('resolvePartialDate: full datetime - exact time', (t) => {
-	t.is(
-		resolvePartialDate('2026-03-01T08:00:00', NOW).toISOString(),
-		'2026-03-01T08:00:00.999Z'
-	);
+	t.is(resolvePartialDate('2026-03-01T08:00:00', NOW).toISOString(), '2026-03-01T08:00:00.999Z');
 });
 
 test('resolvePartialDate: non-date string - null', (t) => {
@@ -48,7 +45,12 @@ test('resolvePartialDate: non-date string - null', (t) => {
 });
 
 test('parseSubject: plain title', (t) => {
-	t.deepEqual(parseSubject('Hello World', NOW), { title: 'Hello World', tags: [], date: null, action: null });
+	t.deepEqual(parseSubject('Hello World', NOW), {
+		title: 'Hello World',
+		tags: [],
+		date: null,
+		action: null,
+	});
 });
 
 test('parseSubject: single tag', (t) => {
@@ -108,7 +110,7 @@ test('parseSubject: date and tag', (t) => {
 test('parseSubject: mixing date and tags works', (t) => {
 	const { title, tags, date } = parseSubject('[travel][2026-03-01T08:00] [photos] Departure', NOW);
 	t.is(title, 'Departure');
-	t.deepEqual(tags, ['photos','travel']);
+	t.deepEqual(tags, ['photos', 'travel']);
 	t.is(date.toISOString(), '2026-03-01T08:00:59.999Z');
 });
 

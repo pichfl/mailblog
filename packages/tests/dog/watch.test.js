@@ -100,7 +100,10 @@ test.serial('does not regenerate a post that is already in .Trash', async (t) =>
 			}
 		});
 
-		const postDirExists = await stat(join(distDir, targetId)).then(() => true, () => false);
+		const postDirExists = await stat(join(distDir, targetId)).then(
+			() => true,
+			() => false
+		);
 		t.false(postDirExists, 'trashed post was not regenerated');
 	} finally {
 		await watcher.close();

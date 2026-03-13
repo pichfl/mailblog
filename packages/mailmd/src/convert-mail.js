@@ -17,7 +17,10 @@ export default async function convertMail(readableStream, outDir) {
 	const outPath = postMeta.id;
 
 	const trashPath = join(outDir, '.Trash', outPath);
-	const isTrashed = await access(trashPath).then(() => true, () => false);
+	const isTrashed = await access(trashPath).then(
+		() => true,
+		() => false
+	);
 
 	if (isTrashed) {
 		return { type: 'trashed', targetId: outPath };
