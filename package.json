@@ -8,6 +8,7 @@
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
+    "fix": "pnpm lint:fix && pnpm format",
     "format:check": "oxfmt --check .",
     "mailmd": "./packages/mailmd/src/mailmd.js",
     "mdmail": "./packages/mailmd/src/mdmail.js",
