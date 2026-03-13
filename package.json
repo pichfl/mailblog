@@ -13,7 +13,8 @@
     "mailmd": "./packages/mailmd/src/mailmd.js",
     "mdmail": "./packages/mailmd/src/mdmail.js",
     "mdapi": "./packages/api/src/index.js",
-    "dog": "./packages/dog/src/index.js"
+    "dog": "./packages/dog/src/index.js",
+    "hash": "./packages/dog/src/hash.js"
   },
   "keywords": [],
   "author": "Florian Pichler <pichfl@ylk.gd>",
