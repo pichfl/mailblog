@@ -27,10 +27,10 @@ async function isEmail(path) {
 	}
 }
 
-export async function rebuild(distDir, options = {}) {
-	const posts = await collectPosts(distDir);
+export async function rebuild(outDir, options = {}) {
+	const posts = await collectPosts(outDir);
 
-	await generateApi(posts, distDir);
+	await generateApi(posts, outDir);
 
 	if (options.deployHook) {
 		await fetch(options.deployHook, { method: 'POST' }).catch((err) =>
@@ -47,15 +47,37 @@ export async function rebuild(distDir, options = {}) {
 	return posts;
 }
 
-async function trashPost(distDir, targetId) {
-	const source = join(distDir, targetId);
-	const trashDir = join(distDir, '.Trash');
+async function moveToProcessed(processedDir, filePath, mailbox = false) {
+	await mkdir(processedDir, { recursive: true });
+
+	const name = filePath.slice(filePath.lastIndexOf('/') + 1);
+	let newName = name;
+
+	if (mailbox) {
+		const infoIdx = name.indexOf(':2,');
+
+		if (infoIdx !== -1) {
+			const flags = new Set(name.slice(infoIdx + 3));
+
+			flags.add('S');
+			newName = name.slice(0, infoIdx + 3) + [...flags].sort().join('');
+		} else {
+			newName = `${name}:2,S`;
+		}
+	}
+
+	await rename(filePath, join(processedDir, newName));
+}
+
+async function trashPost(outDir, targetId) {
+	const source = join(outDir, targetId);
+	const trashDir = join(outDir, '.Trash');
 
 	await mkdir(trashDir, { recursive: true });
 	await rename(source, join(trashDir, targetId));
 }
 
-export function createWatcher(inDir, distDir, options = {}) {
+export function createWatcher(inDir, outDir, options = {}) {
 	let rebuildTimer;
 	const { salt } = options;
 
@@ -76,14 +98,16 @@ export function createWatcher(inDir, distDir, options = {}) {
 				return;
 			}
 
-			const result = await convertMail(createReadStream(path), distDir);
+			const result = await convertMail(createReadStream(path), outDir);
 
 			if (result.type === 'delete') {
-				await trashPost(distDir, result.targetId);
+				await trashPost(outDir, result.targetId);
 			}
 
+			await moveToProcessed(options.processedDir, path, options.mailbox);
+
 			clearTimeout(rebuildTimer);
-			rebuildTimer = setTimeout(() => rebuild(distDir, options), 5000);
+			rebuildTimer = setTimeout(() => rebuild(outDir, options), 5000);
 		})().catch((err) => console.error(`error processing ${path}: ${err.message}`));
 	});
 
