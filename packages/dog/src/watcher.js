@@ -6,6 +6,7 @@ import { collectPosts } from '@posteingang/api/src/collect.js';
 import { generateApi } from '@posteingang/api/src/generate.js';
 import convertMail from '@posteingang/mailmd/src/convert-mail.js';
 import { watch } from 'chokidar';
+import { execa } from 'execa';
 
 import { verifyEmail } from './validate.js';
 
@@ -26,14 +27,20 @@ async function isEmail(path) {
 	}
 }
 
-export async function rebuild(distDir, deployHook) {
+export async function rebuild(distDir, options = {}) {
 	const posts = await collectPosts(distDir);
 
 	await generateApi(posts, distDir);
 
-	if (deployHook) {
-		await fetch(deployHook, { method: 'POST' }).catch((err) =>
+	if (options.deployHook) {
+		await fetch(options.deployHook, { method: 'POST' }).catch((err) =>
 			console.error(`deploy hook failed: ${err.message}`)
+		);
+	}
+
+	if (options.exec) {
+		await execa(options.exec, { shell: true, stdio: 'inherit' }).catch((err) =>
+			console.error(`exec failed: ${err.message}`)
 		);
 	}
 
@@ -76,7 +83,7 @@ export function createWatcher(inDir, distDir, options = {}) {
 			}
 
 			clearTimeout(rebuildTimer);
-			rebuildTimer = setTimeout(() => rebuild(distDir, options.deployHook), 1000);
+			rebuildTimer = setTimeout(() => rebuild(distDir, options), 5000);
 		})().catch((err) => console.error(`error processing ${path}: ${err.message}`));
 	});
 
