@@ -89,6 +89,7 @@ export function createWatcher(inDir, outDir, options = {}) {
 	watcher.on('add', (path) => {
 		(async () => {
 			if (!(await isEmail(path))) {
+				console.log(`skip: ${path}`);
 				return;
 			}
 
@@ -108,6 +109,7 @@ export function createWatcher(inDir, outDir, options = {}) {
 			}
 
 			await moveToProcessed(options.processedDir, path, options.mailbox);
+			console.log(`processed: ${path} -> ${options.processedDir}`);
 
 			clearTimeout(rebuildTimer);
 			rebuildTimer = setTimeout(() => rebuild(outDir, options), 5000);
