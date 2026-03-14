@@ -102,6 +102,9 @@ export function createWatcher(inDir, outDir, options = {}) {
 
 			if (result.type === 'delete') {
 				await trashPost(outDir, result.targetId);
+				console.log(`trash: ${result.targetId}`);
+			} else {
+				console.log(`post: ${result.path}`);
 			}
 
 			await moveToProcessed(options.processedDir, path, options.mailbox);
